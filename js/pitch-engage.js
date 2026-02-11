@@ -80,9 +80,9 @@ function drawEngageCanvas() {
             ctx.beginPath(); ctx.arc(p.endX, p.endY, endR, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(${p.color},${0.4 + pulse * 0.25})`; ctx.fill();
             ctx.font = 'bold 12px JetBrains Mono'; ctx.textAlign = 'right';
-            ctx.fillStyle = `rgba(${p.color},${0.5 + pulse * 0.25})`; ctx.fillText(p.label, p.endX - 14, p.endY - 8);
-            ctx.font = '8px JetBrains Mono';
-            ctx.fillStyle = `rgba(${p.color},${0.3 + pulse * 0.15})`; ctx.fillText(p.sub, p.endX - 14, p.endY + 8);
+            ctx.fillStyle = `rgba(${p.color},${0.75 + pulse * 0.15})`; ctx.fillText(p.label, p.endX - 14, p.endY - 8);
+            ctx.font = '9px JetBrains Mono';
+            ctx.fillStyle = `rgba(${p.color},${0.5 + pulse * 0.15})`; ctx.fillText(p.sub, p.endX - 14, p.endY + 8);
         });
 
         const oPulse = 0.6 + 0.4 * Math.sin(t * 1.2);
@@ -93,7 +93,7 @@ function drawEngageCanvas() {
         ctx.beginPath(); ctx.arc(origin.x, origin.y, oR, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.45 + oPulse * 0.35})`; ctx.fill();
         ctx.font = 'bold 10px JetBrains Mono'; ctx.textAlign = 'center';
-        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.45 + oPulse * 0.25})`; ctx.fillText('you', origin.x, origin.y + oR + 14);
+        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.7 + oPulse * 0.2})`; ctx.fillText('you', origin.x, origin.y + oR + 14);
 
         requestAnimationFrame(animate);
     }

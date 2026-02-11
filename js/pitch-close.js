@@ -144,7 +144,7 @@ function drawCloseCanvas() {
 
         ctx.font = `bold ${10 + cPulse * 3}px JetBrains Mono`;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillStyle = `rgba(${C('text','232,232,240')},${0.5 + cPulse * 0.3})`;
+        ctx.fillStyle = `rgba(${C('text','232,232,240')},${0.7 + cPulse * 0.25})`;
         ctx.fillText('?', cursorCenter.x, cursorCenter.y);
         ctx.textBaseline = 'alphabetic';
 

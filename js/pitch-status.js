@@ -99,15 +99,15 @@ function drawStackCanvas() {
             }
 
             ctx.font = 'bold 12px JetBrains Mono';
-            ctx.fillStyle = `rgba(${l.color},${built ? 0.85 + pulse * 0.15 : 0.5})`;
+            ctx.fillStyle = `rgba(${l.color},${built ? 0.9 + pulse * 0.1 : 0.65})`;
             ctx.textAlign = 'left';
             ctx.fillText(l.label, barX + 14, y + 18);
             ctx.font = '9px JetBrains Mono';
-            ctx.fillStyle = `rgba(${l.color},${built ? 0.45 + pulse * 0.1 : 0.25})`;
+            ctx.fillStyle = `rgba(${l.color},${built ? 0.6 + pulse * 0.1 : 0.4})`;
             ctx.fillText(l.desc, barX + 14, y + 33);
             ctx.textAlign = 'right';
             ctx.font = 'bold 10px JetBrains Mono';
-            ctx.fillStyle = `rgba(${l.color},${built ? 0.75 : 0.4})`;
+            ctx.fillStyle = `rgba(${l.color},${built ? 0.85 : 0.55})`;
             ctx.fillText(built ? '\u25CF LIVE' : '\u25CB DESIGNED', barX + barW - 14, y + layerH / 2 + 4);
         });
 

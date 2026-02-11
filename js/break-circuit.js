@@ -256,7 +256,7 @@ function drawCircuitCanvas() {
                 var climb2 = (netStress - 0.6) / 0.4;
                 displayMs = Math.round(300 + climb2 * 700);
             }
-            ctx.fillStyle = 'rgba(' + hcStr + ',' + (0.38 + 0.12 * nPulse) * holdFade + ')';
+            ctx.fillStyle = 'rgba(' + hcStr + ',' + (0.55 + 0.12 * nPulse) * holdFade + ')';
             ctx.fillText(displayMs + 'ms', timingX, baseY);
 
             // ---- Circuit breaker indicator ----

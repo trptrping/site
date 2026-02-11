@@ -228,11 +228,11 @@ function drawPath1() {
 
             // Prefix
             ctx.textAlign = 'left';
-            ctx.fillStyle = 'rgba(' + C('dim','92,92,116') + ',' + (0.3 + boostLevel * 0.3) + ')';
+            ctx.fillStyle = 'rgba(' + C('dim','92,92,116') + ',' + (0.5 + boostLevel * 0.3) + ')';
             ctx.fillText(pfx(i), treeX, fy);
 
             // Filename
-            var nameAlpha = 0.55 + boostLevel * 0.35 + np * 0.1;
+            var nameAlpha = 0.7 + boostLevel * 0.2 + np * 0.1;
             ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',' + nameAlpha + ')';
             ctx.fillText(files[i], treeX + ctx.measureText(pfx(i)).width, fy);
         }
@@ -284,8 +284,8 @@ function drawPath2() {
         ctx.font = 'bold 11px JetBrains Mono'; ctx.textAlign = 'right';
         ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',0.7)'; ctx.fillText('threshold = ' + threshold.toFixed(2), padX - 8, threshY - 6);
         ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'left';
-        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.4)'; ctx.fillText('fires \u2191', w - padX + 8, threshY - 12);
-        ctx.fillStyle = 'rgba(' + C('dim','92,92,116') + ',0.3)'; ctx.fillText('silent \u2193', w - padX + 8, threshY + 16);
+        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.6)'; ctx.fillText('fires \u2191', w - padX + 8, threshY - 12);
+        ctx.fillStyle = 'rgba(' + C('dim','92,92,116') + ',0.5)'; ctx.fillText('silent \u2193', w - padX + 8, threshY + 16);
 
         var firingCount = 0;
         for (var i = 0; i < cells.length; i++) {
@@ -329,7 +329,7 @@ function drawPath2() {
 
         var pct = Math.round(firingCount / cells.length * 100);
         ctx.font = 'bold 11px JetBrains Mono'; ctx.textAlign = 'center';
-        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.6)';
+        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.75)';
         ctx.fillText(firingCount + '/' + cells.length + ' connections active (' + pct + '%)', w / 2, h - 12);
         requestAnimationFrame(animate);
     }
@@ -412,7 +412,7 @@ function drawPath3() {
             ctx.strokeStyle = 'rgba(' + color + ',' + (0.35 + k * 0.25 + boost * 0.2) + ')';
             ctx.lineWidth = 1.5 + boost; ctx.fill(); ctx.stroke();
             ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'center';
-            ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',' + (0.5 + k * 0.2 + boost * 0.25) + ')'; ctx.fillText(s.label, sx, sy + r + 16);
+            ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',' + (0.7 + k * 0.15 + boost * 0.15) + ')'; ctx.fillText(s.label, sx, sy + r + 16);
             var barW = r * 1.4, barH = 4, bx = sx - barW / 2, by = sy + r + 22;
             ctx.fillStyle = 'rgba(' + C('dim','92,92,116') + ',0.25)';
             ctx.beginPath(); ctx.roundRect(bx, by, barW, barH, 2); ctx.fill();
@@ -423,7 +423,7 @@ function drawPath3() {
         }
 
         ctx.font = '9px JetBrains Mono'; ctx.textAlign = 'center';
-        ctx.fillStyle = 'rgba(' + C('amber','245,158,11') + ',0.4)'; ctx.fillText('knowledge accumulates \u2192', w / 2, h - 14);
+        ctx.fillStyle = 'rgba(' + C('amber','245,158,11') + ',0.65)'; ctx.fillText('knowledge accumulates \u2192', w / 2, h - 14);
         requestAnimationFrame(animate);
     }
     animate();
@@ -526,7 +526,7 @@ function drawPath4() {
         ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',' + (0.6 + cPulse * 0.3) + ')'; ctx.fillText(symbol, cx, cy);
         ctx.textBaseline = 'alphabetic';
         ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'center';
-        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.4)';
+        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.65)';
         ctx.fillText('loss = predict_right + \u03B1 \u00D7 can_you_cite_why', w / 2, h - 14);
         requestAnimationFrame(animate);
     }

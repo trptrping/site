@@ -148,7 +148,7 @@ function drawAttnCanvas(canvasId, typed) {
 
         // Header
         ctx.font = 'bold ' + FONT; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
-        ctx.fillStyle = typed ? 'rgba(' + C('edgeBlue','110,180,255') + ',' + (0.8 + 0.15 * Math.sin(t * 1.5)) + ')' : 'rgba(' + C('mid','160,160,184') + ',0.55)';
+        ctx.fillStyle = typed ? 'rgba(' + C('edgeBlue','110,180,255') + ',' + (0.8 + 0.15 * Math.sin(t * 1.5)) + ')' : 'rgba(' + C('mid','160,160,184') + ',0.7)';
         ctx.fillText(dirLabel, treeX, headerY);
 
         // ---- Trunk ----
@@ -239,16 +239,16 @@ function drawAttnCanvas(canvasId, typed) {
             if (typed) {
                 ctx.fillStyle = 'rgba(' + C('edgeGreen','70,230,170') + ',' + (0.35 + boost * 0.25) * dimFactor + ')';
             } else {
-                ctx.fillStyle = 'rgba(' + C('mid','160,160,184') + ',0.4)';
+                ctx.fillStyle = 'rgba(' + C('mid','160,160,184') + ',0.55)';
             }
             ctx.fillText(prefix, treeX, baseY);
 
             // Filename — brighter on untyped side
             var nameX = treeX + ctx.measureText(prefix).width;
             if (typed) {
-                ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',' + (0.7 + boost * 0.2) * dimFactor + ')';
+                ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',' + (0.8 + boost * 0.15) * dimFactor + ')';
             } else {
-                ctx.fillStyle = 'rgba(' + C('mid','160,160,184') + ',0.55)';
+                ctx.fillStyle = 'rgba(' + C('mid','160,160,184') + ',0.7)';
             }
             ctx.fillText(files[i], nameX, baseY);
         }
@@ -344,7 +344,7 @@ function drawAttnCanvas(canvasId, typed) {
             var legendRowH = 20;
             var legendPad = padLeft;
             var itemGap = 12;
-            ctx.font = '9px JetBrains Mono';
+            ctx.font = '10px JetBrains Mono';
 
             // Measure items and flow into rows
             var curX = legendPad;
@@ -564,7 +564,7 @@ function drawTraceCanvas(canvasId, connected) {
             }
             ctx.fill(); ctx.lineWidth = 1 + boost; ctx.stroke();
             ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'center';
-            ctx.fillStyle = connected ? 'rgba(' + C('text','232,232,240') + ',' + (0.5 + s.knowledge * 0.5) + ')' : 'rgba(' + C('dim','92,92,116') + ',0.5)';
+            ctx.fillStyle = connected ? 'rgba(' + C('text','232,232,240') + ',' + (0.65 + s.knowledge * 0.35) + ')' : 'rgba(' + C('dim','92,92,116') + ',0.6)';
             ctx.fillText(s.label, drawX, drawY + 4);
         }
 
@@ -784,7 +784,7 @@ function drawKnowCanvas(canvasId, attributed) {
 
         // Labels
         ctx.font = '8px JetBrains Mono'; ctx.textAlign = 'left';
-        ctx.fillStyle = attributed ? 'rgba(' + C('text','232,232,240') + ',0.3)' : 'rgba(' + C('dim','92,92,116') + ',0.2)';
+        ctx.fillStyle = attributed ? 'rgba(' + C('text','232,232,240') + ',0.55)' : 'rgba(' + C('dim','92,92,116') + ',0.4)';
         ctx.fillText('output', 4, outputRowY - 6);
 
         requestAnimationFrame(animate);

@@ -102,7 +102,7 @@ function drawVisionCanvas() {
             ctx.fillStyle = `rgba(${b.color},${(0.45 + pulse * 0.4 + cursorBoost * 0.15) * bp})`; ctx.fill();
             if (bp > 0.6) {
                 ctx.font = `bold ${i === 0 ? 12 : 9}px JetBrains Mono`; ctx.textAlign = 'center';
-                ctx.fillStyle = `rgba(${b.color},${(0.45 + cursorBoost * 0.4) * bp})`;
+                ctx.fillStyle = `rgba(${b.color},${(0.7 + cursorBoost * 0.25) * bp})`;
                 ctx.fillText(b.label, drawX, drawY + r + 13);
             }
         });
@@ -118,7 +118,7 @@ function drawVisionCanvas() {
             ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.35 * pulse * cp})`; ctx.fill();
             if (cp > 0.3) {
                 ctx.font = 'bold 10px JetBrains Mono'; ctx.textAlign = 'center';
-                ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.55 * cp})`; ctx.fillText('convergence', converge.x, converge.y + r + 15);
+                ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.75 * cp})`; ctx.fillText('convergence', converge.x, converge.y + r + 15);
             }
         }
 
@@ -126,7 +126,7 @@ function drawVisionCanvas() {
         ctx.beginPath(); ctx.moveTo(w * 0.05, tlY); ctx.lineTo(w * 0.05 + (w * 0.9) * Math.min(1, progress * 1.2), tlY);
         ctx.strokeStyle = `rgba(${C('amber','245,158,11')},0.18)`; ctx.lineWidth = 1.5; ctx.stroke();
         ctx.font = '8px JetBrains Mono';
-        ctx.textAlign = 'left'; ctx.fillStyle = `rgba(${C('amber','245,158,11')},0.35)`; ctx.fillText('one person', w * 0.05, tlY - 6);
+        ctx.textAlign = 'left'; ctx.fillStyle = `rgba(${C('amber','245,158,11')},0.6)`; ctx.fillText('one person', w * 0.05, tlY - 6);
         ctx.textAlign = 'center'; ctx.fillText('many people', w * 0.5, tlY - 6);
         ctx.textAlign = 'right'; ctx.fillText('convergence', w * 0.95, tlY - 6);
 

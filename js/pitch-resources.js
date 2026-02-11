@@ -119,9 +119,9 @@ function drawResCanvas() {
                 ctx.strokeStyle = `rgba(${C('amber','245,158,11')},${0.12 + pulse * 0.08})`; ctx.lineWidth = 0.5; ctx.stroke();
             });
             ctx.font = 'bold 11px JetBrains Mono'; ctx.textAlign = 'center';
-            ctx.fillStyle = `rgba(${res.color},${0.6 + cursorBoost * 0.3})`; ctx.fillText(res.label, nx, ny + r + 14);
-            ctx.font = '8px JetBrains Mono';
-            ctx.fillStyle = `rgba(${res.color},${0.35 + cursorBoost * 0.25})`;
+            ctx.fillStyle = `rgba(${res.color},${0.8 + cursorBoost * 0.15})`; ctx.fillText(res.label, nx, ny + r + 14);
+            ctx.font = '9px JetBrains Mono';
+            ctx.fillStyle = `rgba(${res.color},${0.55 + cursorBoost * 0.25})`;
             const words = res.sub.split(' \u2014 ');
             ctx.fillText(words[0], nx, ny + r + 26);
             if (words[1]) ctx.fillText(words[1], nx, ny + r + 37);
@@ -135,7 +135,7 @@ function drawResCanvas() {
         ctx.beginPath(); ctx.arc(center.x, center.y, cR, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.4 + cPulse * 0.35})`; ctx.fill();
         ctx.font = 'bold 10px JetBrains Mono'; ctx.textAlign = 'center';
-        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.45 + cPulse * 0.2})`; ctx.fillText('ENOUGH', center.x, center.y + 22);
+        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.65 + cPulse * 0.2})`; ctx.fillText('ENOUGH', center.x, center.y + 22);
 
         requestAnimationFrame(animate);
     }

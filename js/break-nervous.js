@@ -221,7 +221,7 @@ function drawHealthy() {
             var timingX = checkX + 18;
             var fluctuation = Math.round(Math.sin(t * 2.5 + i * 1.3) * 5);
             var displayMs = hook.baseMs + fluctuation;
-            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.38 + 0.12 * nPulse) + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.55 + 0.12 * nPulse) + ')';
             ctx.fillText(displayMs + 'ms', timingX, baseY);
         }
 

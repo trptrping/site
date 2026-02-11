@@ -80,7 +80,7 @@
 
                 // column label
                 ctx.font = 'bold 9px JetBrains Mono'; ctx.textAlign = 'center';
-                ctx.fillStyle = `rgba(${c.color},${0.5 * appear + glow * 0.3})`;
+                ctx.fillStyle = `rgba(${c.color},${0.7 * appear + glow * 0.25})`;
                 ctx.fillText(c.label, cx, barBot + 16);
             });
 
@@ -102,7 +102,7 @@
                 if (appear <= 0) return;
                 const cx = startX + ci * (colW + gap) + colW / 2;
                 ctx.font = 'bold 10px JetBrains Mono'; ctx.textAlign = 'center';
-                ctx.fillStyle = `rgba(${c.color},${0.55 * appear})`;
+                ctx.fillStyle = `rgba(${c.color},${0.75 * appear})`;
                 ctx.fillText('Q' + (ci + 1), cx, barTop - 10);
             });
 
