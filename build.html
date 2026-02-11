@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
+    <meta name="color-scheme" content="dark">
+    <title>TRP — Build Log</title>
+    <meta name="description" content="What's built, what's synthetic, where it breaks. The honest status of the TRansParent Box.">
+    <link rel="stylesheet" href="shared/style.css">
+    <style>
+    .layer-grid{display:grid;gap:20px;margin:32px 0}
+    .layer-card{padding:24px;border-radius:14px;border:1px solid var(--border);background:var(--surface)}
+    .layer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+    .layer-name{font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:700}
+    .layer-badge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;padding:3px 10px;border-radius:20px;border:1px solid;white-space:nowrap}
+    .badge-built{color:var(--green);border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.08)}
+    .badge-synthetic{color:var(--amber);border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.08)}
+    .badge-designed{color:var(--dim);border-color:var(--border);background:transparent}
+    .layer-desc{font-size:0.88rem;color:var(--mid);line-height:1.7;margin-bottom:14px}
+    .layer-cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+    .layer-col{padding:14px;border-radius:8px;font-size:0.82rem;line-height:1.7}
+    .col-synth{background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.1);color:var(--mid)}
+    .col-arch{background:rgba(52,211,153,0.05);border:1px solid rgba(52,211,153,0.1);color:var(--mid)}
+    .col-break{background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.1);color:var(--mid)}
+    .col-label{font-family:'JetBrains Mono',monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px}
+    .col-synth .col-label{color:var(--amber)}
+    .col-arch .col-label{color:var(--green)}
+    .col-break .col-label{color:var(--red)}
+    .stack-wrap{position:relative;margin:28px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .stack-wrap canvas{width:100%;height:320px;display:block}
+    .build-note{font-size:0.85rem;color:var(--dim);line-height:1.7;margin-top:20px;padding:16px;border-radius:10px;border:1px solid var(--border);background:var(--surface)}
+    .nav-links-bottom{text-align:center;margin-top:32px;display:flex;justify-content:center;gap:24px}
+    .nav-links-bottom a{color:var(--dim);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.8rem;transition:color 0.2s}
+    .nav-links-bottom a:hover{color:var(--text)}
+    @media(max-width:768px){
+        .layer-cols{grid-template-columns:1fr}
+    }
+    @media(max-width:640px){
+        .stack-wrap canvas{height:260px}
+        .layer-cols{grid-template-columns:1fr}
+    }
+    </style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <a class="nav-brand" href="index.html">TRP</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="build.html">Build Log</a>
+        <a href="break.html">The Break</a>
+        <a href="about.html">About</a>
+    </div>
+</nav>
+
+<div class="progress" id="prog"></div>
+<canvas id="bg"></canvas>
+
+<div class="wrap"><div class="c">
+
+    <div class="nav-spacer"></div>
+
+    <div class="hero" style="min-height:40vh">
+        <div class="eq" style="font-size:clamp(1.6rem,4vw,2.8rem)">Build Log</div>
+        <p class="hero-sub">What's <strong style="color:var(--green)">built</strong>, what's <strong style="color:var(--amber)">synthetic</strong>, where it <strong style="color:var(--red)">breaks.</strong></p>
+    </div>
+
+    <!-- ======= STATUS STACK ======= -->
+    <div class="s" id="status">
+        <h2>Where this stands.</h2>
+        <p style="margin-bottom:8px">Three honest categories:</p>
+        <p style="color:var(--mid);line-height:1.7"><span style="color:var(--green)">Built</span> = architectural, code-enforced. &nbsp; <span style="color:var(--amber)">Synthetic</span> = manually maintained, proves the concept. &nbsp; <span style="color:var(--dim)">Designed</span> = not yet built.</p>
+        <div class="stack-wrap"><canvas id="stack-cvs"></canvas></div>
+        <p style="margin-top:16px;color:var(--mid);line-height:1.7">1 layer <span style="color:var(--green)">built.</span> 3 layers <span style="color:var(--amber)">proven synthetically.</span> 1 layer <span style="color:var(--dim)">designed.</span> The gap between synthetic and architectural is <span class="hl">the roadmap.</span></p>
+    </div>
+
+    <!-- ======= LAYER DETAILS ======= -->
+    <div class="s" id="layers">
+        <h2>Layer by layer.</h2>
+        <p style="margin-bottom:24px;color:var(--mid);line-height:1.7">For each layer: what we have (synthetic), what architectural would look like, and where the current version breaks.</p>
+
+        <div class="layer-grid">
+            <!-- LAYER 0 -->
+            <div class="layer-card">
+                <div class="layer-head">
+                    <span class="layer-name" style="color:var(--green)">Layer 0: Fine-tuned 7B</span>
+                    <span class="layer-badge badge-built">&bull; Built</span>
+                </div>
+                <div class="layer-desc">Voice learned from 4,490 conversation examples. LoRA fine-tuned Qwen 2.5 7B, 3 epochs, loss 3.47&rarr;1.55.</div>
+                <div class="layer-cols">
+                    <div class="layer-col col-synth">
+                        <div class="col-label">What we have</div>
+                        This layer IS architectural. A trained model is architecture by definition &mdash; the weights encode the voice.
+                    </div>
+                    <div class="layer-col col-arch">
+                        <div class="col-label">Architectural</div>
+                        LoRA weights on consumer hardware (RTX 5080). Voice emerges from training, not from prompting. Already there.
+                    </div>
+                    <div class="layer-col col-break">
+                        <div class="col-label">Where it breaks</div>
+                        Training data is conversation-only. No structured knowledge. Voice without understanding. The model sounds right but doesn't <em>know</em> right.
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAYER 1 -->
+            <div class="layer-card">
+                <div class="layer-head">
+                    <span class="layer-name" style="color:var(--amber)">Layer 1: ATLAS Retrieval</span>
+                    <span class="layer-badge badge-synthetic">&bull; Synthetic</span>
+                </div>
+                <div class="layer-desc">Living map with 17 section files. Every instance navigates through the map, not by exploring from scratch.</div>
+                <div class="layer-cols">
+                    <div class="layer-col col-synth">
+                        <div class="col-label">What we have</div>
+                        Manually maintained markdown. Instances read ATLAS.md, follow pointers. Works &mdash; but depends on discipline. If an instance skips the map, nothing stops it.
+                    </div>
+                    <div class="layer-col col-arch">
+                        <div class="col-label">What architectural looks like</div>
+                        Vector + keyword retrieval system. Model queries structured database, not markdown. Retrieval is infrastructure, not a habit.
+                    </div>
+                    <div class="layer-col col-break">
+                        <div class="col-label">Where it breaks</div>
+                        Entries go stale. Compressions drift from source. New files get created without map entries. Encoding debt accumulates faster than we can service it.
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAYER 2 -->
+            <div class="layer-card">
+                <div class="layer-head">
+                    <span class="layer-name" style="color:var(--amber)">Layer 2: Typed Routing</span>
+                    <span class="layer-badge badge-synthetic">&bull; Synthetic</span>
+                </div>
+                <div class="layer-desc">REQUIRES / USES / CONTRADICTS / MENTIONS edges in every ATLAS entry since day 1. Defined by propagation consequence.</div>
+                <div class="layer-cols">
+                    <div class="layer-col col-synth">
+                        <div class="col-label">What we have</div>
+                        Manually typed edge labels in markdown. [REQUIRES] means "breaks if target changes" &mdash; but a human types it, and enforcement is a hook that checks, not a graph that enforces.
+                    </div>
+                    <div class="layer-col col-arch">
+                        <div class="col-label">What architectural looks like</div>
+                        Graph database. Change one node, all [REQUIRES] dependents auto-flag. Propagation is automatic. The graph enforces itself &mdash; you can't create an edge without specifying its type.
+                    </div>
+                    <div class="layer-col col-break">
+                        <div class="col-label">Where it breaks</div>
+                        Edge types are approximate. An instance writes [USES] when it should be [REQUIRES]. No validation. No automated propagation. The types exist but the consequences are manual.
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAYER 3 -->
+            <div class="layer-card">
+                <div class="layer-head">
+                    <span class="layer-name" style="color:var(--amber)">Layer 3: Persistent Trace</span>
+                    <span class="layer-badge badge-synthetic">&bull; Synthetic</span>
+                </div>
+                <div class="layer-desc">Node files, session logs, MEMORY.md &mdash; model reads its own history. Each instance names itself and traces its work.</div>
+                <div class="layer-cols">
+                    <div class="layer-col col-synth">
+                        <div class="col-label">What we have</div>
+                        Instances write node files, update MEMORY.md, encode learnings. Hooks catch gaps (trace-check, generative-capture). Works &mdash; but writing is voluntary, not structural.
+                    </div>
+                    <div class="layer-col col-arch">
+                        <div class="col-label">What architectural looks like</div>
+                        Automatic trace. Self-modifying inference &mdash; the model's state changes based on what it processes. Trace is the processing itself, not a side effect of it.
+                    </div>
+                    <div class="layer-col col-break">
+                        <div class="col-label">Where it breaks</div>
+                        Compaction destroys context. New instances get a summary, not the real history. Node files go stale. Some instances encode well, some forget. The trace has gaps.
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAYER 4 -->
+            <div class="layer-card">
+                <div class="layer-head">
+                    <span class="layer-name" style="color:var(--dim)">Layer 4: Attribution Output</span>
+                    <span class="layer-badge badge-designed">&bull; Designed</span>
+                </div>
+                <div class="layer-desc">Every generation carries its own proof. The loss function penalizes unexplainable generation.</div>
+                <div class="layer-cols">
+                    <div class="layer-col col-synth">
+                        <div class="col-label">What we have</div>
+                        Manual citations. "Source: session X, line Y" written by hand. Inconsistent. Some instances cite well, many don't. No enforcement.
+                    </div>
+                    <div class="layer-col col-arch">
+                        <div class="col-label">What architectural looks like</div>
+                        Self-knowledge loss: loss&nbsp;=&nbsp;predict_right_token()&nbsp;+&nbsp;&alpha;&nbsp;&times;&nbsp;can_you_cite_why(). Unexplainable generation is expensive. Attribution is a training objective.
+                    </div>
+                    <div class="layer-col col-break">
+                        <div class="col-label">Where it breaks</div>
+                        It doesn't break yet &mdash; it doesn't exist yet. The design is on paper. The training infrastructure exists (Layer 0). The question is whether the loss function actually produces self-knowledge.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="build-note">
+            <strong style="color:var(--amber)">Why synthetic matters:</strong> Every architectural layer started as a synthetic experiment. "What if we just did this by hand?" &mdash; and every one that worked became the spec for what to build in code. Synthetic is not fake. It's the experiment that justifies the architecture.
+        </div>
+    </div>
+
+    <!-- ======= TIMELINE ======= -->
+    <div class="s" id="timeline-section">
+        <h2>7 days. 70 sessions.</h2>
+        <p style="margin-bottom:4px"><span class="hl">Conditions:</span> One <span class="hl-purple hl">Claude Max 20x</span> subscription ($200/mo). <span class="hl-blue hl">Claude Code</span> as the interface. <span class="hl-red hl">100% weekly usage.</span></p>
+        <p class="sm" style="margin-bottom:20px">Consumer hardware. Qwen 2.5 7B. LoRA. One week. Here's exactly where it went:</p>
+        <div class="timeline" id="build-timeline">
+            <div class="tl-head"><span class="label">Weekly usage</span><span class="pct" id="tl-pct">100%</span></div>
+            <div class="tl-bar"><div class="tl-fill" id="tl-fill" style="width:0%"></div></div>
+            <div class="tl-days">
+                <div class="tl-day"><div class="dot"></div><div class="day">Feb 4</div><div class="mile">Origin.<br>System born.</div><div class="sess">13 sessions</div></div>
+                <div class="tl-day"><div class="dot"></div><div class="day">Feb 5</div><div class="mile">Archive built.<br>Map loop.</div><div class="sess">15 sessions</div></div>
+                <div class="tl-day"><div class="dot"></div><div class="day">Feb 6</div><div class="mile">LoRA training.<br>Model v0.</div><div class="sess">12 sessions</div></div>
+                <div class="tl-day"><div class="dot"></div><div class="day">Feb 7</div><div class="mile">Experiment.<br>The finding.</div><div class="sess">8 sessions</div></div>
+                <div class="tl-day"><div class="dot"></div><div class="day">Feb 8</div><div class="mile">Thesis.<br>Propagation.</div><div class="sess">9 sessions</div></div>
+                <div class="tl-day"><div class="dot"></div><div class="day">Feb 9</div><div class="mile">Architecture.<br>Layer design.</div><div class="sess">4 sessions</div></div>
+                <div class="tl-day"><div class="dot"></div><div class="day">Feb 10</div><div class="mile">Identity layer.<br>This page.</div><div class="sess">8 sessions</div></div>
+            </div>
+        </div>
+        <p class="sm" style="text-align:center;margin-top:16px">Every token accounted for.</p>
+    </div>
+
+    <div class="nav-links-bottom">
+        <a href="index.html">&larr; Home</a>
+        <a href="break.html">The Break &rarr;</a>
+    </div>
+
+    <div class="foot"><p>TRP &mdash; 2026</p></div>
+
+</div></div>
+
+<script src="shared/content.js"></script>
+<script src="shared/mode.js"></script>
+<script src="shared/canvas-utils.js"></script>
+<script src="shared/particles.js"></script>
+<script src="shared/nav.js"></script>
+<script src="js/build-status.js"></script>
+</body>
+</html>

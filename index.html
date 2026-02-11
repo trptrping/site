@@ -15,6 +15,7 @@
     <a class="nav-brand" href="index.html">TRP</a>
     <div class="nav-links">
         <a href="index.html">Home</a>
+        <a href="build.html">Build Log</a>
         <a href="break.html">The Break</a>
         <a href="about.html">About</a>
     </div>
@@ -144,34 +145,7 @@
         </div>
     </div>
 
-    <!-- ======= STATUS ======= -->
-    <div class="s" id="status">
-        <h2 data-key="stat.title">Where this stands.</h2>
-        <p data-key="stat.intro">This isn't a paper. It's a <span class="hl">build log.</span></p>
-        <div class="stack-wrap"><canvas id="stack-cvs"></canvas></div>
-        <div class="vs">
-            <div class="side old"><div class="label" data-key="stat.probLabel">The problem</div><p data-key="stat.prob1">Sessions start <strong style="color:var(--red)">blank.</strong></p><p data-key="stat.prob2">Corrections <strong style="color:var(--red)">evaporate.</strong></p><p data-key="stat.prob3">The model <strong style="color:var(--red)">never changes.</strong></p></div>
-            <div class="side new"><div class="label" data-key="stat.builtLabel">Built so far</div><p data-key="stat.built1"><strong>Persistent map</strong> + <strong>typed routing</strong> live since day 1. 17 atlas sections, 4 edge types.</p><p data-key="stat.built2">LoRA fine-tuned on own conversations. <span class="mono" style="font-size:0.82rem">7B, 3 epochs, 3.47&rarr;1.55</span></p><p data-key="stat.built3"><strong>Persistent trace:</strong> node files, session logs, MEMORY.md. Model reads its own history.</p></div>
-        </div>
-        <p style="margin-top:20px" data-key="stat.summary">4 of 5 layers <span class="hl">live.</span> Attribution output is the remaining piece.</p>
-        <div class="line"></div>
-        <p style="margin-bottom:4px" data-key="stat.cond"><span class="hl">Conditions:</span> One <span class="hl-purple hl">Claude Max 20x</span> subscription ($200/mo). <span class="hl-blue hl">Claude Code</span> as the interface. <span class="hl-red hl">100% weekly usage.</span></p>
-        <p class="sm" style="margin-bottom:20px" data-key="stat.condDetail">Consumer hardware. Qwen 2.5 7B. LoRA. One week. Here's exactly where it went:</p>
-        <div class="timeline" id="build-timeline">
-            <div class="tl-head"><span class="label">Weekly usage</span><span class="pct" id="tl-pct">100%</span></div>
-            <div class="tl-bar"><div class="tl-fill" id="tl-fill" style="width:0%"></div></div>
-            <div class="tl-days">
-                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 4</div><div class="mile">Origin.<br>System born.</div><div class="sess">13 sessions</div></div>
-                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 5</div><div class="mile">Archive built.<br>Map loop.</div><div class="sess">15 sessions</div></div>
-                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 6</div><div class="mile">LoRA training.<br>Model v0.</div><div class="sess">12 sessions</div></div>
-                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 7</div><div class="mile">Experiment.<br>The finding.</div><div class="sess">8 sessions</div></div>
-                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 8</div><div class="mile">Thesis.<br>Propagation.</div><div class="sess">9 sessions</div></div>
-                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 9</div><div class="mile">Architecture.<br>Layer design.</div><div class="sess">4 sessions</div></div>
-                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 10</div><div class="mile">Identity layer.<br>This page.</div><div class="sess">8 sessions</div></div>
-            </div>
-        </div>
-        <p class="sm" style="text-align:center;margin-top:16px">70 sessions. 7 days. Every token accounted for.</p>
-    </div>
+    <!-- Status moved to build.html — Convergence flows directly into "Now — you" -->
 
     <!-- ======= NOW — YOU ======= -->
     <div class="s cta-section" id="activate">
@@ -257,7 +231,7 @@
 <script src="js/pitch-demos.js"></script>
 <script src="js/pitch-ideas.js"></script>
 <script src="js/pitch-convergence.js"></script>
-<script src="js/pitch-status.js"></script>
+<!-- pitch-status.js moved to build.html -->
 <script src="js/pitch-cta.js"></script>
 <script src="js/pitch-paths.js"></script>
 <script src="js/pitch-resources.js"></script>
