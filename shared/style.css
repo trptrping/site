@@ -247,13 +247,44 @@ strong{color:#fff;font-weight:700} em{color:var(--blue);font-style:normal;font-w
 }
 :root.light body{background:var(--bg);color:var(--text)}
 :root.light .site-nav{background:rgba(244,244,248,0.92);border-bottom-color:var(--border)}
-:root.light .term,.root.light .code-box{background:#f0f0f6}
-:root.light canvas#bg{opacity:0.3}
+:root.light .term,:root.light .code-box{background:#f0f0f6}
+:root.light canvas#bg{opacity:0.15}
 :root.light h2{color:var(--text)}
 :root.light strong{color:var(--text)}
 :root.light .hero-sub strong{color:var(--text)}
-:root.light .hl{background:rgba(217,119,6,0.1)}
+:root.light .hl{color:var(--text);background:rgba(217,119,6,0.1)}
 :root.light .attn-label,:root.light .thresh-label,:root.light .trace-label,:root.light .know-label{background:linear-gradient(transparent,rgba(244,244,248,0.95))}
+/* Hero equation — gradient text stays readable, dim text needs contrast */
+:root.light .eq .r{color:var(--dim)}
+/* Boxes with hardcoded #fff */
+:root.light .box .punch{color:var(--text)}
+:root.light .box h3{background:linear-gradient(135deg,var(--purple),var(--red),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+/* CTA */
+:root.light .cta{background:rgba(244,244,248,0.92);border-color:var(--border)}
+:root.light .cta h2{background:linear-gradient(135deg,var(--amber),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+:root.light .cta .big-q{color:var(--text)}
+:root.light .cta .big-q em{color:var(--amber)}
+/* Path sections */
+:root.light .path-section .path-body strong{color:var(--text)}
+/* Resource items */
+:root.light .res-item .res-name{color:var(--text)}
+:root.light .res-item{background:var(--surface)}
+/* Engage cards */
+:root.light .engage-card .eng-title{color:var(--text)}
+:root.light .engage-card{background:var(--surface)}
+/* Hub cards */
+:root.light .hub-card .card-title{color:var(--text)}
+:root.light .hub-card{background:var(--surface)}
+/* Terminals */
+:root.light .term-body{color:var(--mid)}
+:root.light .term.new .gen{color:var(--text)}
+/* Confidence bars */
+:root.light .conf-bar{background:rgba(200,200,220,0.3)}
+/* Convergence box */
+:root.light .box{background:var(--surface);border-color:var(--border)}
+/* Stack/timeline */
+:root.light .stack-wrap{background:var(--surface)}
+:root.light .tl-day .dot{background:var(--bg);border-color:var(--border)}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:640px){
