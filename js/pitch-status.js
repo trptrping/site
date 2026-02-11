@@ -28,10 +28,10 @@ function drawStackCanvas() {
 
     const layers = [
         { label: 'Layer 0: Fine-tuned 7B', desc: 'Voice learned from 4,490 conversation examples', status: 'built', color: C('green','52,211,153') },
-        { label: 'Layer 1: ATLAS Retrieval', desc: 'Keyword search over 147 chunks from 14 source files', status: 'built', color: C('green','52,211,153') },
-        { label: 'Layer 2: Typed Routing', desc: 'Edges carry REQUIRES / USES / CONTRADICTS labels', status: 'designed', color: C('amber','245,158,11') },
-        { label: 'Layer 3: Persistent Trace', desc: 'Model writes what it did, reads its own history', status: 'designed', color: C('amber','245,158,11') },
-        { label: 'Layer 4: Attribution Output', desc: 'Every generation carries its own proof', status: 'designed', color: C('purple','167,139,250') },
+        { label: 'Layer 1: ATLAS Retrieval', desc: 'Living map with 17 section files, keyword search across project', status: 'built', color: C('green','52,211,153') },
+        { label: 'Layer 2: Typed Routing', desc: 'REQUIRES / USES / CONTRADICTS / MENTIONS edges live in ATLAS since day 1', status: 'built', color: C('green','52,211,153') },
+        { label: 'Layer 3: Persistent Trace', desc: 'Node files, session logs, MEMORY.md — model reads its own history', status: 'built', color: C('green','52,211,153') },
+        { label: 'Layer 4: Attribution Output', desc: 'Every generation carries its own proof — partially live, not yet systematic', status: 'designed', color: C('amber','245,158,11') },
     ];
 
     const flowParticles = [];
