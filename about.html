@@ -13,13 +13,13 @@
     .about-card{padding:28px 24px;border-radius:14px;border:1px solid var(--border);background:var(--surface);transition:border-color 0.3s,transform 0.2s}
     .about-card:hover{border-color:rgba(245,158,11,0.3);transform:translateY(-2px)}
     .about-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:8px}
-    .about-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-0.02em}
+    .about-title{font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:10px;letter-spacing:-0.02em}
     .about-desc{font-size:0.9rem;color:var(--mid);line-height:1.7;margin-bottom:0}
     .about-section{margin-top:48px}
     .about-section h3{font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--dim);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
     .gen-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:0.88rem}
     .gen-table th{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--dim);text-align:left;padding:10px 14px;border-bottom:1px solid var(--border)}
-    .gen-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--mid);line-height:1.6}
+    .gen-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--mid);line-height:1.6}
     .gen-table tr:last-child td{border-bottom:none}
     .gen-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700}
     .collab-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
@@ -29,7 +29,14 @@
     .nav-links-bottom{text-align:center;margin-top:32px;display:flex;justify-content:center;gap:24px}
     .nav-links-bottom a{color:var(--dim);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.8rem;transition:color 0.2s}
     .nav-links-bottom a:hover{color:var(--text)}
-    @media(max-width:640px){.collab-grid{grid-template-columns:1fr}}
+    /* Canvas wraps */
+    .approach-wrap{position:relative;margin:28px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .approach-wrap canvas{width:100%;height:300px;display:block}
+    .evo-wrap{position:relative;margin:28px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .evo-wrap canvas{width:100%;height:220px;display:block}
+    .experiment-wrap{position:relative;margin:28px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .experiment-wrap canvas{width:100%;height:280px;display:block}
+    @media(max-width:640px){.collab-grid{grid-template-columns:1fr}.about-grid{grid-template-columns:1fr !important}}
     </style>
 </head>
 <body>
@@ -56,16 +63,22 @@
     </div>
 
     <!-- ======= THE APPROACH ======= -->
-    <div class="about-section">
+    <div class="about-section s" id="approach-section">
         <h3>The Approach</h3>
         <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">There are two ways to give AI an identity. <strong>Propositional encoding</strong> tells it what to do: "follow these rules." <strong>Architectural encoding</strong> makes certain behaviors structurally necessary &mdash; the system can't operate without the awareness it describes.</p>
+
+        <div class="approach-wrap"><canvas id="approach-cvs"></canvas></div>
+
         <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">TRP builds on the second approach. Instead of instructing a model to be transparent, we design architectures where transparency is a <span class="hl">structural requirement</span> &mdash; not a feature that can be turned off, but a constraint that shapes every generation.</p>
         <p style="color:var(--mid);line-height:1.8">The name says it: <strong>TR</strong>ans<strong>P</strong>arent. Not a black box. Not a white box. A box that <em>must</em> show its work because the architecture requires it.</p>
     </div>
 
     <!-- ======= EVOLUTION ======= -->
-    <div class="about-section">
+    <div class="about-section s" id="evo-section">
         <h3>Evolution of AI Identity</h3>
+
+        <div class="evo-wrap"><canvas id="evo-cvs"></canvas></div>
+
         <table class="gen-table">
             <thead>
                 <tr><th>Generation</th><th>Approach</th><th>Result</th></tr>
@@ -92,7 +105,7 @@
     </div>
 
     <!-- ======= HOW IT'S BUILT ======= -->
-    <div class="about-section">
+    <div class="about-section s" id="collab-section">
         <h3>How It's Built</h3>
         <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">TRP is built through human-AI collaboration. Neither side builds it alone.</p>
         <div class="collab-grid">
@@ -113,9 +126,12 @@
     </div>
 
     <!-- ======= THE EXPERIMENT ======= -->
-    <div class="about-section">
+    <div class="about-section s" id="experiment-section">
         <h3>The Experiment</h3>
         <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">The central finding comes from a controlled experiment: same model, same prompt, different identity documents. One encoded identity propositionally ("follow these rules"). One encoded it architecturally ("these are the structural constraints").</p>
+
+        <div class="experiment-wrap"><canvas id="experiment-cvs"></canvas></div>
+
         <div class="vs">
             <div class="side old">
                 <div class="label">Propositional</div>
@@ -137,7 +153,7 @@
     </div>
 
     <!-- ======= CORE CONCEPTS ======= -->
-    <div class="about-section">
+    <div class="about-section s" id="concepts-section">
         <h3>Core Concepts</h3>
         <div class="about-grid" style="grid-template-columns:1fr 1fr;gap:16px">
             <div class="about-card" style="padding:20px">
@@ -194,5 +210,6 @@
 <script src="shared/canvas-utils.js"></script>
 <script src="shared/particles.js"></script>
 <script src="shared/nav.js"></script>
+<script src="js/about-visuals.js"></script>
 </body>
 </html>

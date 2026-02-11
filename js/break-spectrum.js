@@ -11,10 +11,10 @@
         const w = rect.width, h = 280;
 
         const cols = [
-            { color: '239,68,68',   label: 'binary',    mode: 'solid' },
-            { color: '245,158,11',  label: 'uncertain',  mode: 'flicker' },
-            { color: '96,165,250',  label: 'grounded',   mode: 'pinpoint' },
-            { color: '52,211,153',  label: 'spectral',   mode: 'spectrum' },
+            { color: C('red','239,68,68'),   label: 'binary',    mode: 'solid' },
+            { color: C('amber','245,158,11'),  label: 'uncertain',  mode: 'flicker' },
+            { color: C('blue','96,165,250'),  label: 'grounded',   mode: 'pinpoint' },
+            { color: C('green','52,211,153'),  label: 'spectral',   mode: 'spectrum' },
         ];
         const colW = 50, gap = 24;
         const totalW = cols.length * colW + (cols.length - 1) * gap;

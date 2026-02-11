@@ -26,11 +26,11 @@ function drawStackCanvas() {
     const w = rect.width, h = 320;
 
     const layers = [
-        { label: 'Layer 0: Fine-tuned 7B', desc: 'Voice learned from 4,490 conversation examples', status: 'built', color: '52,211,153' },
-        { label: 'Layer 1: ATLAS Retrieval', desc: 'Keyword search over 147 chunks from 14 source files', status: 'built', color: '52,211,153' },
-        { label: 'Layer 2: Typed Routing', desc: 'Edges carry REQUIRES / USES / CONTRADICTS labels', status: 'designed', color: '245,158,11' },
-        { label: 'Layer 3: Persistent Trace', desc: 'Model writes what it did, reads its own history', status: 'designed', color: '245,158,11' },
-        { label: 'Layer 4: Attribution Output', desc: 'Every generation carries its own proof', status: 'designed', color: '167,139,250' },
+        { label: 'Layer 0: Fine-tuned 7B', desc: 'Voice learned from 4,490 conversation examples', status: 'built', color: C('green','52,211,153') },
+        { label: 'Layer 1: ATLAS Retrieval', desc: 'Keyword search over 147 chunks from 14 source files', status: 'built', color: C('green','52,211,153') },
+        { label: 'Layer 2: Typed Routing', desc: 'Edges carry REQUIRES / USES / CONTRADICTS labels', status: 'designed', color: C('amber','245,158,11') },
+        { label: 'Layer 3: Persistent Trace', desc: 'Model writes what it did, reads its own history', status: 'designed', color: C('amber','245,158,11') },
+        { label: 'Layer 4: Attribution Output', desc: 'Every generation carries its own proof', status: 'designed', color: C('purple','167,139,250') },
     ];
 
     const flowParticles = [];
@@ -118,11 +118,11 @@ function drawStackCanvas() {
             const y2 = startY + i * (layerH + gap);
             const built = l.status === 'built' && layers[i-1].status === 'built';
             ctx.beginPath(); ctx.moveTo(lineX, y1); ctx.lineTo(lineX, y2);
-            ctx.strokeStyle = built ? 'rgba(52,211,153,0.35)' : 'rgba(92,92,116,0.18)';
+            ctx.strokeStyle = built ? `rgba(${C('green','52,211,153')},0.35)` : `rgba(${C('dim','92,92,116')},0.18)`;
             ctx.lineWidth = 1.5; ctx.stroke();
             const my = (y1 + y2) / 2;
             ctx.beginPath(); ctx.moveTo(lineX - 3, my - 3); ctx.lineTo(lineX, my); ctx.lineTo(lineX - 3, my + 3);
-            ctx.strokeStyle = built ? 'rgba(52,211,153,0.4)' : 'rgba(92,92,116,0.2)';
+            ctx.strokeStyle = built ? `rgba(${C('green','52,211,153')},0.4)` : `rgba(${C('dim','92,92,116')},0.2)`;
             ctx.lineWidth = 1; ctx.stroke();
         });
 

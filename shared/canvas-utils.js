@@ -1,6 +1,12 @@
 /* TRP Site — Shared Canvas Utilities
    Extracted from output/index.html. */
 
+// ===== THEME-AWARE COLOR HELPER =====
+// Returns RGB triplet from SITE.colors (set by mode.js), with fallback
+function C(name, fallback) {
+    return (window.SITE && window.SITE.colors && window.SITE.colors[name]) || fallback;
+}
+
 // ===== GLOBAL CURSOR STATE =====
 const mouse = { x: -1000, y: -1000, active: false };
 document.addEventListener('mousemove', e => {

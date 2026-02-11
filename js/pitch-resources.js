@@ -11,9 +11,9 @@ function drawResCanvas() {
 
     const center = { x: w * 0.5, y: h * 0.5 };
     const resources = [
-        { label: 'A MODEL', sub: 'Qwen 2.5 7B \u2014 free, runs on consumer GPUs', color: '167,139,250', angle: 0, orbit: 110, size: 8 },
-        { label: 'A METHOD', sub: 'LoRA/QLoRA \u2014 standard Python, no custom CUDA', color: '96,165,250', angle: Math.PI * 2/3, orbit: 110, size: 8 },
-        { label: 'A QUESTION', sub: '"what happens if I try?" \u2014 the question IS the method', color: '245,158,11', angle: Math.PI * 4/3, orbit: 110, size: 8 },
+        { label: 'A MODEL', sub: 'Qwen 2.5 7B \u2014 free, runs on consumer GPUs', color: C('purple','167,139,250'), angle: 0, orbit: 110, size: 8 },
+        { label: 'A METHOD', sub: 'LoRA/QLoRA \u2014 standard Python, no custom CUDA', color: C('blue','96,165,250'), angle: Math.PI * 2/3, orbit: 110, size: 8 },
+        { label: 'A QUESTION', sub: '"what happens if I try?" \u2014 the question IS the method', color: C('amber','245,158,11'), angle: Math.PI * 4/3, orbit: 110, size: 8 },
     ];
 
     const orbitals = [];
@@ -26,7 +26,7 @@ function drawResCanvas() {
 
     const drifters = [];
     for (let i = 0; i < 30; i++) {
-        drifters.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3, size: 0.4 + Math.random() * 1, color: ['167,139,250','96,165,250','245,158,11'][i % 3], phase: Math.random() * Math.PI * 2 });
+        drifters.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.3, vy: (Math.random() - 0.5) * 0.3, size: 0.4 + Math.random() * 1, color: [C('purple','167,139,250'),C('blue','96,165,250'),C('amber','245,158,11')][i % 3], phase: Math.random() * Math.PI * 2 });
     }
 
     const triParticles = [];
@@ -88,7 +88,7 @@ function drawResCanvas() {
             const py = fromNode.y + (toNode.y - fromNode.y) * tp.progress;
             const pulse = 0.5 + 0.5 * Math.sin(t * 3 + tp.phase);
             ctx.beginPath(); ctx.arc(px, py, tp.size * pulse, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(245,158,11,${0.2 + pulse * 0.15})`; ctx.fill();
+            ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.2 + pulse * 0.15})`; ctx.fill();
         });
 
         resources.forEach((res, ri) => {
@@ -116,7 +116,7 @@ function drawResCanvas() {
                 const ox = center.x + Math.cos(oAngle) * other.orbit;
                 const oy = center.y + Math.sin(oAngle) * other.orbit;
                 ctx.beginPath(); ctx.moveTo(nx, ny); ctx.lineTo(ox, oy);
-                ctx.strokeStyle = `rgba(245,158,11,${0.12 + pulse * 0.08})`; ctx.lineWidth = 0.5; ctx.stroke();
+                ctx.strokeStyle = `rgba(${C('amber','245,158,11')},${0.12 + pulse * 0.08})`; ctx.lineWidth = 0.5; ctx.stroke();
             });
             ctx.font = 'bold 11px JetBrains Mono'; ctx.textAlign = 'center';
             ctx.fillStyle = `rgba(${res.color},${0.6 + cursorBoost * 0.3})`; ctx.fillText(res.label, nx, ny + r + 14);
@@ -130,12 +130,12 @@ function drawResCanvas() {
         const cPulse = 0.6 + 0.4 * Math.sin(t * 1.2);
         const cR = 5 + cPulse * 2;
         const cGrd = ctx.createRadialGradient(center.x, center.y, 0, center.x, center.y, 30);
-        cGrd.addColorStop(0, `rgba(245,158,11,${0.18 * cPulse})`); cGrd.addColorStop(1, 'transparent');
+        cGrd.addColorStop(0, `rgba(${C('amber','245,158,11')},${0.18 * cPulse})`); cGrd.addColorStop(1, 'transparent');
         ctx.beginPath(); ctx.arc(center.x, center.y, 30, 0, Math.PI * 2); ctx.fillStyle = cGrd; ctx.fill();
         ctx.beginPath(); ctx.arc(center.x, center.y, cR, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245,158,11,${0.4 + cPulse * 0.35})`; ctx.fill();
+        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.4 + cPulse * 0.35})`; ctx.fill();
         ctx.font = 'bold 10px JetBrains Mono'; ctx.textAlign = 'center';
-        ctx.fillStyle = `rgba(245,158,11,${0.45 + cPulse * 0.2})`; ctx.fillText('ENOUGH', center.x, center.y + 22);
+        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.45 + cPulse * 0.2})`; ctx.fillText('ENOUGH', center.x, center.y + 22);
 
         requestAnimationFrame(animate);
     }

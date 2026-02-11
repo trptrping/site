@@ -77,19 +77,19 @@ function drawHealthy() {
         var hubPulse = 0.7 + 0.3 * Math.sin(t * 0.8);
         var hubR = 5 + hubPulse * 1.5;
         var hubGrd = ctx.createRadialGradient(nodeX, hubY, 0, nodeX, hubY, hubR * 4);
-        hubGrd.addColorStop(0, 'rgba(96,165,250,' + (0.18 * hubPulse) + ')');
+        hubGrd.addColorStop(0, 'rgba(' + C('blue','96,165,250') + ',' + (0.18 * hubPulse) + ')');
         hubGrd.addColorStop(1, 'transparent');
         ctx.beginPath(); ctx.arc(nodeX, hubY, hubR * 4, 0, Math.PI * 2);
         ctx.fillStyle = hubGrd; ctx.fill();
         ctx.beginPath(); ctx.arc(nodeX, hubY, hubR, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(96,165,250,' + (0.5 + hubPulse * 0.35) + ')';
+        ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.5 + hubPulse * 0.35) + ')';
         ctx.fill();
 
         // Header text
         ctx.font = 'bold ' + FONT;
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'left';
-        ctx.fillStyle = 'rgba(96,165,250,' + (0.7 + 0.15 * Math.sin(t * 0.8)) + ')';
+        ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.7 + 0.15 * Math.sin(t * 0.8)) + ')';
         ctx.fillText('.claude/hooks/', treeX, headerY);
 
         // ---- Vertical trunk (connector line) ----
@@ -98,7 +98,7 @@ function drawHealthy() {
         ctx.beginPath();
         ctx.moveTo(trunkX, hubY + hubR + 2);
         ctx.lineTo(trunkX, lastEntryY);
-        ctx.strokeStyle = 'rgba(52,211,153,' + connAlpha + ')';
+        ctx.strokeStyle = 'rgba(' + C('green','52,211,153') + ',' + connAlpha + ')';
         ctx.lineWidth = 0.8;
         ctx.stroke();
 
@@ -111,7 +111,7 @@ function drawHealthy() {
             var sPulse = 0.5 + 0.5 * Math.sin(t * 4 + sig.phase);
             ctx.beginPath();
             ctx.arc(trunkX, sigY, sig.size * sPulse, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(52,211,153,' + (0.15 + sPulse * 0.2) + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.15 + sPulse * 0.2) + ')';
             ctx.fill();
         }
 
@@ -129,7 +129,7 @@ function drawHealthy() {
             var py = omt * omt * fromY + 2 * omt * pp * ((fromY + toY) / 2) + pp * pp * toY;
             var aPulse = 0.4 + 0.4 * Math.sin(t * 3 + pa.phase);
             ctx.beginPath(); ctx.arc(px, py, 1.2 * aPulse, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(52,211,153,' + (0.12 + aPulse * 0.15) + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.12 + aPulse * 0.15) + ')';
             ctx.fill();
         }
 
@@ -166,18 +166,18 @@ function drawHealthy() {
             var glowR = nodeR * 3.5;
             var glowAlpha = (0.12 + boost * 0.15) * nPulse;
             var grd = ctx.createRadialGradient(drawNodeX, drawNodeY, 0, drawNodeX, drawNodeY, glowR);
-            grd.addColorStop(0, 'rgba(52,211,153,' + glowAlpha + ')');
+            grd.addColorStop(0, 'rgba(' + C('green','52,211,153') + ',' + glowAlpha + ')');
             grd.addColorStop(1, 'transparent');
             ctx.beginPath(); ctx.arc(drawNodeX, drawNodeY, glowR, 0, Math.PI * 2);
             ctx.fillStyle = grd; ctx.fill();
 
             ctx.beginPath(); ctx.arc(drawNodeX, drawNodeY, nodeR, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(52,211,153,' + (0.4 + nPulse * 0.35 + boost * 0.2) + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.4 + nPulse * 0.35 + boost * 0.2) + ')';
             ctx.fill();
 
             // Highlight bar on hover
             if (boost > 0.15) {
-                ctx.fillStyle = 'rgba(52,211,153,' + (boost * 0.05) + ')';
+                ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (boost * 0.05) + ')';
                 ctx.beginPath();
                 ctx.roundRect(treeX - 4, baseY - LINE_H * 0.38, 360, LINE_H * 0.76, 3);
                 ctx.fill();
@@ -187,31 +187,31 @@ function drawHealthy() {
             ctx.beginPath();
             ctx.moveTo(trunkX, baseY);
             ctx.lineTo(drawNodeX - nodeR - 1, drawNodeY);
-            ctx.strokeStyle = 'rgba(52,211,153,' + (0.15 + boost * 0.15) + ')';
+            ctx.strokeStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.15 + boost * 0.15) + ')';
             ctx.lineWidth = 0.6;
             ctx.stroke();
 
             // Tree prefix characters
             ctx.textAlign = 'left';
-            ctx.fillStyle = 'rgba(52,211,153,' + (0.3 + boost * 0.25) + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.3 + boost * 0.25) + ')';
             ctx.fillText(prefix, treeX, baseY);
 
             // Filename
             var nameX = treeX + ctx.measureText(prefix).width;
             var nameAlpha = 0.65 + 0.2 * nPulse + boost * 0.15;
-            ctx.fillStyle = 'rgba(52,211,153,' + nameAlpha + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + nameAlpha + ')';
             ctx.fillText(hook.name, nameX, baseY);
 
             // Checkmark with breathing glow
             var checkX = nameX + ctx.measureText(hook.name).width + 14;
             var checkAlpha = 0.45 + 0.35 * nPulse + boost * 0.15;
-            ctx.fillStyle = 'rgba(52,211,153,' + checkAlpha + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + checkAlpha + ')';
             ctx.fillText('\u2713', checkX, baseY);
 
             // Small halo behind checkmark
             if (nPulse > 0.8 || boost > 0.2) {
                 var chGrd = ctx.createRadialGradient(checkX + 4, baseY, 0, checkX + 4, baseY, 10);
-                chGrd.addColorStop(0, 'rgba(52,211,153,' + (0.06 * nPulse + boost * 0.05) + ')');
+                chGrd.addColorStop(0, 'rgba(' + C('green','52,211,153') + ',' + (0.06 * nPulse + boost * 0.05) + ')');
                 chGrd.addColorStop(1, 'transparent');
                 ctx.beginPath(); ctx.arc(checkX + 4, baseY, 10, 0, Math.PI * 2);
                 ctx.fillStyle = chGrd; ctx.fill();
@@ -221,7 +221,7 @@ function drawHealthy() {
             var timingX = checkX + 18;
             var fluctuation = Math.round(Math.sin(t * 2.5 + i * 1.3) * 5);
             var displayMs = hook.baseMs + fluctuation;
-            ctx.fillStyle = 'rgba(52,211,153,' + (0.38 + 0.12 * nPulse) + ')';
+            ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.38 + 0.12 * nPulse) + ')';
             ctx.fillText(displayMs + 'ms', timingX, baseY);
         }
 
@@ -458,11 +458,11 @@ function drawSuffocate() {
             var checkX = nameX + ctx.measureText(hook.name).width + 14;
             if (hasFailed) {
                 var failDepth = Math.min(1, (decay - failPoints[i]) / 0.2);
-                ctx.fillStyle = 'rgba(239,68,68,' + (0.6 + 0.3 * Math.sin(t * 6 + i)) * globalAlpha + ')';
+                ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',' + (0.6 + 0.3 * Math.sin(t * 6 + i)) * globalAlpha + ')';
                 ctx.fillText('\u2717', checkX, baseY + evibY);
                 // Red flare behind failed checkmark
                 var fGrd = ctx.createRadialGradient(checkX + 4, baseY + evibY, 0, checkX + 4, baseY + evibY, 12);
-                fGrd.addColorStop(0, 'rgba(239,68,68,' + (0.1 * failDepth * nPulse) + ')');
+                fGrd.addColorStop(0, 'rgba(' + C('red','239,68,68') + ',' + (0.1 * failDepth * nPulse) + ')');
                 fGrd.addColorStop(1, 'transparent');
                 ctx.beginPath(); ctx.arc(checkX + 4, baseY + evibY, 12, 0, Math.PI * 2);
                 ctx.fillStyle = fGrd; ctx.fill();
@@ -490,7 +490,7 @@ function drawSuffocate() {
             }
 
             if (displayMs === -1) {
-                ctx.fillStyle = 'rgba(239,68,68,' + 0.7 * globalAlpha + ')';
+                ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',' + 0.7 * globalAlpha + ')';
                 ctx.fillText('timeout', timingX, baseY + evibY);
             } else {
                 ctx.fillStyle = 'rgba(' + colorStr + ',' + (0.38 + 0.12 * nPulse) * globalAlpha + ')';

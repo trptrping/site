@@ -10,9 +10,9 @@ function drawVisionCanvas() {
     const w = rect.width, h = 380;
 
     const builders = [];
-    const pathColors = ['167,139,250', '96,165,250', '245,158,11', '52,211,153'];
+    const pathColors = [C('purple','167,139,250'), C('blue','96,165,250'), C('amber','245,158,11'), C('green','52,211,153')];
     const pathLabels = ['typed', 'threshold', 'trace', 'self-know'];
-    builders.push({ x: w * 0.08, y: h * 0.5, r: 9, color: '245,158,11', label: 'you', phase: 0, type: 'origin' });
+    builders.push({ x: w * 0.08, y: h * 0.5, r: 9, color: C('amber','245,158,11'), label: 'you', phase: 0, type: 'origin' });
 
     const spawnData = [
         { x: w*0.28, y: h*0.18, path: 0 }, { x: w*0.28, y: h*0.82, path: 2 },
@@ -50,7 +50,7 @@ function drawVisionCanvas() {
             ctx.beginPath(); ctx.moveTo(origin.x, origin.y);
             const mx = (origin.x + b.x) / 2, my = (origin.y + b.y) / 2 + Math.sin(b.phase) * 20;
             ctx.quadraticCurveTo(mx, my, origin.x + (b.x - origin.x) * bp, origin.y + (b.y - origin.y) * bp);
-            ctx.strokeStyle = `rgba(245,158,11,${0.22 + pulse * 0.12})`; ctx.lineWidth = 0.8; ctx.stroke();
+            ctx.strokeStyle = `rgba(${C('amber','245,158,11')},${0.22 + pulse * 0.12})`; ctx.lineWidth = 0.8; ctx.stroke();
             if (bp > 0.5) {
                 const cp = (bp - 0.5) * 2;
                 ctx.beginPath(); ctx.moveTo(b.x, b.y);
@@ -79,7 +79,7 @@ function drawVisionCanvas() {
             const py = origin.y + (target.y - origin.y) * pt.progress;
             const pulse = 0.5 + 0.5 * Math.sin(t * 4 + pt.phase);
             ctx.beginPath(); ctx.arc(px, py, pt.size * pulse, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(245,158,11,${0.2 + pulse * 0.15})`; ctx.fill();
+            ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.2 + pulse * 0.15})`; ctx.fill();
         });
 
         builders.forEach((b, i) => {
@@ -112,21 +112,21 @@ function drawVisionCanvas() {
             const pulse = 0.5 + 0.5 * Math.sin(t * 1.5);
             const r = 12 * cp + pulse * 4;
             const grd = ctx.createRadialGradient(converge.x, converge.y, 0, converge.x, converge.y, r * 6);
-            grd.addColorStop(0, `rgba(245,158,11,${0.18 * pulse * cp})`); grd.addColorStop(0.3, `rgba(167,139,250,${0.1 * pulse * cp})`); grd.addColorStop(1, 'transparent');
+            grd.addColorStop(0, `rgba(${C('amber','245,158,11')},${0.18 * pulse * cp})`); grd.addColorStop(0.3, `rgba(${C('purple','167,139,250')},${0.1 * pulse * cp})`); grd.addColorStop(1, 'transparent');
             ctx.beginPath(); ctx.arc(converge.x, converge.y, r * 6, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill();
             ctx.beginPath(); ctx.arc(converge.x, converge.y, r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(245,158,11,${0.35 * pulse * cp})`; ctx.fill();
+            ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.35 * pulse * cp})`; ctx.fill();
             if (cp > 0.3) {
                 ctx.font = 'bold 10px JetBrains Mono'; ctx.textAlign = 'center';
-                ctx.fillStyle = `rgba(245,158,11,${0.55 * cp})`; ctx.fillText('convergence', converge.x, converge.y + r + 15);
+                ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.55 * cp})`; ctx.fillText('convergence', converge.x, converge.y + r + 15);
             }
         }
 
         const tlY = h - 20;
         ctx.beginPath(); ctx.moveTo(w * 0.05, tlY); ctx.lineTo(w * 0.05 + (w * 0.9) * Math.min(1, progress * 1.2), tlY);
-        ctx.strokeStyle = 'rgba(245,158,11,0.18)'; ctx.lineWidth = 1.5; ctx.stroke();
+        ctx.strokeStyle = `rgba(${C('amber','245,158,11')},0.18)`; ctx.lineWidth = 1.5; ctx.stroke();
         ctx.font = '8px JetBrains Mono';
-        ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(245,158,11,0.35)'; ctx.fillText('one person', w * 0.05, tlY - 6);
+        ctx.textAlign = 'left'; ctx.fillStyle = `rgba(${C('amber','245,158,11')},0.35)`; ctx.fillText('one person', w * 0.05, tlY - 6);
         ctx.textAlign = 'center'; ctx.fillText('many people', w * 0.5, tlY - 6);
         ctx.textAlign = 'right'; ctx.fillText('convergence', w * 0.95, tlY - 6);
 

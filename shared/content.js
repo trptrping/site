@@ -18,11 +18,11 @@ window.SITE.theme = {
     },
     light: {
         bg: '244,244,248', surface: '255,255,255', text: '26,26,42',
-        mid: '74,74,104', dim: '136,136,164',
-        red: '220,38,38', green: '5,150,105', blue: '37,99,235',
-        amber: '217,119,6', purple: '124,58,237',
-        edgeRed: '220,38,38', edgeBlue: '37,99,235',
-        edgeAmber: '180,120,10', edgeGreen: '5,150,105', edgeDim: '100,100,140'
+        mid: '62,62,92', dim: '106,106,134',
+        red: '220,38,38', green: '4,120,87', blue: '29,78,216',
+        amber: '180,83,9', purple: '109,40,217',
+        edgeRed: '200,30,30', edgeBlue: '25,70,200',
+        edgeAmber: '160,100,5', edgeGreen: '4,110,75', edgeDim: '80,80,115'
     }
 };
 
@@ -136,7 +136,80 @@ tech: { en: {
     "res2.name": "A METHOD",
     "res2.detail": "LoRA/QLoRA &mdash; standard Python, no custom CUDA",
     "res3.name": "A QUESTION",
-    "res3.detail": "\"what happens if I try?\" &mdash; the question IS the method"
+    "res3.detail": "\"what happens if I try?\" &mdash; the question IS the method",
+
+    // --- Convergence ---
+    "conv.title": "The Transparent Box",
+    "conv.t1": "Attends with <strong style='color:var(--purple)'>typed</strong> relationships",
+    "conv.t2": "Fires only when <strong style='color:var(--blue)'>relevant</strong>",
+    "conv.t3": "Transforms through <strong style='color:var(--red)'>its own processing</strong>",
+    "conv.t4": "Knows <strong style='color:var(--green)'>why</strong> it says what it says",
+    "conv.punch": "Not a black box you hope is right.<br>A transparent box that <em style='color:var(--blue);font-style:normal'>can't not</em> show its work.",
+
+    // --- Status ---
+    "stat.title": "Where this stands.",
+    "stat.intro": "This isn't a paper. It's a <span class='hl'>build log.</span>",
+    "stat.probLabel": "The problem",
+    "stat.prob1": "Sessions start <strong style='color:var(--red)'>blank.</strong>",
+    "stat.prob2": "Corrections <strong style='color:var(--red)'>evaporate.</strong>",
+    "stat.prob3": "The model <strong style='color:var(--red)'>never changes.</strong>",
+    "stat.builtLabel": "Built so far",
+    "stat.built1": "<strong>Persistent map</strong> across sessions.",
+    "stat.built2": "LoRA fine-tuned on own conversations. <span class='mono' style='font-size:0.82rem'>7B, 3 epochs, 3.47&rarr;1.55</span>",
+    "stat.built3": "<strong>Voice transfers.</strong> Facts need retrieval.",
+    "stat.summary": "The transparent box is <span class='hl'>designed, not built.</span> The prototype is next.",
+    "stat.cond": "<span class='hl'>Conditions:</span> One <span class='hl-purple hl'>Claude Max 20x</span> subscription ($200/mo). <span class='hl-blue hl'>Claude Code</span> as the interface. <span class='hl-red hl'>100% weekly usage.</span>",
+    "stat.condDetail": "Consumer hardware. Qwen 2.5 7B. LoRA. One week. Here's exactly where it went:",
+
+    // --- CTA ---
+    "cta.title": "Now &mdash; you.",
+    "cta.q": "You scrolled through four ideas.<br>Now pick the one that <em style='color:var(--amber);font-style:normal'>won't leave you alone.</em>",
+
+    // --- Path details ---
+    "path1.num": "Path 1",
+    "path1.ptitle": "Type your attention",
+    "path1.body": "Current attention computes a number between every pair of tokens. That number says <em>how much</em> two things are related. It says nothing about <em>how.</em><br><br>Take any attention implementation. Add <strong>edge type labels</strong> &mdash; even just two: REQUIRES and USES. Now the model doesn't just know that <code style='color:var(--purple)'>auth.py</code> and <code style='color:var(--purple)'>stripe.py</code> are related. It knows one <em>requires</em> the other.<br><br>Run the same prompts with and without typed edges. Does the model behave differently when it knows relationship types? If yes &mdash; that's signal. If no &mdash; you've still built something nobody else has tested at this granularity.",
+    "path1.req": "Needs: any transformer, ~100 lines of code",
+    "path2.num": "Path 2",
+    "path2.ptitle": "Add a threshold",
+    "path2.body": "In standard attention, every token attends to every other token. Most of those connections carry almost no signal &mdash; but they still cost compute. And you can't see which ones mattered.<br><br>Add a <strong>minimum activation threshold</strong> to any attention layer. Connections below the threshold don't fire. Log which connections survive the cut.<br><br>Two things happen. First: <em>efficiency</em> &mdash; O(n&sup2;) drops toward O(n&times;k) where k is the number of connections that actually matter. Second, and more important: <strong>interpretability</strong>. You can now <em>see</em> exactly which connections the model used. The ones that fire are the ones that mattered. The rest were noise.",
+    "path2.req": "Needs: one attention layer, a threshold value, a logger",
+    "path3.num": "Path 3",
+    "path3.ptitle": "Write a trace",
+    "path3.body": "Every AI session starts from zero. You correct a mistake in session 1. Session 2 makes the same mistake. The model read your correction. It didn't <em>learn</em> from it.<br><br>After each session, write <strong>what the model learned</strong> to a file &mdash; corrections, decisions, patterns discovered. Before the next session, prepend that trace to context.<br><br>Now measure: does it make the same mistake twice? Does it reference yesterday's corrections in today's answers? The trace is the simplest form of self-modifying inference &mdash; the model reading its own history and changing behavior because of it.",
+    "path3.req": "Needs: any LLM API, a JSON file, a diff checker",
+    "path4.num": "Path 4",
+    "path4.ptitle": "Train for self-knowledge",
+    "path4.body": "Current models optimize for one thing: predict the right next token. They have no loss for knowing <em>what they don't know.</em> A model that's 30% confident about something says it with the same fluency as something it's 95% confident about.<br><br>Add a <strong>second prediction head</strong> that outputs a confidence score. Train on examples where you know ground truth &mdash; when the model is right, confidence should be high. When it's wrong, confidence should be low.<br><br>The loss becomes: <code style='color:var(--green)'>predict_right_token() + &alpha; &times; can_you_cite_why()</code>. Now the model is penalized for generating things it can't explain. Self-knowledge isn't a feature. It's a <em>loss function.</em>",
+    "path4.req": "Needs: a fine-tuning setup, labeled confidence data",
+
+    // --- Resources extra ---
+    "res.desc": "Not what you think you need. What you <span class='hl'>actually</span> need.",
+    "res.bottom": "Everything on this page was built with a Qwen 2.5 7B and a <span class='hl-purple hl'>Claude Max</span> subscription.<br>If you have a GPU and curiosity, you have enough.",
+
+    // --- Vision ---
+    "vis.title": "What happens when someone actually does this?",
+    "vis.p1": "If <span class='hl'>one person</span> builds one typed attention prototype, we learn whether relationship labels carry signal through inference.",
+    "vis.p2": "If <span class='hl'>ten people</span> each build a different piece, the architecture starts assembling itself &mdash; not by coordination, but by convergence. Same question, different implementations, shared findings.",
+    "vis.p3": "If <span class='hl-green hl'>any of it works</span> &mdash; even partially, even messily &mdash; it means the current paradigm is leaving value on the table. Not because the models are bad. Because they don't know what they know.",
+    "vis.fail": "And if it <span class='hl-red hl'>doesn't work?</span>",
+    "vis.failp": "Then you'll know why. You'll have the experiment, the data, the specific point of failure. That's more valuable than an opinion. That's <em>engineering.</em>",
+
+    // --- Engage ---
+    "eng.title": "Three ways to engage.",
+    "eng1.title": "Build it",
+    "eng1.desc": "Pick a path. Build a prototype. Share what happens &mdash; the failures are as valuable as the successes.",
+    "eng2.title": "Break it",
+    "eng2.desc": "Tell us what's wrong. Which ideas are already solved? Which are provably impossible? Point to the papers we missed.",
+    "eng3.title": "Extend it",
+    "eng3.desc": "See something we didn't? A fifth idea that connects to these four? A domain where this applies differently? That's how architectures grow.",
+
+    // --- Close ---
+    "close.quote": "\"Which parts matter right now?\"",
+    "close.desc": "That question started this project. The same question is now yours.",
+    "close.big": "What will you build?",
+    "close.p1": "The architecture is open. The ideas are free. The models are free.",
+    "close.p2": "<span class='hl'>The only thing missing is what you do next.</span>"
 
 }, zh: {
     // --- Demo ---
@@ -340,7 +413,80 @@ biz: { en: {
     "res2.name": "A PILOT",
     "res2.detail": "Pick one workflow. Measure before and after. 90-day proof.",
     "res3.name": "A QUESTION",
-    "res3.detail": "\"What would change if our AI could explain itself?\" &mdash; start there"
+    "res3.detail": "\"What would change if our AI could explain itself?\" &mdash; start there",
+
+    // --- Convergence ---
+    "conv.title": "The Accountable AI",
+    "conv.t1": "<strong style='color:var(--purple)'>Understands</strong> dependencies across your data",
+    "conv.t2": "Filters <strong style='color:var(--blue)'>noise</strong> from signal automatically",
+    "conv.t3": "Builds <strong style='color:var(--red)'>institutional memory</strong> that persists",
+    "conv.t4": "Explains <strong style='color:var(--green)'>its reasoning</strong> before you ask",
+    "conv.punch": "Not a black box you audit after the fact.<br>A transparent system that <em style='color:var(--blue);font-style:normal'>audits itself.</em>",
+
+    // --- Status ---
+    "stat.title": "Proof of concept.",
+    "stat.intro": "This isn't a pitch deck. It's a <span class='hl'>working prototype.</span>",
+    "stat.probLabel": "The business pain",
+    "stat.prob1": "Every AI conversation starts <strong style='color:var(--red)'>from scratch.</strong>",
+    "stat.prob2": "Institutional knowledge <strong style='color:var(--red)'>doesn't transfer.</strong>",
+    "stat.prob3": "No accountability for <strong style='color:var(--red)'>wrong answers.</strong>",
+    "stat.builtLabel": "Built so far",
+    "stat.built1": "<strong>Persistent knowledge map</strong> across sessions.",
+    "stat.built2": "Custom model fine-tuned on organizational data. <span class='mono' style='font-size:0.82rem'>Measurable improvement.</span>",
+    "stat.built3": "<strong>Voice and context transfer.</strong> Retrieval-augmented.",
+    "stat.summary": "The full system is <span class='hl'>designed, prototype ready.</span> Pilot phase is next.",
+    "stat.cond": "<span class='hl'>Built with:</span> Open-source models. <span class='hl-blue hl'>Standard tooling.</span> <span class='hl-purple hl'>No vendor lock-in.</span>",
+    "stat.condDetail": "Consumer hardware. Open-source stack. One week from concept to working demo:",
+
+    // --- CTA ---
+    "cta.title": "Now &mdash; your team.",
+    "cta.q": "Four capabilities. Four pilots.<br>Which one solves a real problem <em style='color:var(--amber);font-style:normal'>in your organization?</em>",
+
+    // --- Path details ---
+    "path1.num": "Pilot 1",
+    "path1.ptitle": "Dependency mapping",
+    "path1.body": "Your teams work with interconnected data &mdash; spreadsheets that feed reports, configs that control systems, documents that reference each other. Current AI treats them as isolated files.<br><br>Map the <strong>relationships between your key data assets.</strong> Not just that they're related &mdash; how. Revenue <em>depends on</em> pricing. Inventory <em>feeds</em> logistics. When pricing changes, the system knows what downstream reports need updating.<br><br>Start with one department. Map 10-15 key files. Measure: does knowing relationship types change the quality of AI-generated analysis? If your AI can say \"revenue will be affected because pricing changed\" instead of just \"these are correlated\" &mdash; that's the value.",
+    "path1.req": "Needs: existing data assets, relationship mapping, 2-week pilot",
+    "path2.num": "Pilot 2",
+    "path2.ptitle": "Noise reduction",
+    "path2.body": "Your AI tools process everything equally &mdash; the critical alert and the routine update get the same weight. Your team spends time filtering what the AI should have filtered for them.<br><br>Add <strong>relevance thresholds</strong> to your AI workflows. Instead of processing every email, document, and notification equally, the system identifies which inputs actually matter for the task at hand.<br><br>Measure before and after: how much time does your team spend filtering AI output? How often does the AI surface information that wasn't relevant? The goal isn't less information &mdash; it's <strong>better signal-to-noise ratio.</strong>",
+    "path2.req": "Needs: existing AI workflow, baseline metrics, 30-day measurement",
+    "path3.num": "Pilot 3",
+    "path3.ptitle": "Institutional memory",
+    "path3.body": "Every new AI conversation starts from zero. The corrections, preferences, and context from yesterday's session don't carry forward. New team members onboard the AI from scratch every time.<br><br>Build a <strong>persistent knowledge layer</strong> that records decisions, corrections, and context between sessions. Before each interaction, the AI reads its own history and adapts.<br><br>Measure: does the AI make the same mistake twice? Does it remember last quarter's analysis when building this quarter's? Institutional memory means the AI gets better the more your team uses it &mdash; not just during a session, but across months.",
+    "path3.req": "Needs: any LLM deployment, session logging, knowledge base",
+    "path4.num": "Pilot 4",
+    "path4.ptitle": "Confidence reporting",
+    "path4.body": "Your AI gives every answer with the same confidence. The well-supported analysis and the educated guess look identical. Your team can't tell which outputs to trust and which to verify.<br><br>Add <strong>confidence scores and source citations</strong> to your AI outputs. When the model is drawing from verified data, confidence is high. When it's extrapolating, it says so.<br><br>The result: your team knows where to focus verification effort. An answer with 0.95 confidence backed by three source documents gets fast-tracked. An answer with 0.4 confidence triggers review. That's not just better AI &mdash; it's a <strong>better workflow.</strong>",
+    "path4.req": "Needs: existing AI deployment, source data catalog, 90-day pilot",
+
+    // --- Resources extra ---
+    "res.desc": "Not a massive infrastructure investment. What you <span class='hl'>actually</span> need to start.",
+    "res.bottom": "Everything here runs on open-source models with no vendor lock-in.<br>If you have data and a question, you have enough to pilot.",
+
+    // --- Vision ---
+    "vis.title": "What happens when organizations adopt this?",
+    "vis.p1": "If <span class='hl'>one team</span> pilots dependency mapping, they learn whether their AI makes better decisions when it understands how data connects.",
+    "vis.p2": "If <span class='hl'>multiple departments</span> each pilot a different capability, the organization builds a compound advantage &mdash; each improvement reinforces the others.",
+    "vis.p3": "If <span class='hl-green hl'>any of it works</span> &mdash; even partially &mdash; it means your current AI tools are leaving value on the table. Not because they're bad tools. Because they don't understand your organization.",
+    "vis.fail": "And if a pilot <span class='hl-red hl'>doesn't show ROI?</span>",
+    "vis.failp": "Then you'll know exactly why. You'll have the data, the metrics, the specific point of failure. That's more valuable than a vendor's promise. That's <em>due diligence.</em>",
+
+    // --- Engage ---
+    "eng.title": "Three ways to start.",
+    "eng1.title": "Pilot it",
+    "eng1.desc": "Pick one capability. Run a 90-day proof-of-concept. Measure before and after.",
+    "eng2.title": "Evaluate it",
+    "eng2.desc": "Which of these solves a real problem for your team? What would you need to see to move forward?",
+    "eng3.title": "Partner",
+    "eng3.desc": "See an application in your industry? A use case we haven't considered? That's how platforms grow.",
+
+    // --- Close ---
+    "close.quote": "\"Which workflow changes first?\"",
+    "close.desc": "That question drives every successful pilot. The same question is now yours.",
+    "close.big": "What will your team build?",
+    "close.p1": "The architecture is open. The models are free. The tooling is standard.",
+    "close.p2": "<span class='hl'>The only thing missing is the pilot that proves it.</span>"
 
 }, zh: {
     "hero.eq1": "\u6570\u636E",
@@ -545,7 +691,80 @@ people: { en: {
     "res2.name": "SIMPLE TOOLS",
     "res2.detail": "Standard software &mdash; no PhD required",
     "res3.name": "CURIOSITY",
-    "res3.detail": "\"What if AI was honest about what it doesn't know?\" &mdash; that's the whole idea"
+    "res3.detail": "\"What if AI was honest about what it doesn't know?\" &mdash; that's the whole idea",
+
+    // --- Convergence ---
+    "conv.title": "The Honest Assistant",
+    "conv.t1": "<strong style='color:var(--purple)'>Understands</strong> how your stuff connects",
+    "conv.t2": "Focuses on <strong style='color:var(--blue)'>what matters</strong> to you right now",
+    "conv.t3": "Actually <strong style='color:var(--red)'>remembers</strong> what you told it",
+    "conv.t4": "Tells you when it's <strong style='color:var(--green)'>guessing</strong> vs. when it knows",
+    "conv.punch": "Not an AI you hope is right.<br>An AI that <em style='color:var(--blue);font-style:normal'>tells you</em> when it's not.",
+
+    // --- Status ---
+    "stat.title": "Where this stands.",
+    "stat.intro": "This isn't just an idea. There's a <span class='hl'>working version.</span>",
+    "stat.probLabel": "What's broken now",
+    "stat.prob1": "AI <strong style='color:var(--red)'>forgets</strong> you every conversation.",
+    "stat.prob2": "Your corrections <strong style='color:var(--red)'>disappear.</strong>",
+    "stat.prob3": "It <strong style='color:var(--red)'>never gets better</strong> at helping you.",
+    "stat.builtLabel": "What works already",
+    "stat.built1": "AI that <strong>remembers context</strong> between conversations.",
+    "stat.built2": "Custom model trained on real conversations. <span class='mono' style='font-size:0.82rem'>Measurably better.</span>",
+    "stat.built3": "<strong>Your preferences carry forward.</strong> It learns your style.",
+    "stat.summary": "The full version is <span class='hl'>designed and partially built.</span> Getting closer every day.",
+    "stat.cond": "<span class='hl'>Built with:</span> Free, open-source AI. <span class='hl-blue hl'>Standard tools.</span> <span class='hl-purple hl'>No big company required.</span>",
+    "stat.condDetail": "Regular computer hardware. Free models. One week of focused building:",
+
+    // --- CTA ---
+    "cta.title": "Now &mdash; you.",
+    "cta.q": "Four ways AI could be better.<br>Which one would actually change <em style='color:var(--amber);font-style:normal'>how you use it?</em>",
+
+    // --- Path details ---
+    "path1.num": "Idea 1",
+    "path1.ptitle": "Your files understand each other",
+    "path1.body": "Right now, AI looks at each of your files separately. Your budget spreadsheet and your receipt folder? Just two files. It doesn't know that one <em>needs</em> the other.<br><br>Imagine if it understood: your budget <strong>depends on</strong> your receipts. Your calendar <strong>connects to</strong> your contacts. Your notes <strong>reference</strong> your photos.<br><br>That means when you update your receipts, AI knows your budget summary might need updating too. Not because someone programmed that rule &mdash; because it <em>understands the relationship.</em>",
+    "path1.req": "What it takes: AI that understands connections, not just content",
+    "path2.num": "Idea 2",
+    "path2.ptitle": "AI stops wasting your time",
+    "path2.body": "Current AI treats everything as equally important. A critical deadline and a junk notification get the same attention. You end up doing the filtering yourself.<br><br>What if AI could tell the difference? What if it knew that <strong>the urgent email about your flight change matters more</strong> than the newsletter you never read?<br><br>It's not about seeing less information. It's about seeing the <strong>right information first.</strong> Like having an assistant who knows what's actually important to you right now.",
+    "path2.req": "What it takes: AI that learns your priorities over time",
+    "path3.num": "Idea 3",
+    "path3.ptitle": "AI remembers you",
+    "path3.body": "You told your AI assistant you're lactose intolerant last week. Today it suggests a cheese pizza recipe. You told it you're saving for a vacation. It recommends an expensive gadget.<br><br>Current AI <strong>forgets everything</strong> between conversations. Every session starts fresh. It's like talking to someone with no memory.<br><br>What if it actually remembered? Not just what you asked &mdash; but your preferences, your goals, the corrections you've made. What if each conversation made the next one <em>better?</em>",
+    "path3.req": "What it takes: persistent memory between conversations",
+    "path4.num": "Idea 4",
+    "path4.ptitle": "AI tells you when it's guessing",
+    "path4.body": "Ask AI if a restaurant is good. It says yes with total confidence. Ask if a medication interacts with yours. Same confident tone. But one answer is backed by data and the other is a guess.<br><br>You can't tell the difference. <strong>Neither can the AI.</strong><br><br>What if it could say: \"I'm 95% sure about the restaurant &mdash; 200 reviews back this up. But I'm only 40% sure about the medication &mdash; <em>please check with your doctor.\"</em> That's not less helpful. That's <strong>more honest.</strong>",
+    "path4.req": "What it takes: AI that knows what it knows and what it doesn't",
+
+    // --- Resources extra ---
+    "res.desc": "No tech background needed. Here's what makes this <span class='hl'>actually</span> possible.",
+    "res.bottom": "This isn't some far-off research project. The tools exist today.<br>If someone builds it, everyone benefits.",
+
+    // --- Vision ---
+    "vis.title": "What happens when this actually works?",
+    "vis.p1": "If <span class='hl'>one app</span> remembers your preferences across conversations, every other app looks broken by comparison.",
+    "vis.p2": "If <span class='hl'>multiple apps</span> adopt honest confidence scores, you'll finally know which AI answers to trust and which to double-check.",
+    "vis.p3": "If <span class='hl-green hl'>any of this works</span> &mdash; even in one app, even imperfectly &mdash; it proves that AI can be better than it is today. Not smarter. <em>More honest.</em>",
+    "vis.fail": "And if it <span class='hl-red hl'>doesn't work?</span>",
+    "vis.failp": "Then we'll know exactly why, and that's valuable too. Better to test it than to wonder.",
+
+    // --- Engage ---
+    "eng.title": "Three ways to be part of this.",
+    "eng1.title": "Try it",
+    "eng1.desc": "When tools like this exist, try them. Your feedback as a user shapes what gets built next.",
+    "eng2.title": "Question it",
+    "eng2.desc": "When AI gives you an answer, ask: how sure are you? Where did you get that? Demand honesty.",
+    "eng3.title": "Share it",
+    "eng3.desc": "Know someone who'd care about honest AI? Share this page. Ideas spread when people talk about them.",
+
+    // --- Close ---
+    "close.quote": "\"Which part would actually help you?\"",
+    "close.desc": "That's the only question that matters. The same question is now yours.",
+    "close.big": "What will you try?",
+    "close.p1": "The ideas are simple. The technology exists. The need is real.",
+    "close.p2": "<span class='hl'>Better AI starts with better questions.</span>"
 
 }, zh: {
     "hero.eq1": "\u4F7F\u7528",

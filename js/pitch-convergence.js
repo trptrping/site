@@ -14,10 +14,10 @@
         const w = rect.width, h = rect.height;
 
         const streams = [
-            { color: '167,139,250', startX: 0, startY: 0, label: 'typed' },
-            { color: '96,165,250', startX: w, startY: 0, label: 'thresholds' },
-            { color: '239,68,68', startX: 0, startY: h, label: 'trace' },
-            { color: '52,211,153', startX: w, startY: h, label: 'self-knowledge' },
+            { color: C('purple','167,139,250'), startX: 0, startY: 0, label: 'typed' },
+            { color: C('blue','96,165,250'), startX: w, startY: 0, label: 'thresholds' },
+            { color: C('red','239,68,68'), startX: 0, startY: h, label: 'trace' },
+            { color: C('green','52,211,153'), startX: w, startY: h, label: 'self-knowledge' },
         ];
 
         const particles = [];
@@ -46,8 +46,8 @@
 
             const pulse = 0.5 + 0.5 * Math.sin(t * 1.5);
             const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, Math.min(w, h) * 0.35);
-            grd.addColorStop(0, `rgba(245,158,11,${0.08 + pulse * 0.06})`);
-            grd.addColorStop(0.5, `rgba(167,139,250,${0.04 + pulse * 0.04})`);
+            grd.addColorStop(0, `rgba(${C('amber','245,158,11')},${0.08 + pulse * 0.06})`);
+            grd.addColorStop(0.5, `rgba(${C('purple','167,139,250')},${0.04 + pulse * 0.04})`);
             grd.addColorStop(1, 'transparent');
             ctx.beginPath(); ctx.arc(cx, cy, Math.min(w, h) * 0.35, 0, Math.PI * 2);
             ctx.fillStyle = grd; ctx.fill();

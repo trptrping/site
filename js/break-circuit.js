@@ -99,7 +99,7 @@ function drawCircuitCanvas() {
         ctx.font = 'bold ' + FONT;
         ctx.textBaseline = 'middle';
         ctx.textAlign = 'left';
-        ctx.fillStyle = 'rgba(96,165,250,' + (0.7 + 0.15 * Math.sin(elapsed * 1.5)) * holdFade + ')';
+        ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.7 + 0.15 * Math.sin(elapsed * 1.5)) * holdFade + ')';
         ctx.fillText('.claude/hooks/', treeX, headerY);
 
         // ---- Trunk ----
@@ -218,11 +218,11 @@ function drawCircuitCanvas() {
             var hasFailed = isStressed && netStress > 0.6;
 
             if (hasFailed) {
-                ctx.fillStyle = 'rgba(239,68,68,' + (0.6 + 0.3 * Math.sin(elapsed * 5 + i)) * holdFade + ')';
+                ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',' + (0.6 + 0.3 * Math.sin(elapsed * 5 + i)) * holdFade + ')';
                 ctx.fillText('\u2717', checkX, baseY);
                 // Red flare
                 var fGrd = ctx.createRadialGradient(checkX + 4, baseY, 0, checkX + 4, baseY, 12);
-                fGrd.addColorStop(0, 'rgba(239,68,68,' + (0.08 * netStress * nPulse) + ')');
+                fGrd.addColorStop(0, 'rgba(' + C('red','239,68,68') + ',' + (0.08 * netStress * nPulse) + ')');
                 fGrd.addColorStop(1, 'transparent');
                 ctx.beginPath(); ctx.arc(checkX + 4, baseY, 12, 0, Math.PI * 2);
                 ctx.fillStyle = fGrd; ctx.fill();
@@ -233,7 +233,7 @@ function drawCircuitCanvas() {
                 // Green halo behind healthy checkmark
                 if (hookRecovery > 0.5) {
                     var chGrd = ctx.createRadialGradient(checkX + 4, baseY, 0, checkX + 4, baseY, 10);
-                    chGrd.addColorStop(0, 'rgba(52,211,153,' + (0.06 * chPulse * hookRecovery) + ')');
+                    chGrd.addColorStop(0, 'rgba(' + C('green','52,211,153') + ',' + (0.06 * chPulse * hookRecovery) + ')');
                     chGrd.addColorStop(1, 'transparent');
                     ctx.beginPath(); ctx.arc(checkX + 4, baseY, 10, 0, Math.PI * 2);
                     ctx.fillStyle = chGrd; ctx.fill();
@@ -266,7 +266,7 @@ function drawCircuitCanvas() {
                 var bPulse = 0.7 + 0.3 * Math.sin(elapsed * 4 + i);
 
                 // "timeout: 10s" text
-                ctx.fillStyle = 'rgba(52,211,153,' + bAlpha * 0.65 + ')';
+                ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + bAlpha * 0.65 + ')';
                 ctx.fillText('timeout: 10s', breakerX, baseY);
 
                 // Glowing breaker dot (node-style with halo)
@@ -275,13 +275,13 @@ function drawCircuitCanvas() {
                 var dotGlowR = dotR * 4;
 
                 var dotGrd = ctx.createRadialGradient(dotX, baseY, 0, dotX, baseY, dotGlowR);
-                dotGrd.addColorStop(0, 'rgba(52,211,153,' + (0.2 * bAlpha * bPulse) + ')');
+                dotGrd.addColorStop(0, 'rgba(' + C('green','52,211,153') + ',' + (0.2 * bAlpha * bPulse) + ')');
                 dotGrd.addColorStop(1, 'transparent');
                 ctx.beginPath(); ctx.arc(dotX, baseY, dotGlowR, 0, Math.PI * 2);
                 ctx.fillStyle = dotGrd; ctx.fill();
 
                 ctx.beginPath(); ctx.arc(dotX, baseY, dotR, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(52,211,153,' + (0.5 * bAlpha * bPulse) + ')';
+                ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.5 * bAlpha * bPulse) + ')';
                 ctx.fill();
             }
         }

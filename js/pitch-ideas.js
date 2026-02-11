@@ -31,15 +31,19 @@ function drawAttnCanvas(canvasId, typed) {
     var edgeTypes = A['attn.edgeTypes'] || ['REQUIRES', 'USES', 'CONTRADICTS', 'CREATES', 'MENTIONS'];
 
     // Color palette for edge types — maps by position (0-4) so any mode's types get distinct visuals
-    var palette = [
-        { col: '255,90,90',   width: 2.2, dash: [],       dotR: 3.0 },
-        { col: '110,180,255', width: 1.6, dash: [6, 4],   dotR: 2.2 },
-        { col: '255,180,30',  width: 2.0, dash: [3, 3],   dotR: 2.8 },
-        { col: '70,230,170',  width: 1.4, dash: [10, 3],  dotR: 2.0 },
-        { col: '160,160,200', width: 0.9, dash: [2, 5],   dotR: 1.4 }
-    ];
+    function makePalette() {
+        return [
+            { col: C('edgeRed','255,90,90'),     width: 2.2, dash: [],       dotR: 3.0 },
+            { col: C('edgeBlue','110,180,255'),   width: 1.6, dash: [6, 4],   dotR: 2.2 },
+            { col: C('edgeAmber','255,180,30'),   width: 2.0, dash: [3, 3],   dotR: 2.8 },
+            { col: C('edgeGreen','70,230,170'),   width: 1.4, dash: [10, 3],  dotR: 2.0 },
+            { col: C('edgeDim','160,160,200'),    width: 0.9, dash: [2, 5],   dotR: 1.4 }
+        ];
+    }
+    var palette = makePalette();
     var typeColors = {}, typeStyles = {};
     function rebuildPalette() {
+        palette = makePalette();
         typeColors = {}; typeStyles = {};
         for (var ti = 0; ti < edgeTypes.length; ti++) {
             var p = palette[ti % palette.length];
@@ -130,30 +134,30 @@ function drawAttnCanvas(canvasId, typed) {
             var hp = 0.7 + 0.3 * Math.sin(t * 1.2);
             var hr = 5 + hp * 1.5;
             var hg = ctx.createRadialGradient(nodeX, headerY, 0, nodeX, headerY, hr * 4);
-            hg.addColorStop(0, 'rgba(110,180,255,' + (0.25 * hp) + ')');
+            hg.addColorStop(0, 'rgba(' + C('edgeBlue','110,180,255') + ',' + (0.25 * hp) + ')');
             hg.addColorStop(1, 'transparent');
             ctx.beginPath(); ctx.arc(nodeX, headerY, hr * 4, 0, Math.PI * 2);
             ctx.fillStyle = hg; ctx.fill();
             ctx.beginPath(); ctx.arc(nodeX, headerY, hr, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(110,180,255,' + (0.6 + hp * 0.35) + ')'; ctx.fill();
+            ctx.fillStyle = 'rgba(' + C('edgeBlue','110,180,255') + ',' + (0.6 + hp * 0.35) + ')'; ctx.fill();
         } else {
             // Untyped hub — dim but visible
             ctx.beginPath(); ctx.arc(nodeX, headerY, 3.5, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(160,160,200,0.25)'; ctx.fill();
+            ctx.fillStyle = 'rgba(' + C('edgeDim','160,160,200') + ',0.25)'; ctx.fill();
         }
 
         // Header
         ctx.font = 'bold ' + FONT; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
-        ctx.fillStyle = typed ? 'rgba(110,180,255,' + (0.8 + 0.15 * Math.sin(t * 1.5)) + ')' : 'rgba(180,180,210,0.55)';
+        ctx.fillStyle = typed ? 'rgba(' + C('edgeBlue','110,180,255') + ',' + (0.8 + 0.15 * Math.sin(t * 1.5)) + ')' : 'rgba(' + C('mid','160,160,184') + ',0.55)';
         ctx.fillText(dirLabel, treeX, headerY);
 
         // ---- Trunk ----
         ctx.beginPath(); ctx.moveTo(nodeX, headerY + 8); ctx.lineTo(nodeX, lastY);
         if (typed) {
-            ctx.strokeStyle = 'rgba(70,230,170,' + (0.18 + 0.08 * Math.sin(t * 1.2)) + ')';
+            ctx.strokeStyle = 'rgba(' + C('edgeGreen','70,230,170') + ',' + (0.18 + 0.08 * Math.sin(t * 1.2)) + ')';
             ctx.lineWidth = 1.0;
         } else {
-            ctx.strokeStyle = 'rgba(160,160,200,0.18)'; ctx.lineWidth = 0.7;
+            ctx.strokeStyle = 'rgba(' + C('edgeDim','160,160,200') + ',0.18)'; ctx.lineWidth = 0.7;
         }
         ctx.setLineDash([]); ctx.stroke();
 
@@ -166,7 +170,7 @@ function drawAttnCanvas(canvasId, typed) {
                 var sigY = (headerY + 8) + sig.progress * (lastY - headerY - 8);
                 var sp = 0.5 + 0.5 * Math.sin(t * 5 + sig.phase);
                 ctx.beginPath(); ctx.arc(nodeX, sigY, sig.size * sp, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(70,230,170,' + (0.2 + sp * 0.25) + ')'; ctx.fill();
+                ctx.fillStyle = 'rgba(' + C('edgeGreen','70,230,170') + ',' + (0.2 + sp * 0.25) + ')'; ctx.fill();
             }
         }
 
@@ -203,48 +207,48 @@ function drawAttnCanvas(canvasId, typed) {
                 var nr = 3.5 + np + boost * 3 + clusterBoost * 3;
                 var gr = nr * 3.5;
                 var grd = ctx.createRadialGradient(nX, nY, 0, nX, nY, gr);
-                grd.addColorStop(0, 'rgba(70,230,170,' + ((0.15 + boost * 0.15 + clusterBoost * 0.2) * np * dimFactor) + ')');
+                grd.addColorStop(0, 'rgba(' + C('edgeGreen','70,230,170') + ',' + ((0.15 + boost * 0.15 + clusterBoost * 0.2) * np * dimFactor) + ')');
                 grd.addColorStop(1, 'transparent');
                 ctx.beginPath(); ctx.arc(nX, nY, gr, 0, Math.PI * 2);
                 ctx.fillStyle = grd; ctx.fill();
                 ctx.beginPath(); ctx.arc(nX, nY, nr, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(70,230,170,' + (0.5 + np * 0.35 + boost * 0.2 + clusterBoost * 0.3) * dimFactor + ')'; ctx.fill();
+                ctx.fillStyle = 'rgba(' + C('edgeGreen','70,230,170') + ',' + (0.5 + np * 0.35 + boost * 0.2 + clusterBoost * 0.3) * dimFactor + ')'; ctx.fill();
 
                 // Hover bar — only on hovered file itself
                 if (hoveredFile === i) {
-                    ctx.fillStyle = 'rgba(70,230,170,0.06)';
+                    ctx.fillStyle = 'rgba(' + C('edgeGreen','70,230,170') + ',0.06)';
                     ctx.beginPath(); ctx.roundRect(treeX - 4, baseY - LINE_H * 0.38, w - padLeft - 20, LINE_H * 0.76, 3); ctx.fill();
                 }
 
                 // Connector trunk -> node
                 ctx.beginPath(); ctx.moveTo(nodeX, baseY); ctx.lineTo(nX - nr - 1, nY);
-                ctx.strokeStyle = 'rgba(70,230,170,' + (0.2 + boost * 0.15) * dimFactor + ')';
+                ctx.strokeStyle = 'rgba(' + C('edgeGreen','70,230,170') + ',' + (0.2 + boost * 0.15) * dimFactor + ')';
                 ctx.lineWidth = 0.7; ctx.setLineDash([]); ctx.stroke();
             } else {
                 // Untyped: visible dot, not invisible
                 ctx.beginPath(); ctx.arc(nodeX, baseY, 2.5, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(160,160,200,0.3)'; ctx.fill();
+                ctx.fillStyle = 'rgba(' + C('edgeDim','160,160,200') + ',0.3)'; ctx.fill();
 
                 // Untyped: connector line
                 ctx.beginPath(); ctx.moveTo(nodeX, baseY); ctx.lineTo(nodeX + 8, baseY);
-                ctx.strokeStyle = 'rgba(160,160,200,0.12)'; ctx.lineWidth = 0.5; ctx.setLineDash([]); ctx.stroke();
+                ctx.strokeStyle = 'rgba(' + C('edgeDim','160,160,200') + ',0.12)'; ctx.lineWidth = 0.5; ctx.setLineDash([]); ctx.stroke();
             }
 
             // Prefix — brighter on untyped side
             ctx.textAlign = 'left';
             if (typed) {
-                ctx.fillStyle = 'rgba(70,230,170,' + (0.35 + boost * 0.25) * dimFactor + ')';
+                ctx.fillStyle = 'rgba(' + C('edgeGreen','70,230,170') + ',' + (0.35 + boost * 0.25) * dimFactor + ')';
             } else {
-                ctx.fillStyle = 'rgba(180,180,210,0.4)';
+                ctx.fillStyle = 'rgba(' + C('mid','160,160,184') + ',0.4)';
             }
             ctx.fillText(prefix, treeX, baseY);
 
             // Filename — brighter on untyped side
             var nameX = treeX + ctx.measureText(prefix).width;
             if (typed) {
-                ctx.fillStyle = 'rgba(232,232,240,' + (0.7 + boost * 0.2) * dimFactor + ')';
+                ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',' + (0.7 + boost * 0.2) * dimFactor + ')';
             } else {
-                ctx.fillStyle = 'rgba(200,200,220,0.55)';
+                ctx.fillStyle = 'rgba(' + C('mid','160,160,184') + ',0.55)';
             }
             ctx.fillText(files[i], nameX, baseY);
         }
@@ -317,10 +321,10 @@ function drawAttnCanvas(canvasId, typed) {
 
         // ---- "try hovering" hint (typed side, fades on interaction) ----
         if (typed && !hasHover) {
-            var hintAlpha = 0.25 + 0.1 * Math.sin(t * 2);
-            ctx.font = 'italic 9px JetBrains Mono';
+            var hintAlpha = 0.45 + 0.15 * Math.sin(t * 2);
+            ctx.font = 'italic 10px JetBrains Mono';
             ctx.textAlign = 'right';
-            ctx.fillStyle = 'rgba(160,160,200,' + hintAlpha + ')';
+            ctx.fillStyle = 'rgba(' + C('mid','160,160,184') + ',' + hintAlpha + ')';
             ctx.fillText('try hovering \u2191', edgeOriginX - 10, lastY + LINE_H * 0.9);
             ctx.font = FONT;
         }
@@ -435,7 +439,7 @@ function drawThreshCanvas(canvasId, selective) {
                 if (dist > w * 0.4) continue;
                 var pulse = 0.5 + 0.5 * Math.sin(t + i * 0.3 + j * 0.2);
                 ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-                ctx.strokeStyle = selective ? 'rgba(52,211,153,' + (0.15 + pulse * 0.2) + ')' : 'rgba(239,68,68,' + (0.12 + pulse * 0.1) + ')';
+                ctx.strokeStyle = selective ? 'rgba(' + C('green','52,211,153') + ',' + (0.15 + pulse * 0.2) + ')' : 'rgba(' + C('red','239,68,68') + ',' + (0.12 + pulse * 0.1) + ')';
                 ctx.lineWidth = 0.7; ctx.stroke();
             }
         }
@@ -459,12 +463,12 @@ function drawThreshCanvas(canvasId, selective) {
             // Halo for active nodes
             if (isActive || boost > 0.3) {
                 var grd = ctx.createRadialGradient(drawX, drawY, 0, drawX, drawY, r * 4);
-                grd.addColorStop(0, selective ? 'rgba(52,211,153,' + ((0.2 + boost * 0.2) * pulse) + ')' : 'rgba(239,68,68,' + ((0.15 + boost * 0.15) * pulse) + ')');
+                grd.addColorStop(0, selective ? 'rgba(' + C('green','52,211,153') + ',' + ((0.2 + boost * 0.2) * pulse) + ')' : 'rgba(' + C('red','239,68,68') + ',' + ((0.15 + boost * 0.15) * pulse) + ')');
                 grd.addColorStop(1, 'transparent');
                 ctx.beginPath(); ctx.arc(drawX, drawY, r * 4, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill();
             }
             ctx.beginPath(); ctx.arc(drawX, drawY, r, 0, Math.PI * 2);
-            ctx.fillStyle = selective ? (isActive ? 'rgba(52,211,153,' + alpha + ')' : 'rgba(92,92,116,' + (0.2 + boost * 0.3) + ')') : 'rgba(239,68,68,' + (alpha * 0.6) + ')';
+            ctx.fillStyle = selective ? (isActive ? 'rgba(' + C('green','52,211,153') + ',' + alpha + ')' : 'rgba(' + C('dim','92,92,116') + ',' + (0.2 + boost * 0.3) + ')') : 'rgba(' + C('red','239,68,68') + ',' + (alpha * 0.6) + ')';
             ctx.fill();
         }
         requestAnimationFrame(animate);
@@ -511,20 +515,20 @@ function drawTraceCanvas(canvasId, connected) {
                 ctx.beginPath(); ctx.moveTo(a.x + a.r, a.y);
                 var cpx = (a.x + b.x) / 2, cpy = a.y - 20 - i * 5;
                 ctx.quadraticCurveTo(cpx, cpy, b.x - b.r, b.y);
-                ctx.strokeStyle = 'rgba(52,211,153,' + (0.3 + pulse * 0.4) + ')'; ctx.lineWidth = 1.5 + pulse; ctx.stroke();
+                ctx.strokeStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.3 + pulse * 0.4) + ')'; ctx.lineWidth = 1.5 + pulse; ctx.stroke();
                 // Travelling dot
                 var pt = (Math.sin(t * 1.5 + i * 0.8) + 1) / 2;
                 var px = a.x + a.r + (b.x - b.r - a.x - a.r) * pt;
                 var py = a.y + (cpy - a.y) * 4 * pt * (1 - pt);
                 ctx.beginPath(); ctx.arc(px, py, 2, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(52,211,153,' + (0.5 + pulse * 0.5) + ')'; ctx.fill();
+                ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.5 + pulse * 0.5) + ')'; ctx.fill();
             }
             // Knowledge bars
             for (var i = 1; i < sessions.length; i++) {
                 var s = sessions[i];
                 var barW = s.r * 1.6, barH = 3, bx = s.x - barW / 2, by = s.y + s.r + 18;
-                ctx.fillStyle = 'rgba(92,92,116,0.3)'; ctx.fillRect(bx, by, barW, barH);
-                ctx.fillStyle = 'rgba(52,211,153,' + (0.5 + 0.3 * Math.sin(t + i)) + ')';
+                ctx.fillStyle = 'rgba(' + C('dim','92,92,116') + ',0.3)'; ctx.fillRect(bx, by, barW, barH);
+                ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.5 + 0.3 * Math.sin(t + i)) + ')';
                 ctx.fillRect(bx, by, barW * s.knowledge, barH);
             }
         }
@@ -544,23 +548,23 @@ function drawTraceCanvas(canvasId, connected) {
             var drawR = s.r * pulse + boost * 5;
             var grd = ctx.createRadialGradient(drawX, drawY, 0, drawX, drawY, drawR * 2.5);
             if (connected) {
-                grd.addColorStop(0, 'rgba(52,211,153,' + ((0.15 + s.knowledge * 0.15 + boost * 0.15) * pulse) + ')');
+                grd.addColorStop(0, 'rgba(' + C('green','52,211,153') + ',' + ((0.15 + s.knowledge * 0.15 + boost * 0.15) * pulse) + ')');
             } else {
-                grd.addColorStop(0, 'rgba(239,68,68,' + ((0.12 + boost * 0.1) * pulse) + ')');
+                grd.addColorStop(0, 'rgba(' + C('red','239,68,68') + ',' + ((0.12 + boost * 0.1) * pulse) + ')');
             }
             grd.addColorStop(1, 'transparent');
             ctx.beginPath(); ctx.arc(drawX, drawY, drawR * 2.5, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill();
             ctx.beginPath(); ctx.arc(drawX, drawY, drawR, 0, Math.PI * 2);
             if (connected) {
-                ctx.fillStyle = 'rgba(52,211,153,' + (0.15 + s.knowledge * 0.3 + boost * 0.2) + ')';
-                ctx.strokeStyle = 'rgba(52,211,153,' + (0.3 + s.knowledge * 0.4 + boost * 0.3) + ')';
+                ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.15 + s.knowledge * 0.3 + boost * 0.2) + ')';
+                ctx.strokeStyle = 'rgba(' + C('green','52,211,153') + ',' + (0.3 + s.knowledge * 0.4 + boost * 0.3) + ')';
             } else {
-                ctx.fillStyle = 'rgba(239,68,68,' + (0.15 + boost * 0.12) + ')';
-                ctx.strokeStyle = 'rgba(239,68,68,' + (0.3 + pulse * 0.1 + boost * 0.2) + ')';
+                ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',' + (0.15 + boost * 0.12) + ')';
+                ctx.strokeStyle = 'rgba(' + C('red','239,68,68') + ',' + (0.3 + pulse * 0.1 + boost * 0.2) + ')';
             }
             ctx.fill(); ctx.lineWidth = 1 + boost; ctx.stroke();
             ctx.font = '10px JetBrains Mono'; ctx.textAlign = 'center';
-            ctx.fillStyle = connected ? 'rgba(216,216,228,' + (0.5 + s.knowledge * 0.5) + ')' : 'rgba(128,128,160,0.5)';
+            ctx.fillStyle = connected ? 'rgba(' + C('text','232,232,240') + ',' + (0.5 + s.knowledge * 0.5) + ')' : 'rgba(' + C('dim','92,92,116') + ',0.5)';
             ctx.fillText(s.label, drawX, drawY + 4);
         }
 
@@ -570,7 +574,7 @@ function drawTraceCanvas(canvasId, connected) {
                 var s = sessions[i];
                 var fade = 0.3 + 0.2 * Math.sin(t + i);
                 ctx.font = '8px JetBrains Mono'; ctx.textAlign = 'center';
-                ctx.fillStyle = 'rgba(239,68,68,' + fade + ')';
+                ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',' + fade + ')';
                 ctx.fillText('reset', s.x, s.y + s.r + 16);
             }
         }
@@ -656,19 +660,19 @@ function drawKnowCanvas(canvasId, attributed) {
             var hp = 0.7 + 0.3 * Math.sin(t * 1.2);
             var hr = 4 + hp * 1.2;
             var hg = ctx.createRadialGradient(sourceNodeX, sourceHeaderY, 0, sourceNodeX, sourceHeaderY, hr * 3.5);
-            hg.addColorStop(0, 'rgba(96,165,250,' + (0.15 * hp) + ')'); hg.addColorStop(1, 'transparent');
+            hg.addColorStop(0, 'rgba(' + C('blue','96,165,250') + ',' + (0.15 * hp) + ')'); hg.addColorStop(1, 'transparent');
             ctx.beginPath(); ctx.arc(sourceNodeX, sourceHeaderY, hr * 3.5, 0, Math.PI * 2); ctx.fillStyle = hg; ctx.fill();
             ctx.beginPath(); ctx.arc(sourceNodeX, sourceHeaderY, hr, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(96,165,250,' + (0.45 + hp * 0.3) + ')'; ctx.fill();
+            ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.45 + hp * 0.3) + ')'; ctx.fill();
 
             // Header
             ctx.font = 'bold ' + FONT; ctx.textBaseline = 'middle'; ctx.textAlign = 'left';
-            ctx.fillStyle = 'rgba(96,165,250,' + (0.7 + 0.1 * Math.sin(t * 1.5)) + ')';
+            ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.7 + 0.1 * Math.sin(t * 1.5)) + ')';
             ctx.fillText('sources/', sourceTreeTextX, sourceHeaderY);
 
             // Trunk
             ctx.beginPath(); ctx.moveTo(sourceNodeX, sourceHeaderY + 8); ctx.lineTo(sourceNodeX, sourceLastY);
-            ctx.strokeStyle = 'rgba(96,165,250,' + (0.1 + 0.05 * Math.sin(t * 1.2)) + ')'; ctx.lineWidth = 0.7; ctx.stroke();
+            ctx.strokeStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.1 + 0.05 * Math.sin(t * 1.2)) + ')'; ctx.lineWidth = 0.7; ctx.stroke();
 
             // Signal particles
             for (var si = 0; si < srcSignals.length; si++) {
@@ -677,7 +681,7 @@ function drawKnowCanvas(canvasId, attributed) {
                 var sigYp = (sourceHeaderY + 8) + sig.progress * (sourceLastY - sourceHeaderY - 8);
                 var sp = 0.5 + 0.5 * Math.sin(t * 5 + sig.phase);
                 ctx.beginPath(); ctx.arc(sourceNodeX, sigYp, sig.size * sp, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(96,165,250,' + (0.12 + sp * 0.15) + ')'; ctx.fill();
+                ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.12 + sp * 0.15) + ')'; ctx.fill();
             }
 
             // Source entries with node dots + halos
@@ -701,27 +705,27 @@ function drawKnowCanvas(canvasId, attributed) {
                 var nr = 3 + np * 0.8 + boost * 2.5;
                 var gr = nr * 3.5;
                 var grd = ctx.createRadialGradient(nX, nY, 0, nX, nY, gr);
-                grd.addColorStop(0, 'rgba(96,165,250,' + ((0.1 + boost * 0.12) * np) + ')'); grd.addColorStop(1, 'transparent');
+                grd.addColorStop(0, 'rgba(' + C('blue','96,165,250') + ',' + ((0.1 + boost * 0.12) * np) + ')'); grd.addColorStop(1, 'transparent');
                 ctx.beginPath(); ctx.arc(nX, nY, gr, 0, Math.PI * 2); ctx.fillStyle = grd; ctx.fill();
                 ctx.beginPath(); ctx.arc(nX, nY, nr, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(96,165,250,' + (0.35 + np * 0.3 + boost * 0.2) + ')'; ctx.fill();
+                ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.35 + np * 0.3 + boost * 0.2) + ')'; ctx.fill();
 
                 // Hover bar
                 if (boost > 0.15) {
-                    ctx.fillStyle = 'rgba(96,165,250,' + (boost * 0.04) + ')';
+                    ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (boost * 0.04) + ')';
                     ctx.beginPath(); ctx.roundRect(sourceTreeTextX - 4, baseY - LINE_H * 0.38, 140, LINE_H * 0.76, 3); ctx.fill();
                 }
 
                 // Connector
                 ctx.beginPath(); ctx.moveTo(sourceNodeX, baseY); ctx.lineTo(nX - nr - 1, nY);
-                ctx.strokeStyle = 'rgba(96,165,250,' + (0.12 + boost * 0.1) + ')'; ctx.lineWidth = 0.5; ctx.stroke();
+                ctx.strokeStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.12 + boost * 0.1) + ')'; ctx.lineWidth = 0.5; ctx.stroke();
 
                 // Prefix + label
                 ctx.textAlign = 'left';
-                ctx.fillStyle = 'rgba(96,165,250,' + (0.3 + boost * 0.2) + ')';
+                ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.3 + boost * 0.2) + ')';
                 ctx.fillText(prefix, sourceTreeTextX, baseY);
                 var nameX = sourceTreeTextX + ctx.measureText(prefix).width;
-                ctx.fillStyle = 'rgba(96,165,250,' + (0.55 + boost * 0.2) + ')';
+                ctx.fillStyle = 'rgba(' + C('blue','96,165,250') + ',' + (0.55 + boost * 0.2) + ')';
                 ctx.fillText(sourceFiles[i], nameX, baseY);
             }
 
@@ -774,13 +778,13 @@ function drawKnowCanvas(canvasId, attributed) {
                 var alpha = isHovered ? 0.45 : 0.18 + pulse * 0.07;
                 var r = 5 + (isHovered ? 2 : 0);
                 ctx.beginPath(); ctx.arc(o.x + o.w / 2, o.y + o.h / 2, r, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(239,68,68,' + alpha + ')'; ctx.fill();
+                ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',' + alpha + ')'; ctx.fill();
             }
         }
 
         // Labels
         ctx.font = '8px JetBrains Mono'; ctx.textAlign = 'left';
-        ctx.fillStyle = attributed ? 'rgba(216,216,228,0.3)' : 'rgba(128,128,160,0.2)';
+        ctx.fillStyle = attributed ? 'rgba(' + C('text','232,232,240') + ',0.3)' : 'rgba(' + C('dim','92,92,116') + ',0.2)';
         ctx.fillText('output', 4, outputRowY - 6);
 
         requestAnimationFrame(animate);

@@ -240,35 +240,52 @@ strong{color:#fff;font-weight:700} em{color:var(--blue);font-style:normal;font-w
 
 /* ===== LIGHT MODE ===== */
 :root.light{
-    --bg:#f4f4f8;--surface:#ffffff;--border:#d8d8e4;
-    --text:#1a1a2a;--mid:#4a4a68;--dim:#8888a4;
-    --amber:#d97706;--red:#dc2626;--green:#059669;
-    --blue:#2563eb;--purple:#7c3aed;
+    --bg:#f4f4f8;--surface:#ffffff;--border:#d0d0dc;
+    --text:#1a1a2a;--mid:#3e3e5c;--dim:#6a6a86;
+    --amber:#b45309;--red:#dc2626;--green:#047857;
+    --blue:#1d4ed8;--purple:#6d28d9;
 }
 :root.light body{background:var(--bg);color:var(--text)}
-:root.light .site-nav{background:rgba(244,244,248,0.92);border-bottom-color:var(--border)}
-:root.light .term,:root.light .code-box{background:#f0f0f6}
-:root.light canvas#bg{opacity:0.15}
+:root.light .site-nav{background:rgba(244,244,248,0.95);border-bottom-color:var(--border)}
+:root.light .term,:root.light .code-box{background:#ededf4}
+:root.light canvas#bg{opacity:0.12}
 :root.light h2{color:var(--text)}
 :root.light strong{color:var(--text)}
 :root.light .hero-sub strong{color:var(--text)}
-:root.light .hl{color:var(--text);background:rgba(217,119,6,0.1)}
+:root.light .hl{color:var(--text);background:rgba(180,83,9,0.1);border-bottom-color:var(--amber)}
+:root.light .hl-red{background:rgba(220,38,38,0.08);border-bottom-color:var(--red)}
+:root.light .hl-green{background:rgba(4,120,87,0.08);border-bottom-color:var(--green)}
+:root.light .hl-blue{background:rgba(29,78,216,0.08);border-bottom-color:var(--blue)}
+:root.light .hl-purple{background:rgba(109,40,217,0.08);border-bottom-color:var(--purple)}
 :root.light .attn-label,:root.light .thresh-label,:root.light .trace-label,:root.light .know-label{background:linear-gradient(transparent,rgba(244,244,248,0.95))}
 /* Hero equation — gradient text stays readable, dim text needs contrast */
 :root.light .eq .r{color:var(--dim)}
 /* Boxes with hardcoded #fff */
 :root.light .box .punch{color:var(--text)}
+:root.light .box .trait{color:var(--mid)}
 :root.light .box h3{background:linear-gradient(135deg,var(--purple),var(--red),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 /* CTA */
 :root.light .cta{background:rgba(244,244,248,0.92);border-color:var(--border)}
 :root.light .cta h2{background:linear-gradient(135deg,var(--amber),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 :root.light .cta .big-q{color:var(--text)}
 :root.light .cta .big-q em{color:var(--amber)}
+/* Dual cards */
+:root.light .dual-card{background:var(--surface)}
+:root.light .dual-card.old{background:rgba(220,38,38,0.04);border-color:rgba(220,38,38,0.2)}
+:root.light .dual-card.new{background:rgba(4,120,87,0.04);border-color:rgba(4,120,87,0.2)}
+:root.light .dual-card .big{color:var(--text)}
+:root.light .dual-card.old .big{color:var(--red)}
+:root.light .dual-card.new .big{color:var(--green)}
+/* Versus */
+:root.light .vs .old{background:rgba(220,38,38,0.04);border-color:rgba(220,38,38,0.15)}
+:root.light .vs .new{background:rgba(4,120,87,0.04);border-color:rgba(4,120,87,0.15)}
 /* Path sections */
 :root.light .path-section .path-body strong{color:var(--text)}
+:root.light .path-section .path-title{color:var(--text)}
 /* Resource items */
 :root.light .res-item .res-name{color:var(--text)}
-:root.light .res-item{background:var(--surface)}
+:root.light .res-item{background:var(--surface);border-color:var(--border)}
+:root.light .res-item .res-detail{color:var(--mid)}
 /* Engage cards */
 :root.light .engage-card .eng-title{color:var(--text)}
 :root.light .engage-card{background:var(--surface)}
@@ -279,12 +296,28 @@ strong{color:#fff;font-weight:700} em{color:var(--blue);font-style:normal;font-w
 :root.light .term-body{color:var(--mid)}
 :root.light .term.new .gen{color:var(--text)}
 /* Confidence bars */
-:root.light .conf-bar{background:rgba(200,200,220,0.3)}
+:root.light .conf-bar{background:rgba(180,180,200,0.25)}
+:root.light .conf-side{background:var(--surface)}
+:root.light .conf-side.old{background:rgba(220,38,38,0.03);border-color:rgba(220,38,38,0.15)}
+:root.light .conf-side.new{background:rgba(4,120,87,0.03);border-color:rgba(4,120,87,0.15)}
 /* Convergence box */
 :root.light .box{background:var(--surface);border-color:var(--border)}
+/* Canvas section wraps */
+:root.light .stack-wrap,:root.light .res-wrap,:root.light .vision-wrap,:root.light .engage-wrap,:root.light .close-wrap,:root.light .spark-wrap{background:var(--surface);border-color:var(--border)}
+:root.light .attn-box,:root.light .thresh-box,:root.light .trace-box,:root.light .know-box{background:var(--surface);border-color:var(--border)}
+:root.light .path-canvas-wrap{border-color:var(--border)}
 /* Stack/timeline */
-:root.light .stack-wrap{background:var(--surface)}
 :root.light .tl-day .dot{background:var(--bg);border-color:var(--border)}
+/* About page */
+:root.light .about-title{color:var(--text)}
+:root.light .about-card{background:var(--surface);border-color:var(--border)}
+:root.light .about-card:hover{border-color:rgba(180,83,9,0.3)}
+:root.light .gen-table td{color:var(--mid);border-bottom-color:rgba(0,0,0,0.06)}
+:root.light .collab-card{background:var(--surface);border-color:var(--border)}
+/* Break page */
+:root.light .nervous-wrap,:root.light .suffocate-wrap,:root.light .circuit-wrap,:root.light .spectrum-wrap{background:var(--surface);border-color:var(--border)}
+:root.light .q-card{background:var(--surface);border-color:var(--border)}
+:root.light .q-card .q-answer{background:rgba(240,240,248,0.8)}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:640px){

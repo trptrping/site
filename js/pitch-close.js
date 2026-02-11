@@ -12,11 +12,11 @@ function drawCloseCanvas() {
 
     const rings = [];
     for (let i = 0; i < 6; i++) {
-        rings.push({ radius: 0, maxRadius: 35 + i * 32, delay: i * 0.12, color: ['245,158,11','167,139,250','96,165,250','52,211,153','245,158,11','167,139,250'][i], alpha: 0 });
+        rings.push({ radius: 0, maxRadius: 35 + i * 32, delay: i * 0.12, color: [C('amber','245,158,11'),C('purple','167,139,250'),C('blue','96,165,250'),C('green','52,211,153'),C('amber','245,158,11'),C('purple','167,139,250')][i], alpha: 0 });
     }
 
     const ringNodes = [];
-    const nodeColors = ['245,158,11','167,139,250','96,165,250','239,68,68','52,211,153'];
+    const nodeColors = [C('amber','245,158,11'),C('purple','167,139,250'),C('blue','96,165,250'),C('red','239,68,68'),C('green','52,211,153')];
     for (let ring = 0; ring < 6; ring++) {
         const nodesInRing = 3 + ring * 2;
         const baseRadius = 35 + ring * 32;
@@ -55,8 +55,8 @@ function drawCloseCanvas() {
         const centralR = 5 + cPulse * 3 + (m.inside ? 3 : 0);
 
         const outerGrd = ctx.createRadialGradient(cursorCenter.x, cursorCenter.y, 0, cursorCenter.x, cursorCenter.y, centralR * 15);
-        outerGrd.addColorStop(0, `rgba(245,158,11,${0.12 * cPulse})`);
-        outerGrd.addColorStop(0.3, `rgba(167,139,250,${0.06 * cPulse})`);
+        outerGrd.addColorStop(0, `rgba(${C('amber','245,158,11')},${0.12 * cPulse})`);
+        outerGrd.addColorStop(0.3, `rgba(${C('purple','167,139,250')},${0.06 * cPulse})`);
         outerGrd.addColorStop(1, 'transparent');
         ctx.beginPath(); ctx.arc(cursorCenter.x, cursorCenter.y, centralR * 15, 0, Math.PI * 2);
         ctx.fillStyle = outerGrd; ctx.fill();
@@ -136,15 +136,15 @@ function drawCloseCanvas() {
         });
 
         const cGrd = ctx.createRadialGradient(cursorCenter.x, cursorCenter.y, 0, cursorCenter.x, cursorCenter.y, centralR);
-        cGrd.addColorStop(0, `rgba(255,255,255,${0.4 + cPulse * 0.3})`);
-        cGrd.addColorStop(0.4, `rgba(245,158,11,${0.3 + cPulse * 0.2})`);
-        cGrd.addColorStop(1, 'rgba(245,158,11,0)');
+        cGrd.addColorStop(0, `rgba(${C('text','232,232,240')},${0.4 + cPulse * 0.3})`);
+        cGrd.addColorStop(0.4, `rgba(${C('amber','245,158,11')},${0.3 + cPulse * 0.2})`);
+        cGrd.addColorStop(1, `rgba(${C('amber','245,158,11')},0)`);
         ctx.beginPath(); ctx.arc(cursorCenter.x, cursorCenter.y, centralR, 0, Math.PI * 2);
         ctx.fillStyle = cGrd; ctx.fill();
 
         ctx.font = `bold ${10 + cPulse * 3}px JetBrains Mono`;
         ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillStyle = `rgba(255,255,255,${0.5 + cPulse * 0.3})`;
+        ctx.fillStyle = `rgba(${C('text','232,232,240')},${0.5 + cPulse * 0.3})`;
         ctx.fillText('?', cursorCenter.x, cursorCenter.y);
         ctx.textBaseline = 'alphabetic';
 

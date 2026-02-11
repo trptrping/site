@@ -11,9 +11,9 @@ function drawEngageCanvas() {
 
     const origin = { x: w * 0.08, y: h * 0.5 };
     const paths = [
-        { label: 'BUILD', sub: 'Pick a path. Build a prototype.', color: '52,211,153', endX: w * 0.92, endY: h * 0.15, particles: [] },
-        { label: 'BREAK', sub: "Tell us what's wrong.", color: '245,158,11', endX: w * 0.92, endY: h * 0.5, particles: [] },
-        { label: 'EXTEND', sub: "See something we didn't?", color: '167,139,250', endX: w * 0.92, endY: h * 0.85, particles: [] },
+        { label: 'BUILD', sub: 'Pick a path. Build a prototype.', color: C('green','52,211,153'), endX: w * 0.92, endY: h * 0.15, particles: [] },
+        { label: 'BREAK', sub: "Tell us what's wrong.", color: C('amber','245,158,11'), endX: w * 0.92, endY: h * 0.5, particles: [] },
+        { label: 'EXTEND', sub: "See something we didn't?", color: C('purple','167,139,250'), endX: w * 0.92, endY: h * 0.85, particles: [] },
     ];
     paths.forEach(p => {
         for (let i = 0; i < 25; i++) {
@@ -22,7 +22,7 @@ function drawEngageCanvas() {
     });
     const field = [];
     for (let i = 0; i < 40; i++) {
-        field.push({ x: Math.random() * w, y: Math.random() * h, size: 0.5 + Math.random() * 0.8, color: ['52,211,153','245,158,11','167,139,250'][i % 3], phase: Math.random() * Math.PI * 2 });
+        field.push({ x: Math.random() * w, y: Math.random() * h, size: 0.5 + Math.random() * 0.8, color: [C('green','52,211,153'),C('amber','245,158,11'),C('purple','167,139,250')][i % 3], phase: Math.random() * Math.PI * 2 });
     }
 
     let t = 0;
@@ -88,12 +88,12 @@ function drawEngageCanvas() {
         const oPulse = 0.6 + 0.4 * Math.sin(t * 1.2);
         const oR = 7 + oPulse * 2;
         const oGrd = ctx.createRadialGradient(origin.x, origin.y, 0, origin.x, origin.y, 30);
-        oGrd.addColorStop(0, `rgba(245,158,11,${0.16 * oPulse})`); oGrd.addColorStop(1, 'transparent');
+        oGrd.addColorStop(0, `rgba(${C('amber','245,158,11')},${0.16 * oPulse})`); oGrd.addColorStop(1, 'transparent');
         ctx.beginPath(); ctx.arc(origin.x, origin.y, 30, 0, Math.PI * 2); ctx.fillStyle = oGrd; ctx.fill();
         ctx.beginPath(); ctx.arc(origin.x, origin.y, oR, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(245,158,11,${0.45 + oPulse * 0.35})`; ctx.fill();
+        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.45 + oPulse * 0.35})`; ctx.fill();
         ctx.font = 'bold 10px JetBrains Mono'; ctx.textAlign = 'center';
-        ctx.fillStyle = `rgba(245,158,11,${0.45 + oPulse * 0.25})`; ctx.fillText('you', origin.x, origin.y + oR + 14);
+        ctx.fillStyle = `rgba(${C('amber','245,158,11')},${0.45 + oPulse * 0.25})`; ctx.fillText('you', origin.x, origin.y + oR + 14);
 
         requestAnimationFrame(animate);
     }

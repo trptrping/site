@@ -11,7 +11,7 @@ function drawCtaCanvas() {
     const cx = w / 2, cy = h * 0.5;
 
     const deep = [], mid = [], near = [];
-    const allColors = ['245,158,11', '167,139,250', '96,165,250', '52,211,153', '239,68,68'];
+    const allColors = [C('amber','245,158,11'), C('purple','167,139,250'), C('blue','96,165,250'), C('green','52,211,153'), C('red','239,68,68')];
 
     for (let i = 0; i < 80; i++) {
         deep.push({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - 0.5) * 0.15, vy: (Math.random() - 0.5) * 0.15, size: 0.5 + Math.random() * 1, color: allColors[i % 5], phase: Math.random() * Math.PI * 2 });
@@ -100,9 +100,9 @@ function drawCtaCanvas() {
 
         const pulse = 0.5 + 0.5 * Math.sin(t * 1.5);
         const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, 120 + pulse * 30);
-        grd.addColorStop(0, `rgba(245,158,11,${0.1 + pulse * 0.06})`);
-        grd.addColorStop(0.3, `rgba(167,139,250,${0.06 + pulse * 0.04})`);
-        grd.addColorStop(0.6, `rgba(52,211,153,${0.04 + pulse * 0.03})`);
+        grd.addColorStop(0, `rgba(${C('amber','245,158,11')},${0.1 + pulse * 0.06})`);
+        grd.addColorStop(0.3, `rgba(${C('purple','167,139,250')},${0.06 + pulse * 0.04})`);
+        grd.addColorStop(0.6, `rgba(${C('green','52,211,153')},${0.04 + pulse * 0.03})`);
         grd.addColorStop(1, 'transparent');
         ctx.beginPath(); ctx.arc(cx, cy, 120 + pulse * 30, 0, Math.PI * 2);
         ctx.fillStyle = grd; ctx.fill();
