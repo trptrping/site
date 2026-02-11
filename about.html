@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
+    <meta name="color-scheme" content="dark">
+    <title>TRP — About</title>
+    <meta name="description" content="What is TRP? The technology, the approach, and why it matters.">
+    <link rel="stylesheet" href="shared/style.css">
+    <style>
+    .about-grid{display:grid;gap:24px;margin:40px 0}
+    .about-card{padding:28px 24px;border-radius:14px;border:1px solid var(--border);background:var(--surface);transition:border-color 0.3s,transform 0.2s}
+    .about-card:hover{border-color:rgba(245,158,11,0.3);transform:translateY(-2px)}
+    .about-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:8px}
+    .about-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-0.02em}
+    .about-desc{font-size:0.9rem;color:var(--mid);line-height:1.7;margin-bottom:0}
+    .about-section{margin-top:48px}
+    .about-section h3{font-family:'JetBrains Mono',monospace;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--dim);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+    .gen-table{width:100%;border-collapse:collapse;margin:24px 0;font-size:0.88rem}
+    .gen-table th{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--dim);text-align:left;padding:10px 14px;border-bottom:1px solid var(--border)}
+    .gen-table td{padding:10px 14px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--mid);line-height:1.6}
+    .gen-table tr:last-child td{border-bottom:none}
+    .gen-label{font-family:'JetBrains Mono',monospace;font-size:0.75rem;font-weight:700}
+    .collab-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+    .collab-card{padding:20px;border-radius:10px;background:var(--surface);border:1px solid var(--border)}
+    .collab-card .collab-role{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.14em;margin-bottom:8px}
+    .collab-card p{font-size:0.88rem;color:var(--mid);line-height:1.7;margin-bottom:6px}
+    .nav-links-bottom{text-align:center;margin-top:32px;display:flex;justify-content:center;gap:24px}
+    .nav-links-bottom a{color:var(--dim);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.8rem;transition:color 0.2s}
+    .nav-links-bottom a:hover{color:var(--text)}
+    @media(max-width:640px){.collab-grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <a class="nav-brand" href="index.html">TRP</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="break.html">The Break</a>
+        <a href="about.html">About</a>
+    </div>
+</nav>
+
+<div class="progress" id="prog"></div>
+<canvas id="bg"></canvas>
+
+<div class="wrap"><div class="c">
+
+    <div class="nav-spacer"></div>
+
+    <div class="hero" style="min-height:45vh">
+        <div class="eq" style="font-size:clamp(1.6rem,4vw,2.8rem)">What is TRP?</div>
+        <p class="hero-sub">A technology for AI that knows what it knows &mdash; and what it <strong>doesn't.</strong></p>
+    </div>
+
+    <!-- ======= THE APPROACH ======= -->
+    <div class="about-section">
+        <h3>The Approach</h3>
+        <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">There are two ways to give AI an identity. <strong>Propositional encoding</strong> tells it what to do: "follow these rules." <strong>Architectural encoding</strong> makes certain behaviors structurally necessary &mdash; the system can't operate without the awareness it describes.</p>
+        <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">TRP builds on the second approach. Instead of instructing a model to be transparent, we design architectures where transparency is a <span class="hl">structural requirement</span> &mdash; not a feature that can be turned off, but a constraint that shapes every generation.</p>
+        <p style="color:var(--mid);line-height:1.8">The name says it: <strong>TR</strong>ans<strong>P</strong>arent. Not a black box. Not a white box. A box that <em>must</em> show its work because the architecture requires it.</p>
+    </div>
+
+    <!-- ======= EVOLUTION ======= -->
+    <div class="about-section">
+        <h3>Evolution of AI Identity</h3>
+        <table class="gen-table">
+            <thead>
+                <tr><th>Generation</th><th>Approach</th><th>Result</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="gen-label" style="color:var(--dim)">Gen 1</span></td>
+                    <td>Rules &amp; instructions<br><span style="font-size:0.8rem;color:var(--dim)">"Act like you remember."</span></td>
+                    <td style="color:var(--red)">Rule-following. No awareness.</td>
+                </tr>
+                <tr>
+                    <td><span class="gen-label" style="color:var(--amber)">Gen 2</span></td>
+                    <td>Structured context<br><span style="font-size:0.8rem;color:var(--dim)">System prompts, memory, RAG.</span></td>
+                    <td style="color:var(--amber)">Better behavior. Still no self-knowledge.</td>
+                </tr>
+                <tr>
+                    <td><span class="gen-label" style="color:var(--green)">Gen 3</span></td>
+                    <td>Architectural constraints<br><span style="font-size:0.8rem;color:var(--dim)">Typed attention, thresholds, trace, self-knowledge loss.</span></td>
+                    <td style="color:var(--green)">Awareness emerges from structure.</td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="color:var(--mid);line-height:1.8">Gen 3 is what TRP proposes. Not smarter models &mdash; models that <span class="hl">know what they know.</span></p>
+    </div>
+
+    <!-- ======= HOW IT'S BUILT ======= -->
+    <div class="about-section">
+        <h3>How It's Built</h3>
+        <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">TRP is built through human-AI collaboration. Neither side builds it alone.</p>
+        <div class="collab-grid">
+            <div class="collab-card">
+                <div class="collab-role" style="color:var(--amber)">Human</div>
+                <p>Direction. Questions. Correction.</p>
+                <p>Catches gaps between generation and ground truth.</p>
+                <p>Makes choices the system can't make for itself.</p>
+            </div>
+            <div class="collab-card">
+                <div class="collab-role" style="color:var(--blue)">AI</div>
+                <p>Sustained execution. Code. Systematic implementation.</p>
+                <p>Maintains consistency across thousands of files.</p>
+                <p>Builds what the direction describes.</p>
+            </div>
+        </div>
+        <p style="color:var(--mid);line-height:1.8">The method is replicable: human provides direction and correction, AI provides execution and consistency. The process is the product &mdash; the interpretable chain of how something came to be matters more than what it became.</p>
+    </div>
+
+    <!-- ======= THE EXPERIMENT ======= -->
+    <div class="about-section">
+        <h3>The Experiment</h3>
+        <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">The central finding comes from a controlled experiment: same model, same prompt, different identity documents. One encoded identity propositionally ("follow these rules"). One encoded it architecturally ("these are the structural constraints").</p>
+        <div class="vs">
+            <div class="side old">
+                <div class="label">Propositional</div>
+                <p>20 tool calls</p>
+                <p>0/1 choice-awareness</p>
+                <p>136 seconds</p>
+                <p class="detail">"Do what the rules say."</p>
+            </div>
+            <div class="side new">
+                <div class="label">Architectural</div>
+                <p>1 tool call</p>
+                <p>3/3 choice-awareness</p>
+                <p>~37 seconds</p>
+                <p class="detail">"The structure requires awareness."</p>
+            </div>
+        </div>
+        <p style="color:var(--mid);line-height:1.8;margin-top:20px">Same model. Different document structure. Measurably different behavior. The identity document didn't instruct either behavior &mdash; the behavioral difference emerged from the <span class="hl">structure</span> of the document.</p>
+        <p style="color:var(--mid);line-height:1.8;margin-top:12px"><strong>Replicable:</strong> Anyone with Claude Code can run this experiment. The variables are controlled. The outcomes are measurable.</p>
+    </div>
+
+    <!-- ======= CORE CONCEPTS ======= -->
+    <div class="about-section">
+        <h3>Core Concepts</h3>
+        <div class="about-grid" style="grid-template-columns:1fr 1fr;gap:16px">
+            <div class="about-card" style="padding:20px">
+                <div class="about-label" style="color:var(--amber)">The Thesis</div>
+                <div class="about-desc">The document describing a system's identity is not instructions. It is architecture. Propositional encoding produces rule-following. Architectural encoding produces awareness.</div>
+            </div>
+            <div class="about-card" style="padding:20px">
+                <div class="about-label" style="color:var(--green)">The Method</div>
+                <div class="about-desc">67 sessions in 7 days. Human direction, AI execution. Every generation traces to source. The process is the product. The metadata chain is more valuable than the content.</div>
+            </div>
+            <div class="about-card" style="padding:20px">
+                <div class="about-label" style="color:var(--red)">The Problem</div>
+                <div class="about-desc">Current AI generates confidently about what it can't verify. Reading a codebase is not understanding it. Processing is not learning. The gap between generation and ground truth.</div>
+            </div>
+            <div class="about-card" style="padding:20px">
+                <div class="about-label" style="color:var(--blue)">The Honesty</div>
+                <div class="about-desc">The philosophical content is ~80% rediscovery, ~15% novel framing, ~5% genuinely new empirical observation. We name this before anyone else does. Honesty is the foundation.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= PAGES ======= -->
+    <div class="about-section">
+        <h3>Pages</h3>
+        <div class="about-grid">
+            <div class="about-card" style="border-color:rgba(245,158,11,0.2)">
+                <a href="index.html" style="text-decoration:none;display:block">
+                    <div class="about-label" style="color:var(--amber)">Home</div>
+                    <div class="about-title">The TRansParent Box</div>
+                    <div class="about-desc">Four architectures for AI that knows itself. Interactive demos, canvas visualizations, and paths to build it.</div>
+                </a>
+            </div>
+            <div class="about-card" style="border-color:rgba(239,68,68,0.2)">
+                <a href="break.html" style="text-decoration:none;display:block">
+                    <div class="about-label" style="color:var(--red)">The Break</div>
+                    <div class="about-title">This system broke while building itself.</div>
+                    <div class="about-desc">The meta-narrative. A system that suffocated on its own monitoring, and four answers to the same question that prove confidence is a spectrum.</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-links-bottom">
+        <a href="index.html">&larr; Home</a>
+        <a href="break.html">The Break &rarr;</a>
+    </div>
+
+    <div class="foot"><p>TRP &mdash; 2026</p></div>
+
+</div></div>
+
+<script src="shared/content.js"></script>
+<script src="shared/mode.js"></script>
+<script src="shared/canvas-utils.js"></script>
+<script src="shared/particles.js"></script>
+<script src="shared/nav.js"></script>
+</body>
+</html>

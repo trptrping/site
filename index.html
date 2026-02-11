@@ -16,8 +16,7 @@
     <div class="nav-links">
         <a href="index.html">Home</a>
         <a href="break.html">The Break</a>
-        <a href="origin.html">Origin</a>
-        <a href="directory.html">Directory</a>
+        <a href="about.html">About</a>
     </div>
 </nav>
 
@@ -135,29 +134,29 @@
         <div class="box-canvas-wrap">
         <canvas id="converge-bg"></canvas>
         <div class="box" id="thebox">
-            <h3>The Transparent Box</h3>
-            <p class="trait">Attends with <strong style="color:var(--purple)">typed</strong> relationships</p>
-            <p class="trait">Fires only when <strong style="color:var(--blue)">relevant</strong></p>
-            <p class="trait">Transforms through <strong style="color:var(--red)">its own processing</strong></p>
-            <p class="trait">Knows <strong style="color:var(--green)">why</strong> it says what it says</p>
-            <div class="punch">Not a black box you hope is right.<br>A transparent box that <em style="color:var(--blue);font-style:normal">can't not</em> show its work.</div>
+            <h3 data-key="conv.title">The Transparent Box</h3>
+            <p class="trait" data-key="conv.t1">Attends with <strong style="color:var(--purple)">typed</strong> relationships</p>
+            <p class="trait" data-key="conv.t2">Fires only when <strong style="color:var(--blue)">relevant</strong></p>
+            <p class="trait" data-key="conv.t3">Transforms through <strong style="color:var(--red)">its own processing</strong></p>
+            <p class="trait" data-key="conv.t4">Knows <strong style="color:var(--green)">why</strong> it says what it says</p>
+            <div class="punch" data-key="conv.punch">Not a black box you hope is right.<br>A transparent box that <em style="color:var(--blue);font-style:normal">can't not</em> show its work.</div>
         </div>
         </div>
     </div>
 
     <!-- ======= STATUS ======= -->
     <div class="s" id="status">
-        <h2>Where this stands.</h2>
-        <p>This isn't a paper. It's a <span class="hl">build log.</span></p>
+        <h2 data-key="stat.title">Where this stands.</h2>
+        <p data-key="stat.intro">This isn't a paper. It's a <span class="hl">build log.</span></p>
         <div class="stack-wrap"><canvas id="stack-cvs"></canvas></div>
         <div class="vs">
-            <div class="side old"><div class="label">The problem</div><p>Sessions start <strong style="color:var(--red)">blank.</strong></p><p>Corrections <strong style="color:var(--red)">evaporate.</strong></p><p>The model <strong style="color:var(--red)">never changes.</strong></p></div>
-            <div class="side new"><div class="label">Built so far</div><p><strong>Persistent map</strong> across sessions.</p><p>LoRA fine-tuned on own conversations. <span class="mono" style="font-size:0.82rem">7B, 3 epochs, 3.47&rarr;1.55</span></p><p><strong>Voice transfers.</strong> Facts need retrieval.</p></div>
+            <div class="side old"><div class="label" data-key="stat.probLabel">The problem</div><p data-key="stat.prob1">Sessions start <strong style="color:var(--red)">blank.</strong></p><p data-key="stat.prob2">Corrections <strong style="color:var(--red)">evaporate.</strong></p><p data-key="stat.prob3">The model <strong style="color:var(--red)">never changes.</strong></p></div>
+            <div class="side new"><div class="label" data-key="stat.builtLabel">Built so far</div><p data-key="stat.built1"><strong>Persistent map</strong> across sessions.</p><p data-key="stat.built2">LoRA fine-tuned on own conversations. <span class="mono" style="font-size:0.82rem">7B, 3 epochs, 3.47&rarr;1.55</span></p><p data-key="stat.built3"><strong>Voice transfers.</strong> Facts need retrieval.</p></div>
         </div>
-        <p style="margin-top:20px">The transparent box is <span class="hl">designed, not built.</span> The prototype is next.</p>
+        <p style="margin-top:20px" data-key="stat.summary">The transparent box is <span class="hl">designed, not built.</span> The prototype is next.</p>
         <div class="line"></div>
-        <p style="margin-bottom:4px"><span class="hl">Conditions:</span> One <span class="hl-purple hl">Claude Max 20x</span> subscription ($200/mo). <span class="hl-blue hl">Claude Code</span> as the interface. <span class="hl-red hl">100% weekly usage.</span></p>
-        <p class="sm" style="margin-bottom:20px">Consumer hardware. Qwen 2.5 7B. LoRA. One week. Here's exactly where it went:</p>
+        <p style="margin-bottom:4px" data-key="stat.cond"><span class="hl">Conditions:</span> One <span class="hl-purple hl">Claude Max 20x</span> subscription ($200/mo). <span class="hl-blue hl">Claude Code</span> as the interface. <span class="hl-red hl">100% weekly usage.</span></p>
+        <p class="sm" style="margin-bottom:20px" data-key="stat.condDetail">Consumer hardware. Qwen 2.5 7B. LoRA. One week. Here's exactly where it went:</p>
         <div class="timeline" id="build-timeline">
             <div class="tl-head"><span class="label">Weekly usage</span><span class="pct" id="tl-pct">100%</span></div>
             <div class="tl-bar"><div class="tl-fill" id="tl-fill" style="width:0%"></div></div>
@@ -178,8 +177,8 @@
     <div class="s cta-section" id="activate">
         <canvas class="cta-canvas-full" id="cta-cvs"></canvas>
         <div class="cta" id="cta-box">
-            <h2>Now &mdash; you.</h2>
-            <div class="big-q">You scrolled through four ideas.<br>Now pick the one that <em style="color:var(--amber);font-style:normal">won't leave you alone.</em></div>
+            <h2 data-key="cta.title">Now &mdash; you.</h2>
+            <div class="big-q" data-key="cta.q">You scrolled through four ideas.<br>Now pick the one that <em style="color:var(--amber);font-style:normal">won't leave you alone.</em></div>
         </div>
     </div>
 
@@ -187,62 +186,62 @@
     <div class="s" id="paths-section">
         <h2 data-key="paths.title">Four starting points. Pick one.</h2>
         <p data-key="paths.desc">Each of these is a prototype you can build on <span class="hl">consumer hardware</span> this weekend.</p>
-        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-1"></canvas></div><div class="path-num">Path 1</div><div class="path-title">Type your attention</div><div class="path-body">Current attention computes a number between every pair of tokens. That number says <em>how much</em> two things are related. It says nothing about <em>how.</em><br><br>Take any attention implementation. Add <strong>edge type labels</strong> &mdash; even just two: REQUIRES and USES. Now the model doesn't just know that <code style="color:var(--purple)">auth.py</code> and <code style="color:var(--purple)">stripe.py</code> are related. It knows one <em>requires</em> the other.<br><br>Run the same prompts with and without typed edges. Does the model behave differently when it knows relationship types? If yes &mdash; that's signal. If no &mdash; you've still built something nobody else has tested at this granularity.</div><div class="path-req">Needs: any transformer, ~100 lines of code</div></div>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-1"></canvas></div><div class="path-num" data-key="path1.num">Path 1</div><div class="path-title" data-key="path1.ptitle">Type your attention</div><div class="path-body" data-key="path1.body">Current attention computes a number between every pair of tokens. That number says <em>how much</em> two things are related. It says nothing about <em>how.</em><br><br>Take any attention implementation. Add <strong>edge type labels</strong> &mdash; even just two: REQUIRES and USES. Now the model doesn't just know that <code style="color:var(--purple)">auth.py</code> and <code style="color:var(--purple)">stripe.py</code> are related. It knows one <em>requires</em> the other.<br><br>Run the same prompts with and without typed edges. Does the model behave differently when it knows relationship types? If yes &mdash; that's signal. If no &mdash; you've still built something nobody else has tested at this granularity.</div><div class="path-req" data-key="path1.req">Needs: any transformer, ~100 lines of code</div></div>
         <div class="path-divider"></div>
-        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-2"></canvas></div><div class="path-num">Path 2</div><div class="path-title">Add a threshold</div><div class="path-body">In standard attention, every token attends to every other token. Most of those connections carry almost no signal &mdash; but they still cost compute. And you can't see which ones mattered.<br><br>Add a <strong>minimum activation threshold</strong> to any attention layer. Connections below the threshold don't fire. Log which connections survive the cut.<br><br>Two things happen. First: <em>efficiency</em> &mdash; O(n&sup2;) drops toward O(n&times;k) where k is the number of connections that actually matter. Second, and more important: <strong>interpretability</strong>. You can now <em>see</em> exactly which connections the model used. The ones that fire are the ones that mattered. The rest were noise.</div><div class="path-req">Needs: one attention layer, a threshold value, a logger</div></div>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-2"></canvas></div><div class="path-num" data-key="path2.num">Path 2</div><div class="path-title" data-key="path2.ptitle">Add a threshold</div><div class="path-body" data-key="path2.body">In standard attention, every token attends to every other token. Most of those connections carry almost no signal &mdash; but they still cost compute. And you can't see which ones mattered.<br><br>Add a <strong>minimum activation threshold</strong> to any attention layer. Connections below the threshold don't fire. Log which connections survive the cut.<br><br>Two things happen. First: <em>efficiency</em> &mdash; O(n&sup2;) drops toward O(n&times;k) where k is the number of connections that actually matter. Second, and more important: <strong>interpretability</strong>. You can now <em>see</em> exactly which connections the model used. The ones that fire are the ones that mattered. The rest were noise.</div><div class="path-req" data-key="path2.req">Needs: one attention layer, a threshold value, a logger</div></div>
         <div class="path-divider"></div>
-        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-3"></canvas></div><div class="path-num">Path 3</div><div class="path-title">Write a trace</div><div class="path-body">Every AI session starts from zero. You correct a mistake in session 1. Session 2 makes the same mistake. The model read your correction. It didn't <em>learn</em> from it.<br><br>After each session, write <strong>what the model learned</strong> to a file &mdash; corrections, decisions, patterns discovered. Before the next session, prepend that trace to context.<br><br>Now measure: does it make the same mistake twice? Does it reference yesterday's corrections in today's answers? The trace is the simplest form of self-modifying inference &mdash; the model reading its own history and changing behavior because of it.</div><div class="path-req">Needs: any LLM API, a JSON file, a diff checker</div></div>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-3"></canvas></div><div class="path-num" data-key="path3.num">Path 3</div><div class="path-title" data-key="path3.ptitle">Write a trace</div><div class="path-body" data-key="path3.body">Every AI session starts from zero. You correct a mistake in session 1. Session 2 makes the same mistake. The model read your correction. It didn't <em>learn</em> from it.<br><br>After each session, write <strong>what the model learned</strong> to a file &mdash; corrections, decisions, patterns discovered. Before the next session, prepend that trace to context.<br><br>Now measure: does it make the same mistake twice? Does it reference yesterday's corrections in today's answers? The trace is the simplest form of self-modifying inference &mdash; the model reading its own history and changing behavior because of it.</div><div class="path-req" data-key="path3.req">Needs: any LLM API, a JSON file, a diff checker</div></div>
         <div class="path-divider"></div>
-        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-4"></canvas></div><div class="path-num">Path 4</div><div class="path-title">Train for self-knowledge</div><div class="path-body">Current models optimize for one thing: predict the right next token. They have no loss for knowing <em>what they don't know.</em> A model that's 30% confident about something says it with the same fluency as something it's 95% confident about.<br><br>Add a <strong>second prediction head</strong> that outputs a confidence score. Train on examples where you know ground truth &mdash; when the model is right, confidence should be high. When it's wrong, confidence should be low.<br><br>The loss becomes: <code style="color:var(--green)">predict_right_token() + &alpha; &times; can_you_cite_why()</code>. Now the model is penalized for generating things it can't explain. Self-knowledge isn't a feature. It's a <em>loss function.</em></div><div class="path-req">Needs: a fine-tuning setup, labeled confidence data</div></div>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-4"></canvas></div><div class="path-num" data-key="path4.num">Path 4</div><div class="path-title" data-key="path4.ptitle">Train for self-knowledge</div><div class="path-body" data-key="path4.body">Current models optimize for one thing: predict the right next token. They have no loss for knowing <em>what they don't know.</em> A model that's 30% confident about something says it with the same fluency as something it's 95% confident about.<br><br>Add a <strong>second prediction head</strong> that outputs a confidence score. Train on examples where you know ground truth &mdash; when the model is right, confidence should be high. When it's wrong, confidence should be low.<br><br>The loss becomes: <code style="color:var(--green)">predict_right_token() + &alpha; &times; can_you_cite_why()</code>. Now the model is penalized for generating things it can't explain. Self-knowledge isn't a feature. It's a <em>loss function.</em></div><div class="path-req" data-key="path4.req">Needs: a fine-tuning setup, labeled confidence data</div></div>
     </div>
 
     <!-- ======= WHAT YOU NEED ======= -->
     <div class="s" id="resources">
         <h2 data-key="res.title">What you actually need.</h2>
-        <p>Not what you think you need. What you <span class="hl">actually</span> need.</p>
+        <p data-key="res.desc">Not what you think you need. What you <span class="hl">actually</span> need.</p>
         <div class="res-wrap"><canvas id="res-cvs"></canvas></div>
         <div class="res-grid">
             <div class="res-item"><div class="res-name" data-key="res1.name">A model</div><div class="res-detail" data-key="res1.detail">Qwen 2.5 7B, Llama 3.1 8B, Mistral 7B.<br>All free. All run on consumer GPUs.<br><span style="color:var(--green)">8GB VRAM with QLoRA.</span></div></div>
             <div class="res-item"><div class="res-name" data-key="res2.name">A method</div><div class="res-detail" data-key="res2.detail">LoRA/QLoRA for fine-tuning.<br>Hugging Face transformers + PEFT.<br><span style="color:var(--green)">Standard Python. No custom CUDA.</span></div></div>
             <div class="res-item"><div class="res-name" data-key="res3.name">A question</div><div class="res-detail" data-key="res3.detail">Not "how do I build this?"<br>But <em>"what happens if I try?"</em><br><span style="color:var(--amber)">The question IS the method.</span></div></div>
         </div>
-        <p style="text-align:center;margin-top:16px">Everything on this page was built with a Qwen 2.5 7B and a <span class="hl-purple hl">Claude Max</span> subscription.<br>If you have a GPU and curiosity, you have enough.</p>
+        <p style="text-align:center;margin-top:16px" data-key="res.bottom">Everything on this page was built with a Qwen 2.5 7B and a <span class="hl-purple hl">Claude Max</span> subscription.<br>If you have a GPU and curiosity, you have enough.</p>
     </div>
 
     <!-- ======= WHAT HAPPENS WHEN ======= -->
     <div class="s" id="vision">
-        <h2>What happens when someone actually does this?</h2>
+        <h2 data-key="vis.title">What happens when someone actually does this?</h2>
         <div class="vision-wrap"><canvas id="vision-cvs"></canvas></div>
-        <p>If <span class="hl">one person</span> builds one typed attention prototype, we learn whether relationship labels carry signal through inference.</p>
-        <p>If <span class="hl">ten people</span> each build a different piece, the architecture starts assembling itself &mdash; not by coordination, but by convergence. Same question, different implementations, shared findings.</p>
-        <p>If <span class="hl-green hl">any of it works</span> &mdash; even partially, even messily &mdash; it means the current paradigm is leaving value on the table. Not because the models are bad. Because they don't know what they know.</p>
+        <p data-key="vis.p1">If <span class="hl">one person</span> builds one typed attention prototype, we learn whether relationship labels carry signal through inference.</p>
+        <p data-key="vis.p2">If <span class="hl">ten people</span> each build a different piece, the architecture starts assembling itself &mdash; not by coordination, but by convergence. Same question, different implementations, shared findings.</p>
+        <p data-key="vis.p3">If <span class="hl-green hl">any of it works</span> &mdash; even partially, even messily &mdash; it means the current paradigm is leaving value on the table. Not because the models are bad. Because they don't know what they know.</p>
         <div class="line"></div>
-        <p>And if it <span class="hl-red hl">doesn't work?</span></p>
-        <p>Then you'll know why. You'll have the experiment, the data, the specific point of failure. That's more valuable than an opinion. That's <em>engineering.</em></p>
+        <p data-key="vis.fail">And if it <span class="hl-red hl">doesn't work?</span></p>
+        <p data-key="vis.failp">Then you'll know why. You'll have the experiment, the data, the specific point of failure. That's more valuable than an opinion. That's <em>engineering.</em></p>
     </div>
 
     <!-- ======= HOW TO ENGAGE ======= -->
     <div class="s" id="engage-section">
-        <h2>Three ways to engage.</h2>
+        <h2 data-key="eng.title">Three ways to engage.</h2>
         <div class="engage-wrap"><canvas id="engage-cvs"></canvas></div>
         <div class="engage">
-            <div class="engage-card"><div class="eng-title" style="color:var(--green)">Build it</div><div class="eng-desc">Pick a path. Build a prototype. Share what happens &mdash; the failures are as valuable as the successes.</div></div>
-            <div class="engage-card"><div class="eng-title" style="color:var(--amber)">Break it</div><div class="eng-desc">Tell us what's wrong. Which ideas are already solved? Which are provably impossible? Point to the papers we missed.</div></div>
-            <div class="engage-card"><div class="eng-title" style="color:var(--purple)">Extend it</div><div class="eng-desc">See something we didn't? A fifth idea that connects to these four? A domain where this applies differently? That's how architectures grow.</div></div>
+            <div class="engage-card"><div class="eng-title" style="color:var(--green)" data-key="eng1.title">Build it</div><div class="eng-desc" data-key="eng1.desc">Pick a path. Build a prototype. Share what happens &mdash; the failures are as valuable as the successes.</div></div>
+            <div class="engage-card"><div class="eng-title" style="color:var(--amber)" data-key="eng2.title">Break it</div><div class="eng-desc" data-key="eng2.desc">Tell us what's wrong. Which ideas are already solved? Which are provably impossible? Point to the papers we missed.</div></div>
+            <div class="engage-card"><div class="eng-title" style="color:var(--purple)" data-key="eng3.title">Extend it</div><div class="eng-desc" data-key="eng3.desc">See something we didn't? A fifth idea that connects to these four? A domain where this applies differently? That's how architectures grow.</div></div>
         </div>
     </div>
 
     <!-- ======= THE CLOSE ======= -->
     <div class="s" id="close">
         <div class="close-wrap"><canvas id="close-cvs"></canvas></div>
-        <p style="text-align:center;font-size:1.3rem;color:var(--blue);font-style:italic;font-weight:300;max-width:500px;margin:0 auto 24px">"Which parts matter right now?"</p>
-        <p style="text-align:center;color:var(--mid);max-width:500px;margin:0 auto">That question started this project. The same question is now yours.</p>
+        <p style="text-align:center;font-size:1.3rem;color:var(--blue);font-style:italic;font-weight:300;max-width:500px;margin:0 auto 24px" data-key="close.quote">"Which parts matter right now?"</p>
+        <p style="text-align:center;color:var(--mid);max-width:500px;margin:0 auto" data-key="close.desc">That question started this project. The same question is now yours.</p>
         <div style="text-align:center;margin-top:40px">
-            <p style="font-size:clamp(1.4rem,4vw,2rem);font-weight:900;background:linear-gradient(135deg,var(--amber),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">What will you build?</p>
+            <p style="font-size:clamp(1.4rem,4vw,2rem);font-weight:900;background:linear-gradient(135deg,var(--amber),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text" data-key="close.big">What will you build?</p>
         </div>
         <div style="text-align:center;margin-top:40px">
-            <p style="color:var(--mid)">The architecture is open. The ideas are free. The models are free.</p>
-            <p style="margin-top:8px"><span class="hl">The only thing missing is what you do next.</span></p>
+            <p style="color:var(--mid)" data-key="close.p1">The architecture is open. The ideas are free. The models are free.</p>
+            <p style="margin-top:8px" data-key="close.p2"><span class="hl">The only thing missing is what you do next.</span></p>
         </div>
     </div>
 
