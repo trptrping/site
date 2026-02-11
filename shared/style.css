@@ -127,7 +127,7 @@ strong{color:#fff;font-weight:700} em{color:var(--blue);font-style:normal;font-w
 .stack-wrap{position:relative;margin:24px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--surface)}
 .stack-wrap canvas{width:100%;height:320px;display:block}
 
-/* ===== SPARK CANVAS (ADHD mind map) ===== */
+/* ===== SPARK CANVAS (divergent thought map) ===== */
 .spark-wrap{position:relative;margin:32px 0;border:1px solid var(--border);border-radius:10px;overflow:hidden}
 .spark-wrap canvas{width:100%;height:400px;display:block}
 

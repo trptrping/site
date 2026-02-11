@@ -1,4 +1,4 @@
-/* TRP Site — Origin: ADHD Mind Map (spark canvas)
+/* TRP Site — Origin: Spark Canvas (divergent thought map)
    Extracted from output/index.html. The inside of the builder's head. */
 
 (function() {
