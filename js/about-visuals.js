@@ -320,7 +320,7 @@
         var t = (Date.now() - startTime) / 1000;
         ctx.clearRect(0, 0, w, h);
 
-        var padL = 130, padR = 40, padT = 50, padB = 40;
+        var padL = 130, padR = 40, padT = 70, padB = 40;
         var chartW = w - padL - padR;
         var barH = 24, gap = 58;
         var animProgress = Math.min(1, t * 0.4);
@@ -332,21 +332,25 @@
         ctx.fillStyle = 'rgba(' + C('text','232,232,240') + ',0.7)';
         ctx.fillText('same model, same prompt, different document', w / 2, 22);
 
-        // Column headers
+        // Legend above bars
         ctx.font = '700 11px JetBrains Mono';
         ctx.textAlign = 'left';
+        var legendY = 46;
+        // Red square + propositional
+        ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',0.6)';
+        ctx.fillRect(padL, legendY - 8, 10, 10);
+        ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',0.9)';
+        ctx.fillText('propositional', padL + 16, legendY);
+        // Green square + architectural
+        var archLegendX = padL + 150;
+        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.6)';
+        ctx.fillRect(archLegendX, legendY - 8, 10, 10);
+        ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.9)';
+        ctx.fillText('architectural', archLegendX + 16, legendY);
 
         for (var i = 0; i < metrics.length; i++) {
             var mt = metrics[i];
             var y = padT + i * gap;
-
-            // Row headers (propositional / architectural)
-            if (i === 0) {
-                ctx.fillStyle = 'rgba(' + C('red','239,68,68') + ',0.85)';
-                ctx.fillText('propositional', padL, y + barH / 2 + 4);
-                ctx.fillStyle = 'rgba(' + C('green','52,211,153') + ',0.85)';
-                ctx.fillText('architectural', padL, y + barH + 4 + barH / 2 + 4);
-            }
 
             // Metric label — left side, readable
             ctx.font = '600 10px JetBrains Mono';
