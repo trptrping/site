@@ -5,9 +5,10 @@ function drawJourneyCanvas() {
     const cvs = document.getElementById('journey-cvs');
     const ctx = cvs.getContext('2d');
     const rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 300 * 2;
+    const h = rect.height || 300;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    const w = rect.width, h = 300;
+    const w = rect.width;
 
     const epochs = [
         { x: w * 0.12, y: h * 0.5, label: 'Eve', year: '2020', color: '167,139,250', r: 10, sub: 'propositional' },

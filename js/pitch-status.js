@@ -21,9 +21,10 @@ function drawStackCanvas() {
     const cvs = document.getElementById('stack-cvs');
     const ctx = cvs.getContext('2d');
     const rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 320 * 2;
+    const h = rect.height || 320;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    const w = rect.width, h = 320;
+    const w = rect.width;
 
     const layers = [
         { label: 'Layer 0: Fine-tuned 7B', desc: 'Voice learned from 4,490 conversation examples', status: 'built', color: C('green','52,211,153') },

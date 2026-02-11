@@ -30,9 +30,10 @@ function drawHealthy() {
     var cvs = document.getElementById('nervous-cvs');
     var ctx = cvs.getContext('2d');
     var rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 340 * 2;
+    var h = rect.height || 340;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = 340;
+    var w = rect.width;
 
     var padLeft = Math.max(36, w * 0.06);
     var padTop = 34;
@@ -235,9 +236,10 @@ function drawSuffocate() {
     var cvs = document.getElementById('suffocate-cvs');
     var ctx = cvs.getContext('2d');
     var rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 340 * 2;
+    var h = rect.height || 340;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = 340;
+    var w = rect.width;
 
     var padLeft = Math.max(36, w * 0.06);
     var padTop = 34;

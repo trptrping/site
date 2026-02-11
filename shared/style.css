@@ -319,10 +319,57 @@ strong{color:#fff;font-weight:700} em{color:var(--blue);font-style:normal;font-w
 :root.light .q-card{background:var(--surface);border-color:var(--border)}
 :root.light .q-card .q-answer{background:rgba(240,240,248,0.8)}
 
-/* ===== RESPONSIVE ===== */
+/* ===== HAMBURGER NAV (mobile) ===== */
+.nav-toggle{display:none;background:none;border:none;color:var(--dim);font-size:1.2rem;cursor:pointer;padding:4px 8px;font-family:'JetBrains Mono',monospace}
+.nav-toggle:hover{color:var(--text)}
+
+/* ===== REDUCED MOTION ===== */
+@media(prefers-reduced-motion:reduce){
+    .s{transition:none}
+    .hero .arr{animation:none;opacity:0.3}
+    .cursor-t{animation:none;opacity:1}
+    @keyframes fadeIn{0%,100%{opacity:1}}
+}
+
+/* ===== RESPONSIVE: TABLET ===== */
+@media(max-width:768px){
+    .c{padding:0 16px}
+    .s{padding:60px 0}
+    h2{margin-bottom:16px}
+    .hero-sub{max-width:360px;font-size:1.05rem}
+    .box{padding:36px 24px}
+    .cta{padding:60px 24px 48px}
+    .path-section .path-body{font-size:0.95rem}
+}
+
+/* ===== RESPONSIVE: MOBILE ===== */
 @media(max-width:640px){
     .terminals,.dual,.attn-wrap,.thresh-wrap,.trace-wrap,.know-wrap,.code-dual,.vs,.conf-dual{grid-template-columns:1fr}
     .res-grid,.engage,.hub-grid{grid-template-columns:1fr}
     .tl-day .mile{font-size:0.6rem}
     .conf-row .label{width:80px;font-size:0.65rem}
+    /* Navigation hamburger */
+    .nav-toggle{display:block}
+    .site-nav .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:rgba(6,6,10,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:8px 0}
+    .site-nav .nav-links a{padding:10px 24px;display:block}
+    .site-nav.nav-open .nav-links{display:flex}
+    .mode-toggles{padding-left:8px}
+    /* Canvas heights reduced for mobile */
+    .attn-box canvas,.trace-box canvas,.know-box canvas{height:220px}
+    .thresh-box canvas{height:200px}
+    .stack-wrap canvas{height:240px}
+    .spark-wrap canvas{height:280px}
+    .cta-canvas-full{height:280px}
+    .path-section .path-canvas-wrap canvas{height:300px}
+    .res-wrap canvas{height:260px}
+    .vision-wrap canvas{height:280px}
+    .engage-wrap canvas{height:260px}
+    .close-wrap canvas{height:300px}
+    /* General mobile */
+    .s{padding:48px 0}
+    .hero{min-height:80vh}
+    .eq{font-size:clamp(2.2rem,8vw,4rem)}
+    .box{padding:28px 18px}
+    .cta{padding:48px 18px 40px}
 }
+:root.light .site-nav.nav-open .nav-links{background:rgba(244,244,248,0.98)}

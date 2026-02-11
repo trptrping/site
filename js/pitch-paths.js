@@ -13,9 +13,10 @@ function drawPath1() {
     var wrap = cvs.parentElement;
     var ctx = cvs.getContext('2d');
     var rect = wrap.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = PH * 2;
+    var h = rect.height || PH;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = PH;
+    var w = rect.width;
 
     var LINE_H = 34;
     var A = (window.SITE && window.SITE.active) || {};
@@ -259,9 +260,10 @@ function drawPath2() {
     var wrap = cvs.parentElement;
     var ctx = cvs.getContext('2d');
     var rect = wrap.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = PH * 2;
+    var h = rect.height || PH;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = PH;
+    var w = rect.width;
     var cols = 16, rows = 10, cells = [];
     for (var r = 0; r < rows; r++) {
         for (var c = 0; c < cols; c++) {
@@ -343,9 +345,10 @@ function drawPath3() {
     var wrap = cvs.parentElement;
     var ctx = cvs.getContext('2d');
     var rect = wrap.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = PH * 2;
+    var h = rect.height || PH;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = PH;
+    var w = rect.width;
     var sessions = [
         { x: 0.06, y: 0.5, label: 'session 1', r: 16 }, { x: 0.22, y: 0.28, label: 'session 2', r: 20 },
         { x: 0.38, y: 0.55, label: 'session 3', r: 24 }, { x: 0.54, y: 0.3, label: 'session 4', r: 28 },
@@ -436,9 +439,10 @@ function drawPath4() {
     var wrap = cvs.parentElement;
     var ctx = cvs.getContext('2d');
     var rect = wrap.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = PH * 2;
+    var h = rect.height || PH;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = PH;
+    var w = rect.width;
     var cx = w * 0.5, cy = h * 0.48;
 
     var rays = [];

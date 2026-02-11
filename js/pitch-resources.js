@@ -5,9 +5,10 @@ function drawResCanvas() {
     const cvs = document.getElementById('res-cvs');
     const ctx = cvs.getContext('2d');
     const rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 360 * 2;
+    const h = rect.height || 360;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    const w = rect.width, h = 360;
+    const w = rect.width;
 
     const center = { x: w * 0.5, y: h * 0.5 };
     const resources = [

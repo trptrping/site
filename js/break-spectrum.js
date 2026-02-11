@@ -6,9 +6,10 @@
         const cvs = document.getElementById('spectrum-cvs');
         const ctx = cvs.getContext('2d');
         const rect = cvs.parentElement.getBoundingClientRect();
-        cvs.width = rect.width * 2; cvs.height = 280 * 2;
+        const h = rect.height || 280;
+        cvs.width = rect.width * 2; cvs.height = h * 2;
         ctx.scale(2, 2);
-        const w = rect.width, h = 280;
+        const w = rect.width;
 
         const cols = [
             { color: C('red','239,68,68'),   label: 'binary',    mode: 'solid' },

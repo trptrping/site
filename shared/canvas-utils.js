@@ -7,7 +7,11 @@ function C(name, fallback) {
     return (window.SITE && window.SITE.colors && window.SITE.colors[name]) || fallback;
 }
 
-// ===== GLOBAL CURSOR STATE =====
+// ===== REDUCED MOTION =====
+window.SITE = window.SITE || {};
+window.SITE.reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ===== GLOBAL CURSOR STATE (mouse + touch) =====
 const mouse = { x: -1000, y: -1000, active: false };
 document.addEventListener('mousemove', e => {
     mouse.x = e.clientX;
@@ -15,6 +19,14 @@ document.addEventListener('mousemove', e => {
     mouse.active = true;
 });
 document.addEventListener('mouseleave', () => { mouse.active = false; });
+document.addEventListener('touchmove', e => {
+    if (e.touches.length > 0) {
+        mouse.x = e.touches[0].clientX;
+        mouse.y = e.touches[0].clientY;
+        mouse.active = true;
+    }
+}, { passive: true });
+document.addEventListener('touchend', () => { mouse.active = false; });
 
 // Helper: get mouse position relative to a canvas's parent
 function mouseInCanvas(canvasParent) {

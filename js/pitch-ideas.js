@@ -11,9 +11,10 @@ function drawAttnCanvas(canvasId, typed) {
     var cvs = document.getElementById(canvasId);
     var ctx = cvs.getContext('2d');
     var rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 300 * 2;
+    var h = rect.height || 300;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = 300;
+    var w = rect.width;
 
     var LINE_H = 28;
 
@@ -412,9 +413,10 @@ function drawThreshCanvas(canvasId, selective) {
     var cvs = document.getElementById(canvasId);
     var ctx = cvs.getContext('2d');
     var rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 280 * 2;
+    var h = rect.height || 280;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = 280;
+    var w = rect.width;
 
     var grid = [];
     var cols = 6, rows = 4;
@@ -492,9 +494,10 @@ function drawTraceCanvas(canvasId, connected) {
     var cvs = document.getElementById(canvasId);
     var ctx = cvs.getContext('2d');
     var rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 300 * 2;
+    var h = rect.height || 300;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = 300;
+    var w = rect.width;
 
     var count = 5;
     var sessions = [];
@@ -599,9 +602,10 @@ function drawKnowCanvas(canvasId, attributed) {
     var cvs = document.getElementById(canvasId);
     var ctx = cvs.getContext('2d');
     var rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 300 * 2;
+    var h = rect.height || 300;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    var w = rect.width, h = 300;
+    var w = rect.width;
 
     var LINE_H = 26;
 

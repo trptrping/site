@@ -6,9 +6,10 @@ function drawSparkCanvas() {
     const cvs = document.getElementById('spark-cvs');
     const ctx = cvs.getContext('2d');
     const rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 400 * 2;
+    const h = rect.height || 400;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    const w = rect.width, h = 400;
+    const w = rect.width;
 
     const thoughts = [
         // Core ideas (bigger, brighter)

@@ -5,9 +5,10 @@ function drawVisionCanvas() {
     const cvs = document.getElementById('vision-cvs');
     const ctx = cvs.getContext('2d');
     const rect = cvs.parentElement.getBoundingClientRect();
-    cvs.width = rect.width * 2; cvs.height = 380 * 2;
+    const h = rect.height || 380;
+    cvs.width = rect.width * 2; cvs.height = h * 2;
     ctx.scale(2, 2);
-    const w = rect.width, h = 380;
+    const w = rect.width;
 
     const builders = [];
     const pathColors = [C('purple','167,139,250'), C('blue','96,165,250'), C('amber','245,158,11'), C('green','52,211,153')];

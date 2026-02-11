@@ -20,7 +20,7 @@
     function resize() {
         dpr = window.devicePixelRatio || 1;
         var rect = cvs.parentElement.getBoundingClientRect();
-        w = rect.width; h = 300;
+        w = rect.width; h = rect.height || 300;
         cvs.width = w * dpr; cvs.height = h * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
@@ -173,7 +173,7 @@
     function resize() {
         dpr = window.devicePixelRatio || 1;
         var rect = cvs.parentElement.getBoundingClientRect();
-        w = rect.width; h = 220;
+        w = rect.width; h = rect.height || 220;
         cvs.width = w * dpr; cvs.height = h * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         var pad = w * 0.12;
@@ -309,7 +309,7 @@
     function resize() {
         dpr = window.devicePixelRatio || 1;
         var rect = cvs.parentElement.getBoundingClientRect();
-        w = rect.width; h = 280;
+        w = rect.width; h = rect.height || 280;
         cvs.width = w * dpr; cvs.height = h * dpr;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
