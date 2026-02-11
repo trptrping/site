@@ -9,43 +9,56 @@
     <meta name="description" content="What worked, what broke, what caused what. The actual history of building the TRansParent Box.">
     <link rel="stylesheet" href="shared/style.css">
     <style>
+    /* ===== HERO GRADIENT TEXT ===== */
+    .hero-title-gradient{background:linear-gradient(135deg,var(--green),var(--amber),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    /* ===== TIMELINE CANVAS ===== */
+    .tl-canvas-wrap{position:relative;margin:0 0 -40px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .tl-canvas-wrap canvas{width:100%;height:600px;display:block}
+
     /* ===== TIMELINE ===== */
     .tl{position:relative;margin:40px 0;padding-left:32px}
-    .tl::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
+    .tl::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--green),var(--amber) 50%,var(--red))}
 
     .tl-date{position:relative;margin-top:40px;margin-bottom:20px}
     .tl-date:first-child{margin-top:0}
     .tl-date-dot{position:absolute;left:-28px;top:4px;width:12px;height:12px;border-radius:50%;border:2px solid var(--dim);background:var(--bg);z-index:2}
-    .tl-date-text{font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase}
+    .tl-date-text{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--text);letter-spacing:0.1em;text-transform:uppercase}
     .tl-date-sub{font-size:0.8rem;color:var(--mid);margin-top:4px}
 
-    .tl-event{position:relative;margin:16px 0;padding:16px 20px;border-radius:10px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.3s}
-    .tl-event:hover{border-color:rgba(200,200,208,0.15)}
+    .tl-event{position:relative;margin:16px 0;padding:20px 24px;border-radius:10px;background:var(--surface);border:1px solid var(--border);transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s}
+    .tl-event:hover{transform:translateX(2px)}
+    .tl-event.worked:hover{border-color:rgba(52,211,153,0.4);box-shadow:0 0 16px rgba(52,211,153,0.1)}
+    .tl-event.broke:hover{border-color:rgba(239,68,68,0.4);box-shadow:0 0 16px rgba(239,68,68,0.1)}
+    .tl-event.fixed:hover{border-color:rgba(96,165,250,0.4);box-shadow:0 0 16px rgba(96,165,250,0.1)}
+    .tl-event.synthetic:hover{border-color:rgba(245,158,11,0.4);box-shadow:0 0 16px rgba(245,158,11,0.1)}
 
-    .tl-event::before{content:'';position:absolute;left:-24px;top:20px;width:8px;height:8px;border-radius:50%;z-index:2}
-    .tl-event.worked::before{background:var(--green)}
-    .tl-event.broke::before{background:var(--red)}
-    .tl-event.fixed::before{background:var(--blue)}
-    .tl-event.synthetic::before{background:var(--amber)}
+    .tl-event::before{content:'';position:absolute;left:-24px;top:24px;width:10px;height:10px;border-radius:50%;z-index:2}
+    .tl-event.worked::before{background:var(--green);box-shadow:0 0 8px rgba(52,211,153,0.4)}
+    .tl-event.broke::before{background:var(--red);box-shadow:0 0 8px rgba(239,68,68,0.4)}
+    .tl-event.fixed::before{background:var(--blue);box-shadow:0 0 8px rgba(96,165,250,0.4)}
+    .tl-event.synthetic::before{background:var(--amber);box-shadow:0 0 8px rgba(245,158,11,0.4)}
 
     .tl-event-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
-    .tl-event-title{font-size:0.92rem;font-weight:700;color:var(--text)}
-    .tl-badge{font-family:'JetBrains Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.1em;padding:2px 8px;border-radius:12px;border:1px solid;white-space:nowrap}
-    .badge-worked{color:var(--green);border-color:rgba(52,211,153,0.3)}
-    .badge-broke{color:var(--red);border-color:rgba(239,68,68,0.3)}
-    .badge-fixed{color:var(--blue);border-color:rgba(96,165,250,0.3)}
-    .badge-synthetic{color:var(--amber);border-color:rgba(245,158,11,0.3)}
-    .badge-architectural{color:var(--green);border-color:rgba(52,211,153,0.3)}
+    .tl-event-title{font-size:1rem;font-weight:800;color:var(--text)}
+    .tl-badge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;padding:3px 9px;border-radius:12px;border:1px solid;white-space:nowrap}
+    .badge-worked{color:var(--green);border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.08)}
+    .badge-broke{color:var(--red);border-color:rgba(239,68,68,0.3);background:rgba(239,68,68,0.08)}
+    .badge-fixed{color:var(--blue);border-color:rgba(96,165,250,0.3);background:rgba(96,165,250,0.08)}
+    .badge-synthetic{color:var(--amber);border-color:rgba(245,158,11,0.3);background:rgba(245,158,11,0.08)}
+    .badge-architectural{color:var(--green);border-color:rgba(52,211,153,0.3);background:rgba(52,211,153,0.08)}
 
-    .tl-event-body{font-size:0.85rem;color:var(--mid);line-height:1.7}
+    .tl-event-body{font-size:0.85rem;color:var(--mid);line-height:1.8}
     .tl-event-body strong{color:var(--text)}
 
     .tl-edges{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
-    .tl-edge{font-family:'JetBrains Mono',monospace;font-size:0.55rem;padding:2px 7px;border-radius:4px;background:rgba(200,200,208,0.05);color:var(--dim)}
-    .tl-edge.requires{color:var(--red);background:rgba(239,68,68,0.06)}
-    .tl-edge.caused{color:var(--amber);background:rgba(245,158,11,0.06)}
-    .tl-edge.fixed-by{color:var(--blue);background:rgba(96,165,250,0.06)}
-    .tl-edge.enabled{color:var(--green);background:rgba(52,211,153,0.06)}
+    .tl-edge{font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:3px 8px;border-radius:4px;background:rgba(200,200,208,0.05);color:var(--dim);transition:transform 0.2s}
+    .tl-edge:hover{transform:scale(1.06)}
+    .tl-edge.requires{color:var(--red);background:rgba(239,68,68,0.1)}
+    .tl-edge.caused{color:var(--amber);background:rgba(245,158,11,0.1)}
+    .tl-edge.fixed-by{color:var(--blue);background:rgba(96,165,250,0.1)}
+    .tl-edge.enabled{color:var(--green);background:rgba(52,211,153,0.1)}
+    .tl-edge.fixes{color:var(--blue);background:rgba(96,165,250,0.1)}
 
     /* ===== STATUS SUMMARY ===== */
     .status-bar{display:flex;gap:20px;justify-content:center;margin:24px 0;flex-wrap:wrap}
@@ -55,7 +68,11 @@
     .stack-wrap{position:relative;margin:28px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
     .stack-wrap canvas{width:100%;height:320px;display:block}
 
-    .build-note{font-size:0.85rem;color:var(--dim);line-height:1.7;margin-top:24px;padding:16px;border-radius:10px;border:1px solid var(--border);background:var(--surface)}
+    /* ===== WHAT SYNTHETIC MEANS ===== */
+    .synthetic-section{border-left:3px solid var(--amber);padding-left:20px}
+    .synthetic-section h2{background:linear-gradient(135deg,var(--amber),var(--red));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+    .build-note{font-size:0.9rem;color:var(--mid);line-height:1.7;margin-top:24px;padding:18px;border-radius:10px;border:1px solid rgba(245,158,11,0.2);background:var(--surface)}
 
     .nav-links-bottom{text-align:center;margin-top:32px;display:flex;justify-content:center;gap:24px}
     .nav-links-bottom a{color:var(--dim);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.8rem;transition:color 0.2s}
@@ -65,8 +82,9 @@
         .tl{padding-left:24px}
         .tl::before{left:6px}
         .tl-date-dot{left:-22px;width:10px;height:10px}
-        .tl-event::before{left:-20px;width:6px;height:6px}
+        .tl-event::before{left:-20px;width:8px;height:8px}
         .stack-wrap canvas{height:260px}
+        .tl-canvas-wrap canvas{height:400px}
     }
     </style>
 </head>
@@ -90,7 +108,7 @@
     <div class="nav-spacer"></div>
 
     <div class="hero" style="min-height:35vh">
-        <div class="eq" style="font-size:clamp(1.6rem,4vw,2.8rem)">Build Log</div>
+        <div class="eq" style="font-size:clamp(1.6rem,4vw,2.8rem)"><span class="hero-title-gradient">Build Log</span></div>
         <p class="hero-sub">What <strong style="color:var(--green)">worked</strong>, what <strong style="color:var(--red)">broke</strong>, what <strong style="color:var(--amber)">caused</strong> what. As it actually happened.</p>
     </div>
 
@@ -111,6 +129,8 @@
     <div class="s" id="history">
         <h2>The actual history.</h2>
         <p style="margin-bottom:8px;color:var(--mid);line-height:1.7">Not organized by layer. Organized by time. Things work, break, get fixed, break again &mdash; all related to each other.</p>
+
+        <div class="tl-canvas-wrap"><canvas id="timeline-cvs"></canvas></div>
 
         <div class="tl">
 
@@ -397,7 +417,7 @@
     </div>
 
     <!-- ======= WHAT SYNTHETIC MEANS ======= -->
-    <div class="s" id="synthetic">
+    <div class="s synthetic-section" id="synthetic">
         <h2>What "synthetic" means.</h2>
         <p style="color:var(--mid);line-height:1.8;margin-bottom:16px">Every architectural layer started as a synthetic experiment. "What if we just did this by hand?" Every one that worked became the spec for what to build in code.</p>
         <p style="color:var(--mid);line-height:1.8;margin-bottom:16px"><span style="color:var(--amber)">Synthetic</span> is not fake. It's the proof that justifies the architecture. The gap between synthetic and architectural is the roadmap.</p>
@@ -423,5 +443,6 @@
 <script src="shared/particles.js"></script>
 <script src="shared/nav.js"></script>
 <script src="js/build-status.js"></script>
+<script src="js/build-timeline.js"></script>
 </body>
 </html>
