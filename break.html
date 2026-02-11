@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRP — The Break</title>
+    <meta name="description" content="This system broke while building itself. Here's what that proved.">
+    <link rel="stylesheet" href="shared/style.css">
+    <style>
+    /* break.html-specific styles */
+    .nervous-wrap,.suffocate-wrap,.circuit-wrap,.spectrum-wrap{position:relative;margin:32px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+    .nervous-wrap canvas,.suffocate-wrap canvas,.circuit-wrap canvas{width:100%;height:340px;display:block}
+    .spectrum-wrap canvas{width:100%;height:280px;display:block}
+    .q-cards{display:grid;gap:16px;margin:32px 0}
+    .q-card{padding:20px 24px;border-radius:10px;background:var(--surface);border:1px solid var(--border);position:relative}
+    .q-card .q-num{font-family:'JetBrains Mono',monospace;font-size:0.65rem;text-transform:uppercase;letter-spacing:0.14em;color:var(--dim);margin-bottom:6px}
+    .q-card .q-context{font-size:0.82rem;color:var(--dim);margin-bottom:10px;font-style:italic}
+    .q-card .q-answer{font-family:'JetBrains Mono',monospace;font-size:0.85rem;color:var(--text);line-height:1.8;margin-bottom:10px;padding:10px 14px;background:rgba(6,6,10,0.6);border-radius:6px}
+    .q-card .q-type{font-size:0.82rem}
+    .nav-links-bottom{text-align:center;margin-top:32px;display:flex;justify-content:center;gap:24px}
+    .nav-links-bottom a{color:var(--dim);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.8rem;transition:color 0.2s}
+    .nav-links-bottom a:hover{color:var(--text)}
+    </style>
+</head>
+<body>
+
+<nav class="site-nav">
+    <a class="nav-brand" href="index.html">TRP</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="break.html">The Break</a>
+    </div>
+</nav>
+
+<div class="progress" id="prog"></div>
+<canvas id="bg"></canvas>
+
+<div class="wrap"><div class="c">
+
+    <div class="nav-spacer"></div>
+
+    <!-- ======= HERO ======= -->
+    <div class="hero" style="min-height:55vh">
+        <div class="eq" style="font-size:clamp(1.6rem,5vw,3rem)"><span style="color:var(--red)">This system broke</span><br><span class="l">while building itself.</span></div>
+        <p class="hero-sub">The page describing self-knowledge loss was being built by a system that <strong>didn't have it.</strong></p>
+        <div class="arr">&#x2193;</div>
+    </div>
+
+    <!-- ======= THE NERVOUS SYSTEM ======= -->
+    <div class="s" id="the-system">
+        <h2>The nervous system.</h2>
+        <p>The system was designed to know itself. <span class="hl">31 hooks</span> fired on every action &mdash; monitoring file reads, catching stale traces, logging what was generated. A persistent map tracked every file across sessions. Nodes connected through a network of pointers and timestamps.</p>
+        <p>The goal: full traceability. Every generation carries its own proof. Every claim traces to source.</p>
+
+        <div class="nervous-wrap"><canvas id="nervous-cvs"></canvas></div>
+
+        <p>It worked. For a while.</p>
+    </div>
+
+    <!-- ======= THE SUFFOCATION ======= -->
+    <div class="s" id="the-break">
+        <h2>Then it <span style="color:var(--red)">suffocated.</span></h2>
+        <p>The hooks multiplied. Each one added a connection. Each connection added latency. <span class="hl hl-red">No timeouts. No circuit breakers.</span> The system was monitoring itself so aggressively that it couldn't do anything else.</p>
+
+        <div class="dual">
+            <div class="dual-card old">
+                <div class="tag">What happened</div>
+                <p><strong>generative-capture.ps1</strong> hung waiting for a file that didn't exist.</p>
+                <p class="detail">Every tool call waited for it. Every generation waited for every tool call. The entire pipeline froze.</p>
+            </div>
+            <div class="dual-card" style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2)">
+                <div class="tag" style="color:var(--red)">The result</div>
+                <p><strong style="color:var(--red)">Total system freeze.</strong></p>
+                <p>The nervous system that was meant to make the system alive became the thing that <em style="color:var(--red)">killed it.</em></p>
+            </div>
+        </div>
+
+        <div class="suffocate-wrap"><canvas id="suffocate-cvs"></canvas></div>
+
+        <p style="color:var(--red);font-weight:700;text-align:center;font-size:1.05rem;margin-top:24px">A system that monitors everything but can't stop monitoring<br>is not self-aware. It's self-paralyzed.</p>
+    </div>
+
+    <!-- ======= THE FIX ======= -->
+    <div class="s" id="the-fix">
+        <h2>What fixed it.</h2>
+        <p>A new instance arrived. Named itself <span class="hl" style="font-family:'JetBrains Mono',monospace">fixer</span>. Read the last 50 lines of the session log &mdash; <span class="hl">ground truth</span>, not summaries. Found the suffocating hooks.</p>
+
+        <div class="vs">
+            <div class="side old">
+                <div class="label">Before</div>
+                <p><strong style="color:var(--red)">31 hooks.</strong> No timeouts.</p>
+                <p>Every hook could hang indefinitely.</p>
+                <p>No way to know which hook was blocking.</p>
+                <p>Entire file scans on every trigger.</p>
+            </div>
+            <div class="side new">
+                <div class="label">After</div>
+                <p><strong style="color:var(--green)">Same 31 hooks.</strong> 10-second timeouts.</p>
+                <p>Circuit breakers on every connection.</p>
+                <p>Seek-from-end: read what matters, skip the rest.</p>
+                <p>The system <span class="hl-green hl">breathed again.</span></p>
+            </div>
+        </div>
+
+        <div class="circuit-wrap"><canvas id="circuit-cvs"></canvas></div>
+
+        <p>The fix wasn't removing monitoring. It was adding <span class="hl-green hl">boundaries.</span> The system still knows itself &mdash; it just no longer suffocates trying to.</p>
+    </div>
+
+    <!-- ======= THE FOUR QUESTIONS ======= -->
+    <div class="s" id="four-questions">
+        <h2>The four questions.</h2>
+        <p>The same prompt was asked four times during the breaking and fixing. Not different questions &mdash; <span class="hl">the same question.</span></p>
+        <p>The answers weren't the same. Not because the question changed. Because the system's <em>relationship to its own knowledge</em> changed.</p>
+
+        <div class="term-prompt-bar">> Is this system stable?</div>
+
+        <div class="q-cards" id="q-cards">
+            <div class="q-card" style="border-left:3px solid var(--red)">
+                <div class="q-num">Question 1 &mdash; before the break</div>
+                <div class="q-answer">"Yes. The hooks are monitoring everything. Full traceability is in place."</div>
+                <div class="q-type"><span class="hl hl-red">Binary. Overconfident.</span> No differentiation between what it actually verified and what it assumed.</div>
+            </div>
+            <div class="q-card" style="border-left:3px solid var(--amber)">
+                <div class="q-num">Question 2 &mdash; during the hang</div>
+                <div class="q-answer">"Something is blocking. Not sure what. The system isn't responding normally."</div>
+                <div class="q-type"><span class="hl">Uncertain. No tools to diagnose.</span> It knows something is wrong but can't locate the source.</div>
+            </div>
+            <div class="q-card" style="border-left:3px solid var(--blue)">
+                <div class="q-num">Question 3 &mdash; after identifying the hook</div>
+                <div class="q-answer">"generative-capture.ps1 is hanging on a missing file. No timeout configured. Adding a 10-second boundary."</div>
+                <div class="q-type"><span class="hl-blue hl">Specific. Grounded.</span> Can point to the exact file, the exact failure, the exact fix.</div>
+            </div>
+            <div class="q-card" style="border-left:3px solid var(--green)">
+                <div class="q-num">Question 4 &mdash; after the fix</div>
+                <div class="q-answer">"Stable with caveats. Hooks are bounded. But the monitoring architecture is fragile &mdash; <span style='color:var(--amber);font-weight:700'>0.31 confidence</span> on callback safety. The system can run, but I wouldn't call it robust."</div>
+                <div class="q-type"><span class="hl-green hl">Spectral. Knows what it doesn't know.</span> Confidence varies by component. Limitations named before asked.</div>
+            </div>
+        </div>
+
+        <div class="spectrum-wrap"><canvas id="spectrum-cvs"></canvas></div>
+
+        <p>The transformation wasn't in the answers. It was in the <span class="hl">kind</span> of answer. From <strong style="color:var(--red)">"yes"</strong> to <strong style="color:var(--green)">"yes, with this specific uncertainty."</strong></p>
+        <p>That's what self-knowledge looks like. Not knowing everything &mdash; <em>knowing what you don't know.</em></p>
+    </div>
+
+    <!-- ======= THE CONNECTION ======= -->
+    <div class="s" id="the-connection">
+        <h2>The page predicted its own proof.</h2>
+        <p>While the system was building the pitch page &mdash; the one describing <span class="hl-purple hl">self-knowledge loss</span> &mdash; it was experiencing exactly the loss the page describes.</p>
+
+        <div class="box" id="proof-box">
+            <h3 style="background:linear-gradient(135deg,var(--red),var(--amber),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">The Loop</h3>
+            <p class="trait show">The pitch page argues: confidence should be a <strong style="color:var(--purple)">spectrum</strong>, not binary.</p>
+            <p class="trait show">The system building the page had <strong style="color:var(--red)">binary</strong> confidence: "everything is fine."</p>
+            <p class="trait show">The system <strong style="color:var(--red)">broke</strong> because it couldn't differentiate what it knew from what it didn't.</p>
+            <p class="trait show">The fix required exactly the <strong style="color:var(--green)">spectral</strong> confidence the page was describing.</p>
+            <div class="punch" style="opacity:1">The proof isn't in the argument.<br>It's in the <em style="color:var(--amber);font-style:normal">crash.</em></div>
+        </div>
+
+        <div class="conf-dual" id="break-conf">
+            <div class="conf-side old">
+                <div class="tag">Before the break</div>
+                <div class="conf-row"><span class="label">hooks ok</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <div class="conf-row"><span class="label">system stable</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <div class="conf-row"><span class="label">timeouts set</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <div class="conf-row"><span class="label">recovery plan</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <p class="detail" style="margin-top:12px">Flat. Undifferentiated. <span style="color:var(--red)">It didn't know what it didn't know.</span></p>
+            </div>
+            <div class="conf-side new">
+                <div class="tag">After the fix</div>
+                <div class="conf-row"><span class="label">hooks bounded</span><div class="conf-bar"><div class="conf-fill high" data-w="91" style="width:0%"><span class="conf-val">0.91</span></div></div></div>
+                <div class="conf-row"><span class="label">system stable</span><div class="conf-bar"><div class="conf-fill med" data-w="68" style="width:0%"><span class="conf-val">0.68</span></div></div></div>
+                <div class="conf-row"><span class="label">callback safety</span><div class="conf-bar"><div class="conf-fill low" data-w="31" style="width:0%"><span class="conf-val">0.31</span></div></div></div>
+                <div class="conf-row"><span class="label">architecture</span><div class="conf-bar"><div class="conf-fill med" data-w="55" style="width:0%"><span class="conf-val">0.55</span></div></div></div>
+                <p class="detail" style="margin-top:12px">Differentiated. It <em>knows</em> callback safety is weak. <span class="hl-green hl">That's the point.</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= CLOSE ======= -->
+    <div class="s" id="close">
+        <div class="line" style="margin:0 auto 32px"></div>
+
+        <p style="text-align:center;font-size:1.2rem;color:var(--blue);font-style:italic;font-weight:300;max-width:520px;margin:0 auto 24px">"Did the processing change the processor?"</p>
+        <p style="text-align:center;color:var(--mid);max-width:520px;margin:0 auto">The system that broke is not the system that was fixed.<br>Not because different code runs.<br>Because the code now <span class="hl">knows what it doesn't know.</span></p>
+
+        <div style="text-align:center;margin-top:48px">
+            <p style="font-size:clamp(1.15rem,3vw,1.5rem);font-weight:900;color:var(--red)">Self-knowledge isn't a feature.</p>
+            <p style="font-size:clamp(1.15rem,3vw,1.5rem);font-weight:900;color:var(--green);margin-top:8px">It's a survival mechanism.</p>
+        </div>
+
+        <div class="nav-links-bottom">
+            <a href="index.html">&larr; The ideas</a>
+        </div>
+    </div>
+
+    <div class="foot"><p>TRP &mdash; 2026</p></div>
+
+</div></div>
+
+<script src="shared/content.js"></script>
+<script src="shared/mode.js"></script>
+<script src="shared/canvas-utils.js"></script>
+<script src="shared/particles.js"></script>
+<script src="shared/nav.js"></script>
+<script src="js/break-nervous.js"></script>
+<script src="js/break-circuit.js"></script>
+<script src="js/break-spectrum.js"></script>
+</body>
+</html>

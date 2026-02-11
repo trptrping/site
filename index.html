@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRP — The TRansParent Box</title>
+    <meta name="description" content="Four architectures for AI that knows itself. Typed attention. Activation thresholds. Self-modifying inference. Self-knowledge loss.">
+    <link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+    <a class="nav-brand" href="index.html">TRP</a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="break.html">The Break</a>
+    </div>
+</nav>
+
+<div class="progress" id="prog"></div>
+<canvas id="bg"></canvas>
+
+<div class="wrap"><div class="c">
+
+    <div class="nav-spacer"></div>
+
+    <!-- ======= HERO ======= -->
+    <div class="hero" style="min-height:60vh">
+        <div class="eq" style="font-size:clamp(2rem,6vw,4rem)"><span class="r" data-key="hero.eq1">Reading</span><span class="n"> &#x2260; </span><span class="l" data-key="hero.eq3">Learning</span></div>
+        <p class="hero-sub" data-key="hero.sub">Four architectures for AI that <strong>knows itself.</strong></p>
+        <div class="arr">&#x2193;</div>
+    </div>
+
+    <!-- ======= THE SPLIT TERMINAL ======= -->
+    <div class="s" id="demo">
+        <h2 data-key="demo.title">Watch the difference.</h2>
+        <p data-key="demo.desc">Same prompt. Two models. One forgets. One <span class="hl-green hl">remembers.</span></p>
+        <div class="term-prompt-bar" id="prompt1" data-key="demo.prompt1">> Is processPayment() thread-safe?</div>
+        <div class="terminals" id="demo1">
+            <div class="term old"><div class="term-head"><span class="dot"></span> Current AI</div><div class="term-body"><div class="gen" id="gen1a"></div></div></div>
+            <div class="term new"><div class="term-head"><span class="dot"></span> Transparent Box</div><div class="term-body"><div class="gen" id="gen1b"></div></div></div>
+        </div>
+        <div class="term-prompt-bar" id="prompt2" style="margin-top:24px" data-key="demo.prompt2">> Set up auth for this Express app <span class="sm" style="color:var(--dim)">(session 2)</span></div>
+        <div class="terminals" id="demo2">
+            <div class="term old"><div class="term-head"><span class="dot"></span> Current AI</div><div class="term-body"><div class="gen" id="gen2a"></div></div></div>
+            <div class="term new"><div class="term-head"><span class="dot"></span> Transparent Box</div><div class="term-body"><div class="gen" id="gen2b"></div></div></div>
+        </div>
+    </div>
+
+    <!-- ======= IDEA 1: TYPED ATTENTION ======= -->
+    <div class="s" id="idea1">
+        <h2 data-key="idea1.title">1. Typed Attention</h2>
+        <p data-key="idea1.desc">Current attention knows <em>how much</em> things are related. Not <span class="hl-purple hl">how.</span></p>
+        <div class="attn-wrap">
+            <div class="attn-box old"><canvas id="attn-old"></canvas><div class="attn-label" data-key="idea1.oldLabel">Current: magnitudes only</div></div>
+            <div class="attn-box new"><canvas id="attn-new"></canvas><div class="attn-label" data-key="idea1.newLabel">Typed: labeled relationships</div></div>
+        </div>
+        <div class="dual">
+            <div class="dual-card old"><div class="tag" data-key="idea1.oldTag">Current AI</div><div class="big" data-key="idea1.oldBig">0.73</div><p data-key="idea1.oldLine">"These are related."</p><p class="detail" data-key="idea1.oldDetail">How? No idea.</p></div>
+            <div class="dual-card new"><div class="tag" data-key="idea1.newTag">Typed Attention</div><div class="big" data-key="idea1.newBig">REQUIRES</div><p data-key="idea1.newLine">"B breaks if A changes."</p><p class="detail" data-key="idea1.newDetail">Actionable. Propagates.</p></div>
+        </div>
+    </div>
+
+    <!-- ======= IDEA 2: ACTIVATION THRESHOLDS ======= -->
+    <div class="s" id="idea2">
+        <h2 data-key="idea2.title">2. Activation Thresholds</h2>
+        <p data-key="idea2.desc">Your brain doesn't fire every neuron on every input. <span class="hl">Why does attention?</span></p>
+        <div class="thresh-wrap">
+            <div class="thresh-box old"><canvas id="thresh-old"></canvas><div class="thresh-label" data-key="idea2.oldLabel">Current: everything fires. O(n&sup2;)</div></div>
+            <div class="thresh-box new"><canvas id="thresh-new"></canvas><div class="thresh-label" data-key="idea2.newLabel">Thresholds: only what matters. O(n&times;k)</div></div>
+        </div>
+        <div class="dual">
+            <div class="dual-card old"><div class="tag">Current AI</div><div class="big" style="font-family:'JetBrains Mono',monospace;font-size:1.2rem">O(n&sup2;)</div><p>Every token looks at every token. Always.</p><p class="detail">Brute force. Opaque.</p></div>
+            <div class="dual-card new"><div class="tag">With Thresholds</div><div class="big" style="font-family:'JetBrains Mono',monospace;font-size:1.2rem">O(n&times;k)</div><p>Only relevant connections fire.</p><p class="detail">And you can <em>see which ones.</em></p></div>
+        </div>
+    </div>
+
+    <!-- ======= IDEA 3: SELF-MODIFYING INFERENCE ======= -->
+    <div class="s" id="idea3">
+        <h2 data-key="idea3.title">3. Self-Modifying Inference</h2>
+        <p data-key="idea3.desc">Weights are <span class="hl hl-red">frozen at inference.</span> The model is identical before and after your conversation.</p>
+        <div class="trace-wrap">
+            <div class="trace-box old"><canvas id="trace-old"></canvas><div class="trace-label" data-key="idea3.oldLabel">Current: every session starts blank</div></div>
+            <div class="trace-box new"><canvas id="trace-new"></canvas><div class="trace-label" data-key="idea3.newLabel">Trace: knowledge accumulates</div></div>
+        </div>
+        <div class="dual">
+            <div class="dual-card old"><div class="tag">Current AI</div><p><strong>Session 1:</strong> You correct a mistake.</p><p><strong>Session 2:</strong> Same mistake.</p><p><strong>Session 3:</strong> Same mistake.</p><p class="detail">Corrections evaporate with context.</p></div>
+            <div class="dual-card new"><div class="tag">With Trace Layer</div><p><strong>Session 1:</strong> You correct a mistake. <span class="hl-green hl">Trace written.</span></p><p><strong>Session 2:</strong> Model reads its own trace. <span class="hl-green hl">Already knows.</span></p><p><strong>Session 3:</strong> Builds on accumulated history.</p><p class="detail">Processing transforms the processor.</p></div>
+        </div>
+    </div>
+
+    <!-- ======= IDEA 4: SELF-KNOWLEDGE LOSS ======= -->
+    <div class="s" id="idea4">
+        <h2 data-key="idea4.title">4. Self-Knowledge Loss</h2>
+        <p data-key="idea4.desc">Current AI optimizes for one thing: <span class="hl hl-red">predict the right token.</span> It has zero concept of <em>why.</em></p>
+        <div class="know-wrap">
+            <div class="know-box old"><canvas id="know-old"></canvas><div class="know-label" data-key="idea4.oldLabel">Current: uniform confidence. No attribution.</div></div>
+            <div class="know-box new"><canvas id="know-new"></canvas><div class="know-label" data-key="idea4.newLabel">Self-knowledge: confidence varies. Citations link.</div></div>
+        </div>
+        <div class="code-dual">
+            <div class="code-box old"><span class="tag">Current loss function</span><span class="kw">loss</span> = <span class="fn">predict_right_token</span>()<br><br><span class="cm">// that's it.</span><br><span class="cm">// no concept of "why"</span></div>
+            <div class="code-box new"><span class="tag">Self-knowledge loss</span><span class="kw">loss</span> = <span class="fn">predict_right_token</span>()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="op">+</span> &alpha; &times; <span class="hl-fn">can_you_cite_why</span>()<br><br><span class="cm">// unexplainable = expensive</span></div>
+        </div>
+        <p style="margin-top:24px">What does confidence <em>look like</em> when a model actually knows what it knows?</p>
+        <div class="conf-dual" id="conf-section">
+            <div class="conf-side old">
+                <div class="tag">Current AI</div>
+                <div class="conf-row"><span class="label">"thread-safe"</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <div class="conf-row"><span class="label">"uses mutex"</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <div class="conf-row"><span class="label">"callback safe"</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <div class="conf-row"><span class="label">"no race cond."</span><div class="conf-bar"><div class="conf-fill unknown" style="width:100%"><span class="conf-val">???</span></div></div></div>
+                <p class="detail" style="margin-top:12px">Same flat bar. No differentiation. It doesn't know what it doesn't know.</p>
+            </div>
+            <div class="conf-side new">
+                <div class="tag">With Self-Knowledge</div>
+                <div class="conf-row"><span class="label">mutex lock</span><div class="conf-bar"><div class="conf-fill high" data-w="94" style="width:0%"><span class="conf-val">0.94</span></div></div></div>
+                <div class="conf-row"><span class="label">lock scope</span><div class="conf-bar"><div class="conf-fill high" data-w="87" style="width:0%"><span class="conf-val">0.87</span></div></div></div>
+                <div class="conf-row"><span class="label">callback safety</span><div class="conf-bar"><div class="conf-fill low" data-w="31" style="width:0%"><span class="conf-val">0.31</span></div></div></div>
+                <div class="conf-row"><span class="label">race condition</span><div class="conf-bar"><div class="conf-fill med" data-w="62" style="width:0%"><span class="conf-val">0.62</span></div></div></div>
+                <p class="detail" style="margin-top:12px">It <em>knows</em> callback safety is weak. <span class="hl-green hl">That's the point.</span></p>
+            </div>
+        </div>
+        <div class="dual">
+            <div class="dual-card old"><div class="tag">Current AI</div><p>"Yes, it's thread-safe."</p><p class="detail">Maybe right. Maybe hallucination. No way to tell from the outside.</p></div>
+            <div class="dual-card new"><div class="tag">With Self-Knowledge</div><p>"Yes &mdash; lock on <span class="hl-green hl">line 47</span> guards shared state. Callback on <span class="hl-green hl">line 62</span> runs on main thread. <span class="hl hl">Confidence: 0.91</span>"</p><p class="detail">Every answer carries its own proof.</p></div>
+        </div>
+    </div>
+
+    <!-- ======= CONVERGENCE ======= -->
+    <div class="s" id="convergence">
+        <div class="box-canvas-wrap">
+        <canvas id="converge-bg"></canvas>
+        <div class="box" id="thebox">
+            <h3>The Transparent Box</h3>
+            <p class="trait">Attends with <strong style="color:var(--purple)">typed</strong> relationships</p>
+            <p class="trait">Fires only when <strong style="color:var(--blue)">relevant</strong></p>
+            <p class="trait">Transforms through <strong style="color:var(--red)">its own processing</strong></p>
+            <p class="trait">Knows <strong style="color:var(--green)">why</strong> it says what it says</p>
+            <div class="punch">Not a black box you hope is right.<br>A transparent box that <em style="color:var(--blue);font-style:normal">can't not</em> show its work.</div>
+        </div>
+        </div>
+    </div>
+
+    <!-- ======= STATUS ======= -->
+    <div class="s" id="status">
+        <h2>Where this stands.</h2>
+        <p>This isn't a paper. It's a <span class="hl">build log.</span></p>
+        <div class="stack-wrap"><canvas id="stack-cvs"></canvas></div>
+        <div class="vs">
+            <div class="side old"><div class="label">The problem</div><p>Sessions start <strong style="color:var(--red)">blank.</strong></p><p>Corrections <strong style="color:var(--red)">evaporate.</strong></p><p>The model <strong style="color:var(--red)">never changes.</strong></p></div>
+            <div class="side new"><div class="label">Built so far</div><p><strong>Persistent map</strong> across sessions.</p><p>LoRA fine-tuned on own conversations. <span class="mono" style="font-size:0.82rem">7B, 3 epochs, 3.47&rarr;1.55</span></p><p><strong>Voice transfers.</strong> Facts need retrieval.</p></div>
+        </div>
+        <p style="margin-top:20px">The transparent box is <span class="hl">designed, not built.</span> The prototype is next.</p>
+        <div class="line"></div>
+        <p style="margin-bottom:4px"><span class="hl">Conditions:</span> One <span class="hl-purple hl">Claude Max 20x</span> subscription ($200/mo). <span class="hl-blue hl">Claude Code</span> as the interface. <span class="hl-red hl">100% weekly usage.</span></p>
+        <p class="sm" style="margin-bottom:20px">Consumer hardware. Qwen 2.5 7B. LoRA. One week. Here's exactly where it went:</p>
+        <div class="timeline" id="build-timeline">
+            <div class="tl-head"><span class="label">Weekly usage</span><span class="pct" id="tl-pct">100%</span></div>
+            <div class="tl-bar"><div class="tl-fill" id="tl-fill" style="width:0%"></div></div>
+            <div class="tl-days">
+                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 4</div><div class="mile">Origin.<br>System born.</div><div class="sess">13 sessions</div></div>
+                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 5</div><div class="mile">Archive built.<br>Map loop.</div><div class="sess">15 sessions</div></div>
+                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 6</div><div class="mile">LoRA training.<br>Model v0.</div><div class="sess">12 sessions</div></div>
+                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 7</div><div class="mile">Experiment.<br>The finding.</div><div class="sess">8 sessions</div></div>
+                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 8</div><div class="mile">Thesis.<br>Propagation.</div><div class="sess">9 sessions</div></div>
+                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 9</div><div class="mile">Architecture.<br>Layer design.</div><div class="sess">4 sessions</div></div>
+                <div class="tl-day done"><div class="dot"></div><div class="day">Feb 10</div><div class="mile">This page.<br>You're here.</div><div class="sess">6+ sessions</div></div>
+            </div>
+        </div>
+        <p class="sm" style="text-align:center;margin-top:16px">67 sessions. 7 days. Every token accounted for.</p>
+    </div>
+
+    <!-- ======= NOW — YOU ======= -->
+    <div class="s cta-section" id="activate">
+        <canvas class="cta-canvas-full" id="cta-cvs"></canvas>
+        <div class="cta" id="cta-box">
+            <h2>Now &mdash; you.</h2>
+            <div class="big-q">You scrolled through four ideas.<br>Now pick the one that <em style="color:var(--amber);font-style:normal">won't leave you alone.</em></div>
+        </div>
+    </div>
+
+    <!-- ======= FOUR PATHS ======= -->
+    <div class="s" id="paths-section">
+        <h2 data-key="paths.title">Four starting points. Pick one.</h2>
+        <p data-key="paths.desc">Each of these is a prototype you can build on <span class="hl">consumer hardware</span> this weekend.</p>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-1"></canvas></div><div class="path-num">Path 1</div><div class="path-title">Type your attention</div><div class="path-body">Current attention computes a number between every pair of tokens. That number says <em>how much</em> two things are related. It says nothing about <em>how.</em><br><br>Take any attention implementation. Add <strong>edge type labels</strong> &mdash; even just two: REQUIRES and USES. Now the model doesn't just know that <code style="color:var(--purple)">auth.py</code> and <code style="color:var(--purple)">stripe.py</code> are related. It knows one <em>requires</em> the other.<br><br>Run the same prompts with and without typed edges. Does the model behave differently when it knows relationship types? If yes &mdash; that's signal. If no &mdash; you've still built something nobody else has tested at this granularity.</div><div class="path-req">Needs: any transformer, ~100 lines of code</div></div>
+        <div class="path-divider"></div>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-2"></canvas></div><div class="path-num">Path 2</div><div class="path-title">Add a threshold</div><div class="path-body">In standard attention, every token attends to every other token. Most of those connections carry almost no signal &mdash; but they still cost compute. And you can't see which ones mattered.<br><br>Add a <strong>minimum activation threshold</strong> to any attention layer. Connections below the threshold don't fire. Log which connections survive the cut.<br><br>Two things happen. First: <em>efficiency</em> &mdash; O(n&sup2;) drops toward O(n&times;k) where k is the number of connections that actually matter. Second, and more important: <strong>interpretability</strong>. You can now <em>see</em> exactly which connections the model used. The ones that fire are the ones that mattered. The rest were noise.</div><div class="path-req">Needs: one attention layer, a threshold value, a logger</div></div>
+        <div class="path-divider"></div>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-3"></canvas></div><div class="path-num">Path 3</div><div class="path-title">Write a trace</div><div class="path-body">Every AI session starts from zero. You correct a mistake in session 1. Session 2 makes the same mistake. The model read your correction. It didn't <em>learn</em> from it.<br><br>After each session, write <strong>what the model learned</strong> to a file &mdash; corrections, decisions, patterns discovered. Before the next session, prepend that trace to context.<br><br>Now measure: does it make the same mistake twice? Does it reference yesterday's corrections in today's answers? The trace is the simplest form of self-modifying inference &mdash; the model reading its own history and changing behavior because of it.</div><div class="path-req">Needs: any LLM API, a JSON file, a diff checker</div></div>
+        <div class="path-divider"></div>
+        <div class="path-section"><div class="path-canvas-wrap"><canvas id="path-cvs-4"></canvas></div><div class="path-num">Path 4</div><div class="path-title">Train for self-knowledge</div><div class="path-body">Current models optimize for one thing: predict the right next token. They have no loss for knowing <em>what they don't know.</em> A model that's 30% confident about something says it with the same fluency as something it's 95% confident about.<br><br>Add a <strong>second prediction head</strong> that outputs a confidence score. Train on examples where you know ground truth &mdash; when the model is right, confidence should be high. When it's wrong, confidence should be low.<br><br>The loss becomes: <code style="color:var(--green)">predict_right_token() + &alpha; &times; can_you_cite_why()</code>. Now the model is penalized for generating things it can't explain. Self-knowledge isn't a feature. It's a <em>loss function.</em></div><div class="path-req">Needs: a fine-tuning setup, labeled confidence data</div></div>
+    </div>
+
+    <!-- ======= WHAT YOU NEED ======= -->
+    <div class="s" id="resources">
+        <h2 data-key="res.title">What you actually need.</h2>
+        <p>Not what you think you need. What you <span class="hl">actually</span> need.</p>
+        <div class="res-wrap"><canvas id="res-cvs"></canvas></div>
+        <div class="res-grid">
+            <div class="res-item"><div class="res-name" data-key="res1.name">A model</div><div class="res-detail" data-key="res1.detail">Qwen 2.5 7B, Llama 3.1 8B, Mistral 7B.<br>All free. All run on consumer GPUs.<br><span style="color:var(--green)">8GB VRAM with QLoRA.</span></div></div>
+            <div class="res-item"><div class="res-name" data-key="res2.name">A method</div><div class="res-detail" data-key="res2.detail">LoRA/QLoRA for fine-tuning.<br>Hugging Face transformers + PEFT.<br><span style="color:var(--green)">Standard Python. No custom CUDA.</span></div></div>
+            <div class="res-item"><div class="res-name" data-key="res3.name">A question</div><div class="res-detail" data-key="res3.detail">Not "how do I build this?"<br>But <em>"what happens if I try?"</em><br><span style="color:var(--amber)">The question IS the method.</span></div></div>
+        </div>
+        <p style="text-align:center;margin-top:16px">Everything on this page was built with a Qwen 2.5 7B and a <span class="hl-purple hl">Claude Max</span> subscription.<br>If you have a GPU and curiosity, you have enough.</p>
+    </div>
+
+    <!-- ======= WHAT HAPPENS WHEN ======= -->
+    <div class="s" id="vision">
+        <h2>What happens when someone actually does this?</h2>
+        <div class="vision-wrap"><canvas id="vision-cvs"></canvas></div>
+        <p>If <span class="hl">one person</span> builds one typed attention prototype, we learn whether relationship labels carry signal through inference.</p>
+        <p>If <span class="hl">ten people</span> each build a different piece, the architecture starts assembling itself &mdash; not by coordination, but by convergence. Same question, different implementations, shared findings.</p>
+        <p>If <span class="hl-green hl">any of it works</span> &mdash; even partially, even messily &mdash; it means the current paradigm is leaving value on the table. Not because the models are bad. Because they don't know what they know.</p>
+        <div class="line"></div>
+        <p>And if it <span class="hl-red hl">doesn't work?</span></p>
+        <p>Then you'll know why. You'll have the experiment, the data, the specific point of failure. That's more valuable than an opinion. That's <em>engineering.</em></p>
+    </div>
+
+    <!-- ======= HOW TO ENGAGE ======= -->
+    <div class="s" id="engage-section">
+        <h2>Three ways to engage.</h2>
+        <div class="engage-wrap"><canvas id="engage-cvs"></canvas></div>
+        <div class="engage">
+            <div class="engage-card"><div class="eng-title" style="color:var(--green)">Build it</div><div class="eng-desc">Pick a path. Build a prototype. Share what happens &mdash; the failures are as valuable as the successes.</div></div>
+            <div class="engage-card"><div class="eng-title" style="color:var(--amber)">Break it</div><div class="eng-desc">Tell us what's wrong. Which ideas are already solved? Which are provably impossible? Point to the papers we missed.</div></div>
+            <div class="engage-card"><div class="eng-title" style="color:var(--purple)">Extend it</div><div class="eng-desc">See something we didn't? A fifth idea that connects to these four? A domain where this applies differently? That's how architectures grow.</div></div>
+        </div>
+    </div>
+
+    <!-- ======= THE CLOSE ======= -->
+    <div class="s" id="close">
+        <div class="close-wrap"><canvas id="close-cvs"></canvas></div>
+        <p style="text-align:center;font-size:1.3rem;color:var(--blue);font-style:italic;font-weight:300;max-width:500px;margin:0 auto 24px">"Which parts matter right now?"</p>
+        <p style="text-align:center;color:var(--mid);max-width:500px;margin:0 auto">That question started this project. The same question is now yours.</p>
+        <div style="text-align:center;margin-top:40px">
+            <p style="font-size:clamp(1.4rem,4vw,2rem);font-weight:900;background:linear-gradient(135deg,var(--amber),var(--red),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">What will you build?</p>
+        </div>
+        <div style="text-align:center;margin-top:40px">
+            <p style="color:var(--mid)">The architecture is open. The ideas are free. The models are free.</p>
+            <p style="margin-top:8px"><span class="hl">The only thing missing is what you do next.</span></p>
+        </div>
+    </div>
+
+    <div class="foot"><p>TRP &mdash; 2026</p></div>
+
+</div></div>
+
+<script src="shared/content.js"></script>
+<script src="shared/mode.js"></script>
+<script src="shared/canvas-utils.js"></script>
+<script src="shared/particles.js"></script>
+<script src="shared/nav.js"></script>
+<script src="js/pitch-demos.js"></script>
+<script src="js/pitch-ideas.js"></script>
+<script src="js/pitch-convergence.js"></script>
+<script src="js/pitch-status.js"></script>
+<script src="js/pitch-cta.js"></script>
+<script src="js/pitch-paths.js"></script>
+<script src="js/pitch-resources.js"></script>
+<script src="js/pitch-vision.js"></script>
+<script src="js/pitch-engage.js"></script>
+<script src="js/pitch-close.js"></script>
+</body>
+</html>
