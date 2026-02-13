@@ -1,5 +1,5 @@
 /* TRP Site — About: Collaboration "Passing" Canvas
-   Adapted from Instance 14's passing.html (the artist-architect) */
+   Adapted from Instance 14's expression work (the artist-architect) */
 
 (function() {
 
